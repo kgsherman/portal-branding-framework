@@ -1,0 +1,669 @@
+<title>Business Portal Brand Tokens</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: sticky contents rail + one reading column; tables and galleries use the full column width. */
+:root {
+  --bg: #F3F6F6;
+  --surface: #FFFFFF;
+  --sunk: #E9EFF0;
+  --fg: #132226;
+  --muted: #51646B;
+  --line: #D2DCDF;
+  --accent: #006E8C;
+  --accent-soft: #DDEEF3;
+  --note: #7A5200;
+  --note-bg: #FBF0D9;
+  --check: rgba(19, 34, 38, .08);
+  --font-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+  --radius: 6px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0D1517; --surface: #142024; --sunk: #0A1214; --fg: #E2ECEE; --muted: #95A9AF;
+    --line: #27383D; --accent: #5BC0DB; --accent-soft: #143440; --note: #E9BE6B; --note-bg: #2C2414;
+    --check: rgba(226, 236, 238, .08); color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0D1517; --surface: #142024; --sunk: #0A1214; --fg: #E2ECEE; --muted: #95A9AF;
+  --line: #27383D; --accent: #5BC0DB; --accent-soft: #143440; --note: #E9BE6B; --note-bg: #2C2414;
+  --check: rgba(226, 236, 238, .08); color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  background: var(--bg); color: var(--fg);
+  font: 17px/1.6 var(--font-body);
+  padding-inline: 16px; padding-block: 0;
+}
+a { color: var(--accent); text-underline-offset: 2px; }
+a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visible, .shot:focus-visible {
+  outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 3px;
+}
+code, .mono { font-family: var(--font-mono); font-size: .86em; }
+code { background: var(--sunk); padding: .08em .35em; border-radius: 4px; overflow-wrap: anywhere; }
+pre { font-family: var(--font-mono); font-size: 13.5px; line-height: 1.55; background: var(--sunk); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px 16px; overflow-x: auto; margin: 0; }
+pre code { background: none; padding: 0; font-size: inherit; }
+
+.shell { max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: 210px minmax(0, 1fr); gap: 48px; }
+.toc { position: sticky; top: env(safe-area-inset-top, 0px); align-self: start; padding-block: 40px; max-height: 100vh; overflow-y: auto; }
+.toc p { font: 600 12px/1 var(--font-body); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin: 0 0 12px; }
+.toc ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+.toc a { display: block; padding: 4px 10px; border-left: 2px solid var(--line); color: var(--muted); text-decoration: none; font-size: 15px; line-height: 1.35; }
+.toc a:hover { color: var(--fg); border-left-color: var(--accent); }
+main { min-width: 0; padding-block: 40px 96px; display: grid; gap: 72px; }
+section { display: grid; gap: 18px; min-width: 0; scroll-margin-top: 16px; }
+.prose { max-width: 70ch; display: grid; gap: 14px; }
+.prose p, .prose ul, .prose ol { margin: 0; }
+.prose ul, .prose ol { padding-left: 1.25em; display: grid; gap: 6px; }
+
+h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; line-height: 1.12; }
+h1 { font-size: clamp(34px, 5vw, 52px); font-weight: 700; letter-spacing: -.01em; }
+h2 { font-size: clamp(25px, 3vw, 31px); font-weight: 700; }
+h3 { font-size: 20px; font-weight: 500; }
+.eyebrow { font: 600 13px/1.3 var(--font-body); letter-spacing: .08em; text-transform: uppercase; color: var(--accent); margin: 0; }
+.lede { font-size: 20px; line-height: 1.5; max-width: 62ch; margin: 0; }
+.facts { display: flex; flex-wrap: wrap; gap: 8px 28px; margin: 4px 0 0; padding: 0; }
+.facts div { display: grid; }
+.facts dt { font-size: 13px; color: var(--muted); }
+.facts dd { margin: 0; font: 700 22px/1.2 var(--font-display); font-variant-numeric: tabular-nums; }
+.intro { display: grid; gap: 18px; padding-block: 8px 0; }
+
+/* compare */
+.compare { display: grid; gap: 12px; }
+.compare-head, .compare-row { display: grid; grid-template-columns: 70px minmax(0, 1fr) minmax(0, 1fr); gap: 12px; align-items: start; }
+.compare-head span { font-size: 13px; color: var(--muted); font-weight: 600; letter-spacing: .04em; text-transform: uppercase; }
+.compare-row > b { font-weight: 600; font-size: 15px; padding-top: 6px; }
+.shot { display: block; padding: 0; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); overflow: hidden; cursor: zoom-in; width: 100%; }
+.shot img { display: block; width: 100%; height: auto; }
+
+/* palette strip */
+.strip { display: grid; gap: 6px; overflow-x: auto; }
+.strip-row { display: grid; grid-template-columns: 82px repeat(var(--n), minmax(30px, 1fr)); gap: 3px; min-width: 620px; align-items: center; }
+.strip-row > span:first-child { font-size: 14px; font-weight: 600; }
+.chip { height: 34px; border-radius: 4px; border: 1px solid var(--check); }
+.strip-labels span { font: 11px/1.2 var(--font-mono); color: var(--muted); text-align: center; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* steps */
+.steps { list-style: none; counter-reset: s; margin: 0; padding: 0; display: grid; gap: 14px; max-width: 76ch; }
+.steps > li { counter-increment: s; display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 14px; }
+.steps > li::before { content: counter(s); font: 700 15px/34px var(--font-display); text-align: center; width: 34px; height: 34px; border-radius: 50%; background: var(--accent-soft); color: var(--accent); }
+.steps h3 { font-size: 18px; margin-bottom: 4px; }
+.steps p, .steps ul { margin: 0; }
+.steps ul { padding-left: 1.2em; margin-top: 6px; display: grid; gap: 4px; }
+
+/* tables */
+.table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); }
+table { border-collapse: collapse; width: 100%; font-size: 15px; line-height: 1.45; }
+th, td { text-align: left; vertical-align: top; padding: 10px 12px; border-bottom: 1px solid var(--line); }
+th { font-size: 12.5px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); background: var(--sunk); position: sticky; top: 0; z-index: 1; }
+tbody tr:last-child td { border-bottom: 0; }
+td code { white-space: nowrap; }
+td.wrap code { white-space: normal; }
+
+/* flow */
+.flow { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px; }
+.flow > div { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 12px 14px; display: grid; gap: 4px; align-content: start; }
+.flow b { font-family: var(--font-display); font-weight: 500; font-size: 17px; }
+.flow span { font-size: 14px; color: var(--muted); }
+.flow .lead { border-color: var(--accent); box-shadow: inset 3px 0 0 var(--accent); }
+
+.note { background: var(--note-bg); color: var(--fg); border-radius: var(--radius); padding: 12px 16px; max-width: 76ch; font-size: 16px; }
+.note b { color: var(--note); }
+
+/* gallery */
+.gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap: 22px 18px; }
+.gallery figure { margin: 0; display: grid; gap: 8px; align-content: start; }
+.gallery figcaption { font-size: 14.5px; line-height: 1.45; color: var(--muted); }
+.gallery figcaption code { color: var(--fg); }
+.gallery h3 { grid-column: 1 / -1; margin-top: 8px; }
+
+/* token reference */
+.controls { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center; }
+.controls input[type="search"] { font: inherit; font-size: 15px; padding: 8px 12px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); color: var(--fg); min-width: 0; flex: 1 1 240px; max-width: 360px; }
+.pills { display: flex; flex-wrap: wrap; gap: 6px; }
+.pills button { font: 600 13px/1 var(--font-body); padding: 7px 11px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--muted); cursor: pointer; }
+.pills button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--surface); }
+.controls label { display: inline-flex; gap: 6px; align-items: center; font-size: 15px; cursor: pointer; }
+.count { font-size: 14px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.ref td:first-child { min-width: 260px; max-width: 420px; }
+.ref .tname { font: 600 13.5px/1.4 var(--font-mono); color: var(--fg); display: block; }
+.ref .tdesc { display: block; font-size: 14.5px; color: var(--muted); margin-top: 3px; }
+.ref .grp td { background: var(--accent-soft); font: 700 13px/1.3 var(--font-body); letter-spacing: .04em; text-transform: uppercase; color: var(--accent); padding-block: 8px; }
+.val { display: flex; gap: 8px; align-items: center; min-width: 150px; }
+.val .mono { font-size: 12.5px; overflow-wrap: anywhere; }
+.sw { flex: none; width: 26px; height: 26px; border-radius: 5px; border: 1px solid var(--check); }
+.pv-radius { flex: none; width: 26px; height: 26px; border: 2px solid var(--accent); background: var(--accent-soft); }
+.pv-shadow { flex: none; width: 26px; height: 20px; background: var(--surface); border-radius: 3px; }
+.pv-bar { flex: none; height: 10px; background: var(--accent); border-radius: 2px; }
+.pv-font { flex: none; font-size: 20px; line-height: 1; width: 30px; }
+.changed { outline: 2px solid var(--accent); outline-offset: 2px; }
+.dash { color: var(--muted); }
+.wired { display: flex; flex-wrap: wrap; gap: 4px; min-width: 200px; }
+.wired code { font-size: 11.5px; }
+.wired .sec { background: var(--accent-soft); color: var(--accent); }
+.scroll { max-height: 640px; overflow: auto; }
+.status { font: 600 12px/1 var(--font-body); padding: 4px 8px; border-radius: 999px; white-space: nowrap; display: inline-block; }
+.status.live { background: var(--accent-soft); color: var(--accent); }
+.status.added { background: var(--note-bg); color: var(--note); }
+.status.legacy { background: var(--sunk); color: var(--muted); }
+
+dialog { border: 0; padding: 0; background: transparent; max-width: min(96vw, 1000px); }
+dialog::backdrop { background: rgba(5, 10, 12, .78); }
+dialog img { display: block; max-width: 100%; max-height: 86vh; border-radius: var(--radius); }
+dialog p { color: #E2ECEE; font-size: 15px; margin: 8px 2px 0; }
+dialog button { position: absolute; top: 8px; right: 8px; font: 600 14px/1 var(--font-body); padding: 8px 12px; border-radius: 999px; border: 0; background: rgba(0,0,0,.6); color: #fff; cursor: pointer; }
+
+footer { color: var(--muted); font-size: 14px; border-top: 1px solid var(--line); padding-top: 18px; }
+
+@media (max-width: 960px) {
+  .shell { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .toc { position: static; max-height: none; padding-block: 24px 0; }
+  .toc ol { display: flex; flex-wrap: wrap; gap: 6px; }
+  .toc a { border: 1px solid var(--line); border-radius: 999px; padding: 4px 10px; font-size: 14px; }
+  main { padding-block: 28px 64px; gap: 56px; }
+}
+@media (max-width: 560px) {
+  body { font-size: 16px; }
+  .compare-head, .compare-row { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .compare-head span:first-child { display: none; }
+  .compare-row > b { grid-column: 1 / -1; padding-top: 0; }
+}
+</style>
+
+<div class="shell">
+  <nav class="toc" aria-label="Contents">
+    <p>Contents</p>
+    <ol>
+      <li><a href="#example">Aareal example</a></li>
+      <li><a href="#start">New client</a></li>
+      <li><a href="#how">How it works</a></li>
+      <li><a href="#file">The variables file</a></li>
+      <li><a href="#roles">Palette roles</a></li>
+      <li><a href="#effects">What tokens change</a></li>
+      <li><a href="#reference">Token reference</a></li>
+      <li><a href="#fonts">Fonts</a></li>
+      <li><a href="#edge">Edge cases</a></li>
+      <li><a href="#trouble">Troubleshooting</a></li>
+      <li><a href="#maintain">Maintenance</a></li>
+      <li><a href="#deploy">Deployment</a></li>
+      <li><a href="#records">Records</a></li>
+      <li><a href="#inventory">Variable inventory</a></li>
+    </ol>
+  </nav>
+
+  <main>
+    <header class="intro">
+      <p class="eyebrow">ServiceNow Business Portal · Coral base · framework v1.0</p>
+      <h1>Business Portal Brand Tokens</h1>
+      <p class="lede">One place per client for a full rebrand: <strong>Section 1 of the theme's CSS Variables</strong>. Bootstrap, the Coral stylesheets, header and footer, the OOTB widgets and the Next Experience components are all wired to it.</p>
+      <dl class="facts">
+        <div><dt>Coral variables mapped</dt><dd>375 / 375</dd></div>
+        <div><dt>Brand tokens</dt><dd>139</dd></div>
+        <div><dt>Hardcoded rules fixed</dt><dd>~240</dd></div>
+        <div><dt>Core CSS vs stock Coral</dt><dd>5,514 / 5,514</dd></div>
+      </dl>
+    </header>
+
+    <section aria-labelledby="compare-h">
+      <h2 id="compare-h">Same portal, rebranded from one file</h2>
+      <div class="prose"><p>Left: the stock Business Portal. Right: the same portal with the Aareal Bank example theme. Every colour, font, corner and the banner come from Section 1 of the theme's CSS Variables; the logo and footer address are set on the portal record.</p></div>
+      <div class="compare">
+        <div class="compare-head"><span></span><span>Stock Coral</span><span>Aareal Bank example</span></div>
+        <div class="compare-row"><b>Home</b>
+          <button class="shot" data-cap="Stock Coral: home"><img src="screenshots/40-coral-home.jpg" alt="Business Portal home page in stock Coral teal" width="800" height="741"></button>
+          <button class="shot" data-cap="Aareal: navy header, angled light-shard banner, Arvo slab headings, sky-blue call to action, cream page with flat square cards"><img src="screenshots/30-aareal-home.jpg" alt="Business Portal home page in Aareal Bank branding" width="800" height="741"></button>
+        </div>
+        <div class="compare-row"><b>Case</b>
+          <button class="shot" data-cap="Stock Coral: case"><img src="screenshots/42-coral-case.jpg" alt="Case page in stock Coral" loading="lazy" width="800" height="741"></button>
+          <button class="shot" data-cap="Aareal: case page"><img src="screenshots/32-aareal-case.jpg" alt="Case page in Aareal Bank branding" loading="lazy" width="800" height="741"></button>
+        </div>
+        <div class="compare-row"><b>Form</b>
+          <button class="shot" data-cap="Stock Coral: catalog form"><img src="screenshots/43-coral-form.jpg" alt="Create case form in stock Coral" loading="lazy" width="800" height="741"></button>
+          <button class="shot" data-cap="Aareal: catalog form"><img src="screenshots/33-aareal-form.jpg" alt="Create case form in Aareal Bank branding" loading="lazy" width="800" height="741"></button>
+        </div>
+        <div class="compare-row"><b>Knowledge</b>
+          <button class="shot" data-cap="Stock Coral: knowledge home"><img src="screenshots/44-coral-kb-home.jpg" alt="Knowledge home in stock Coral" loading="lazy" width="800" height="741"></button>
+          <button class="shot" data-cap="Aareal: knowledge home - the banner follows the same hero tokens as the home page"><img src="screenshots/34-aareal-kb-home.jpg" alt="Knowledge home in Aareal Bank branding" loading="lazy" width="800" height="741"></button>
+        </div>
+      </div>
+      <div class="strip" id="strip" aria-label="Palette roles, Coral and Aareal"></div>
+    </section>
+
+    <section id="example" aria-labelledby="example-h">
+      <p class="eyebrow">Worked example</p>
+      <h2 id="example-h">Aareal Bank in Section 1</h2>
+      <div class="prose">
+        <p>Aareal's brand, taken from aareal-bank.com: a deep navy, a light sky blue for calls to action, warm cream and sand surfaces, four royal blues in the angled "light shards" of their artwork, square cards, and a slab-serif heading face over Helvetica. All of it maps onto existing tokens:</p>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Aareal brand</th><th>Section 1 setting</th></tr></thead>
+        <tbody>
+          <tr><td>Navy <code>#002A5F</code> for brand, links, headings</td><td><code>$palette-primary</code>, <code>$palette-secondary</code>, <code>$ui-heading-color</code></td></tr>
+          <tr><td>Sky blue CTA with bold navy text</td><td><code>$ui-button-primary-bg: $aareal-lightblue;</code> <code>$ui-button-primary-text: $aareal-darkblue;</code></td></tr>
+          <tr><td>Navy header, menu bar and footer</td><td><code>$ui-header-bg</code>, <code>$ui-header-text: #FFFFFF</code> (menus, hover states and footer follow)</td></tr>
+          <tr><td>Angled light shards</td><td><code>$ui-hero-bg</code>: one hard-stop <code>linear-gradient(121deg, …)</code> built from the four royal blues; reaches the home and knowledge banners</td></tr>
+          <tr><td>Cream and sand surfaces, navy greys</td><td>Neutral ramp <code>mix($aareal-darkblue, $aareal-sand, 12% … 95%)</code>, body text black</td></tr>
+          <tr><td>Selected state and focus</td><td>Royal blues from the artwork: <code>$palette-accent</code>, <code>$palette-focus</code></td></tr>
+          <tr><td>Square, flat cards</td><td><code>$ui-radius-md/-lg: 0px</code>, <code>$ui-shadow-card: none</code>; buttons and inputs keep 4px</td></tr>
+          <tr><td>Slab headings over Helvetica</td><td><code>$ui-font-family-heading: "Arvo", …</code> (open-source stand-in for ITC Lubalin Graph, embedded by the <code>aareal-fonts</code> include)</td></tr>
+        </tbody>
+      </table></div>
+      <div class="gallery">
+        <figure><button class="shot"><img src="screenshots/31-aareal-home-footer.jpg" alt="Aareal footer" loading="lazy" width="800" height="741"></button><figcaption>Footer in header navy with the white logo and Aareal's address. The logo and address are footer settings on the portal record, not theme tokens.</figcaption></figure>
+        <figure><button class="shot"><img src="screenshots/35-aareal-kb-article.jpg" alt="Aareal KB article" loading="lazy" width="800" height="741"></button><figcaption>Knowledge article: slab title, navy links and ratings, flat cards on cream.</figcaption></figure>
+        <figure><button class="shot"><img src="screenshots/36-aareal-product-catalog.jpg" alt="Aareal product catalog" loading="lazy" width="800" height="741"></button><figcaption>Product catalog (a Next Experience component) in Aareal colours and font after <strong>Sync Next Experience theme</strong>. Its panel keeps rounded corners: the sync covers colours and fonts, not shape.</figcaption></figure>
+      </div>
+      <div class="prose"><p>Outside Section 1 the example needed three things: the <code>aareal-fonts</code> CSS include (made with <code>tools/embed_font.py</code>), the white logo on the portal record, and the footer logo and address in the portal's footer settings. Building the example also turned up three framework fixes that every dark-header or light-CTA client now gets: header loading dots follow <code>$ui-header-text</code>, the knowledge banner text follows <code>$ui-hero-text</code>, and the onboarding modal's button hover derives from the CTA colour.</p></div>
+    </section>
+
+    <section id="start" aria-labelledby="start-h">
+      <p class="eyebrow">Quick start</p>
+      <h2 id="start-h">New client in six steps</h2>
+      <ol class="steps">
+        <li><div><h3>Copy the template</h3><p>Open <em>Service Portal › Themes › Business Portal Brand Template</em> and use the related link <strong>Clone theme with includes</strong>. Rename the copy <code>&lt;Client&gt; Theme</code> before step 4, because the generated Next Experience theme takes the theme's name.</p></div></li>
+        <li><div><h3>Fill in Section 1 of CSS Variables, and nothing else</h3>
+          <ul>
+            <li><b>1a</b> paste the brand guide's colours under their own names: <code>$acme-navy: #1B2A4A;</code></li>
+            <li><b>1b</b> assign every palette role (see <a href="#roles">palette roles</a>)</li>
+            <li><b>1c</b> pin exact tints if the guide has them, otherwise shades are generated</li>
+            <li><b>1d</b> optional token overrides: CTA colour, headings, header, radii, font</li>
+          </ul></div></li>
+        <li><div><h3>Set the logo on the portal record</h3><p>The Business Portal logo lives on <em>Portals › Business Portal › Logo</em>, not on the theme. A dark header needs a light logo.</p></div></li>
+        <li><div><h3>Click Sync Next Experience theme</h3><p>On the theme form. It regenerates the colours and font that Next Experience components read. Repeat after every palette or font change.</p></div></li>
+        <li><div><h3>Attach the theme to the portal</h3><p><em>Portals › Business Portal › Theme</em>. If you created a <em>new</em> portal record instead of reusing <code>business_portal</code>, also create <code>glide.service_portal.resize_text.&lt;url_suffix&gt;.base_font = 16</code>. Without it, every size renders 60% too large.</p></div></li>
+        <li><div><h3>Verify</h3><p>Hard-refresh, check <em>System Log</em> for <code>com.vaadin.sass</code> errors, then walk the <a href="#trouble">verification pages</a>.</p></div></li>
+      </ol>
+      <div class="table-wrap"><table>
+        <thead><tr><th>What</th><th>Where it is set</th></tr></thead>
+        <tbody>
+          <tr><td>Colours, fonts, radii, spacing, header, footer, banner</td><td>Theme › CSS Variables › Section 1</td></tr>
+          <tr><td>Logo, portal title, homepage</td><td>Portal record</td></tr>
+          <tr><td>Next Experience component colours</td><td>Generated by <strong>Sync Next Experience theme</strong>, never edited by hand</td></tr>
+          <tr><td>Menu items, quick links, banner text</td><td>Portal and widget instance options (content, not branding)</td></tr>
+          <tr><td>Case status pill colours</td><td>Instance option on the case cards widget (<a href="#edge">edge case</a>)</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <section id="how" aria-labelledby="how-h">
+      <p class="eyebrow">Architecture</p>
+      <h2 id="how-h">How portal styling works</h2>
+      <div class="prose"><p>A Business Portal page pulls CSS from seven places. Five are compiled with the theme's variables; two are not. The framework covers all of them.</p></div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Layer</th><th>Compiled with theme</th><th>Covered by</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Core</strong> <code>sp-bootstrap-rem.scss</code>: Bootstrap 3.4 + Service Portal core. Also turns ~150 variables into <code>--now-*</code> custom properties.</td><td>yes</td><td>Section 3 mapping</td></tr>
+          <tr><td><strong>Theme CSS includes</strong>: the 15 Coral stylesheets, order 90–560</td><td>yes</td><td>Section 3 + overrides C2</td></tr>
+          <tr><td><strong>Header and footer widgets</strong></td><td>yes</td><td>Section 3 + overrides B, C3</td></tr>
+          <tr><td><strong>Widget CSS</strong>: compiled per widget, prefixed <code>.v&lt;sys_id&gt;</code>, injected after the theme CSS</td><td>yes</td><td>widget knobs in Section 3 + overrides C4–C14 (selectors start with <code>body</code> to win)</td></tr>
+          <tr><td><strong><code>portal-brand-tokens-overrides</code></strong>, order 1000</td><td>yes</td><td>itself</td></tr>
+          <tr><td><strong>Next Experience theme block</strong> <code>#sp_uxf_theme_variables</code>: <code>:root</code> properties from the linked UX theme, loaded after the theme includes</td><td>no</td><td>overrides A (<code>html:root</code>) + the Sync button</td></tr>
+          <tr><td><strong>Static bundle</strong> <code>css_includes_$sp.css</code>: select2, date picker, slider, skeleton loaders</td><td><strong>never</strong></td><td>overrides C11</td></tr>
+        </tbody>
+      </table></div>
+      <div class="flow" aria-label="How a value flows">
+        <div class="lead"><b>Section 1</b><span>Palette (<code>$palette-*</code>) and token overrides</span></div>
+        <div><b>Section 2</b><span>139 brand tokens (<code>$ui-*</code>), all <code>!default</code></span></div>
+        <div><b>Section 3</b><span>378 Bootstrap, Coral and widget variables</span></div>
+        <div><b>Override sheet</b><span>Reads tokens: bridge (A), footer and hero (B), fixes (C1–C14)</span></div>
+        <div><b>Sync</b><span>Reads tokens and writes the generated Next Experience theme</span></div>
+      </div>
+      <div class="prose">
+        <p><strong>Why <code>!default</code> matters.</strong> The theme's variables are prepended to every compile. Section 2 declares each token with <code>!default</code> ("only if not set yet"), so whatever Section 1 sets wins, and everything derived from it (hover shades, header states, footer, banner) recalculates. It also means Section 1 can only reference <code>$palette-*</code>, its own 1a colours and literals, because the <code>$ui-*</code> tokens don't exist yet at that point.</p>
+        <p><strong>Why a separate override sheet.</strong> About 240 OOTB rules ignore the theme. They use literal colours, spacing variables as radii, <code>!important</code> button radii, a static bundle that is never compiled, inline placeholder colours, and TinyMCE's own skin. Each fix is a small rule that reads tokens, so one shared copy serves every client. Each block names what it fixes, so it can be deleted once ServiceNow fixes the source.</p>
+        <p><strong>Why the Sync button.</strong> The Product Catalog macroponent, AI Search, Now Assist and <code>now-*</code> components read ~5,000 component tokens from the Next Experience theme. ServiceNow resolves those into literal values when it writes the page, so overriding base <code>--now-color--*</code> scales in CSS isn't enough. Sync evaluates the theme's variables, rebuilds the ~40 base scales (brand, neutrals, alerts, focus, selection) and the font, and links <em>&lt;theme&gt; (generated UX theme)</em> to the portal theme.</p>
+      </div>
+    </section>
+
+    <section id="file" aria-labelledby="file-h">
+      <p class="eyebrow">css_variables</p>
+      <h2 id="file-h">The variables file</h2>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Section</th><th>Who edits</th><th>Contents</th></tr></thead>
+        <tbody>
+          <tr><td><strong>1 · Client</strong></td><td>you, per client</td><td>1a brand guide colours · 1b palette roles (required) · 1c pinned shades · 1d token overrides</td></tr>
+          <tr><td><strong>2 · Brand tokens</strong></td><td>nobody (read it)</td><td>2a generated shades · 2b colour roles · 2c header, footer, hero · 2d buttons · 2e typography · 2f shape · 2g spacing</td></tr>
+          <tr><td><strong>3 · Platform mapping</strong></td><td>nobody</td><td>378 Bootstrap, Coral and widget variables, each pointing at a token</td></tr>
+          <tr><td><strong>4 · Legacy</strong></td><td>nobody</td><td>43 Coral variables nothing reads any more, kept so custom widgets still compile</td></tr>
+        </tbody>
+      </table></div>
+      <pre><code>// --- 1b. Palette roles (required) ------------------------------
+$palette-primary:      $aareal-darkblue;   // main brand colour
+$palette-secondary:    $aareal-darkblue;   // links and text actions
+$palette-accent:       $aareal-royal-3;    // selected / active states
+$palette-focus:        $aareal-royal-4;    // keyboard focus ring
+$palette-neutral-5:    $aareal-cream;      // page background
+$palette-neutral-60:   mix($aareal-darkblue, $aareal-sand, 58%);  // input borders
+...
+// --- 1d. Token overrides (optional) ----------------------------
+$ui-button-primary-bg: $aareal-lightblue;  // sky blue call to action ...
+$ui-button-primary-text: $aareal-darkblue; // ... with navy text
+$ui-header-bg:         $aareal-darkblue;
+$ui-header-text:       #FFFFFF;
+$ui-radius-lg:         0px;                // square cards</code></pre>
+      <div class="note"><b>Syntax rules.</b> ServiceNow compiles with the Vaadin Sass compiler. One declaration per line, always ending in <code>;</code>, with the <code>;</code> <em>before</em> any <code>//</code> comment. No Sass maps. Colour functions (<code>mix</code>, <code>darken</code>, <code>lighten</code>, <code>rgba($c, .5)</code>) are fine. A parse error silently drops the whole stylesheet, and because these variables are prepended to every compile, a typo unstyles the entire portal. An undefined variable is written out literally and the browser ignores it, so that one thing quietly stays OOTB.</div>
+      <div class="prose"><p><strong>Upgrading the framework</strong> means replacing everything from <code>SECTION 2</code> down with the new template and keeping Section 1.</p></div>
+    </section>
+
+    <section id="roles" aria-labelledby="roles-h">
+      <p class="eyebrow">Section 1b</p>
+      <h2 id="roles-h">Choosing palette roles</h2>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Role</th><th>Drives</th><th>Rule of thumb</th></tr></thead>
+        <tbody>
+          <tr><td><code>$palette-primary</code></td><td>Primary buttons (white text), Actions menus, "Hide details" toggles, pagination, progress, carousel dots, active tab underline, banner tint</td><td>≥ 4.5:1 against white</td></tr>
+          <tr><td><code>$palette-secondary</code></td><td>Text links and text actions</td><td>≥ 4.5:1 on white and on <code>neutral-5</code></td></tr>
+          <tr><td><code>$palette-accent</code></td><td>Selected state: active tab label, chosen items, active pills (white text)</td><td>≥ 4.5:1 against white</td></tr>
+          <tr><td><code>$palette-focus</code></td><td>Focus ring</td><td>≥ 3:1 against white</td></tr>
+          <tr><td><code>$palette-neutral-5 … -100</code></td><td>5 page background · 20 borders · 60 input borders · 85 muted text · 90 secondary text · 100 body text</td><td>Darker at every step; 60 ≥ 3:1 on white; 85 ≥ 4.5:1 on 5</td></tr>
+          <tr><td><code>$palette-success / warning / danger / info</code></td><td>Icons, alert borders, required asterisks (danger), status buttons</td><td>Danger must read as "error"</td></tr>
+          <tr><td><code>…-light</code></td><td>Alert and label fills (text on them is <code>neutral-100</code>)</td><td>Pale</td></tr>
+        </tbody>
+      </table></div>
+      <div class="prose"><ul>
+        <li><strong>Small brand guide?</strong> One colour can fill several roles. Aareal uses its navy for both primary and links, and borrows royal blues from its artwork for the selected state and focus.</li>
+        <li><strong>CTA colour different from the brand colour?</strong> Keep <code>$palette-primary</code> on brand and set <code>$ui-button-primary-bg</code> in 1d, plus <code>$ui-button-primary-text</code> if the CTA is light. Aareal has sky-blue buttons with navy text on a navy brand.</li>
+        <li><strong>No neutrals in the guide?</strong> Grade the brand's background colour into its darkest colour. Aareal goes from sand to navy: <code>$palette-neutral-60: mix($aareal-darkblue, $aareal-sand, 58%);</code></li>
+        <li><strong>Exact tints in the guide?</strong> Pin them in 1c. Generated shades are fixed <code>mix()</code> percentages with black or white (see 2a).</li>
+        <li><strong>Dark header?</strong> Set <code>$ui-header-bg</code> and <code>$ui-header-text</code> in 1d. Hover, active and disabled states are derived from those two, and the footer follows unless you set <code>$ui-footer-*</code>. You'll need a light logo.</li>
+      </ul></div>
+    </section>
+
+    <section id="effects" aria-labelledby="effects-h">
+      <p class="eyebrow">Screenshots</p>
+      <h2 id="effects-h">What each token changes</h2>
+      <div class="prose"><p>Each screenshot is the lab portal with one group of tokens set to loud colours, so you can see exactly what they reach. The caption gives the exact override. Select an image to enlarge it.</p></div>
+      <div class="gallery">
+        <h3>Brand colours (1b)</h3>
+        <figure><button class="shot"><img src="screenshots/10-token-primary-home.jpg" alt="Home with magenta primary" loading="lazy" width="800" height="742"></button><figcaption><code>$palette-primary: #E6007E</code>. Primary and secondary buttons, carousel dots, banner tint. The case status pills are not palette-driven (edge case).</figcaption></figure>
+        <figure><button class="shot"><img src="screenshots/11-token-primary-case.jpg" alt="Case with magenta primary" loading="lazy" width="800" height="742"></button><figcaption>Same override on a case: Actions, Send, "Hide details", active tab underline.</figcaption></figure>
+        <figure><button class="shot"><img src="screenshots/12-token-accent-case.jpg" alt="Case with magenta accent" loading="lazy" width="800" height="742"></button><figcaption><code>$palette-accent: #E6007E</code>. The active tab label (selected state).</figcaption></figure>
+        <figure><button class="shot"><img src="screenshots/13-token-link-kb.jpg" alt="KB article with purple links" loading="lazy" width="800" height="742"></button><figcaption><code>$palette-secondary: #7A00FF</code>. Links on a KB article: Most Useful titles, Copy Permalink, Post a comment.</figcaption></figure>
+        <figure><button class="shot"><img src="screenshots/20-token-focus-danger-form.jpg" alt="Form with magenta focus ring and purple asterisks" loading="lazy" width="800" height="742"></button><figcaption><code>$palette-focus: #E6007E</code> rings the focused Subject field; <code>$palette-danger: #7A00FF</code> colours the required asterisks.</figcaption></figure>
+        <h3>Text, surfaces, borders (2b)</h3>
+        <figure><button class="shot"><img src="screenshots/21-token-text-colours-case.jpg" alt="Case with coloured text roles" loading="lazy" width="800" height="742"></button><figcaption><code>$ui-text</code> purple (body, nav, values) · <code>$ui-text-secondary</code> blue ("Last updated") · <code>$ui-text-muted</code> magenta (labels, timestamps, editor icons) · <code>$ui-heading-color</code> green.</figcaption></figure>
+        <figure><button class="shot"><img src="screenshots/19-token-surfaces-borders.jpg" alt="Form with pink page background and coloured borders" loading="lazy" width="800" height="742"></button><figcaption><code>$ui-page-bg</code> / <code>$ui-surface-subtle: #FBE3EF</code> · <code>$ui-border-subtle: #E6007E</code> (header line, editor chrome) · <code>$ui-border-strong: #7A00FF</code> (inputs, search).</figcaption></figure>
+        <h3>Header, footer, banner (2c)</h3>
+        <figure><button class="shot"><img src="screenshots/14-token-header-hero.jpg" alt="Dark header and gradient banner" loading="lazy" width="800" height="742"></button><figcaption><code>$ui-header-bg: #2B1F5C; $ui-header-text: #FFFFFF; $ui-hero-bg: linear-gradient(120deg, #2B1F5C 0%, #E6007E 100%); $ui-hero-text: #FFFFFF</code>. The dark logo on a dark header shows why a light logo variant is needed.</figcaption></figure>
+        <figure><button class="shot"><img src="screenshots/15-token-footer.jpg" alt="Magenta footer" loading="lazy" width="800" height="742"></button><figcaption><code>$ui-footer-bg: #E6007E; $ui-footer-text: #FFFFFF</code>. The footer is independent of the header (OOTB it always copies the header).</figcaption></figure>
+        <h3>Typography (2e) and shape (2f)</h3>
+        <figure><button class="shot"><img src="screenshots/16-token-typography-case.jpg" alt="Case in Georgia serif" loading="lazy" width="800" height="742"></button><figcaption><code>$ui-font-family: Georgia, "Times New Roman", serif; $ui-font-weight-heading: 700; $ui-heading-color: #E6007E</code>.</figcaption></figure>
+        <figure><button class="shot"><img src="screenshots/17-token-shape-home.jpg" alt="Home with square cards and pill buttons" loading="lazy" width="800" height="742"></button><figcaption>All radii <code>0</code>, <code>$ui-radius-button: 999px</code> (pill buttons), <code>$ui-shadow-card: 0 10px 28px 0 rgba(43, 31, 92, .35)</code>.</figcaption></figure>
+        <figure><button class="shot"><img src="screenshots/18-token-shape-case.jpg" alt="Case with square cards and pill buttons" loading="lazy" width="800" height="742"></button><figcaption>Same overrides on a case: square cards and editor, pill buttons, deeper shadow.</figcaption></figure>
+      </div>
+      <div class="prose">
+        <p><code>$ui-hero-bg</code> accepts any CSS background (colour, gradient, <code>url(…)</code>). The default is a soft gradient built from the palette. Set <code>$ui-hero-bg: null;</code> and <code>$ui-hero-text: null;</code> to hand control back to the Portal Banner widget's own options.</p>
+        <p><strong>Spacing (2g)</strong>: <code>$ui-space-3xs … -3xl</code> (1–40px) feed ServiceNow's <code>$sp-space--*</code> scale and Bootstrap's padding variables. <code>$ui-page-padding</code> is the gap around page content and <code>$ui-grid-gutter</code> the space between columns. The override sheet never touches layout, so treat these as density controls and change them sparingly.</p>
+      </div>
+    </section>
+
+    <section id="reference" aria-labelledby="reference-h">
+      <p class="eyebrow">All 139 tokens</p>
+      <h2 id="reference-h">Token reference</h2>
+      <div class="prose"><p>Each token's resolved value in the template (Coral look) and in the Aareal example, what it visibly changes, and where it is wired in. <em>Wired into</em> lists the platform variables mapped to it, the tokens derived from it (→), and the override sheet sections that read it (A bridge, B footer and hero, C1–C14 fixes).</p></div>
+      <div class="controls">
+        <input type="search" id="tok-q" placeholder="Filter tokens, e.g. header, radius, link" aria-label="Filter tokens">
+        <div class="pills" id="tok-groups" role="group" aria-label="Token group"></div>
+        <label><input type="checkbox" id="tok-changed"> Only tokens Aareal changes</label>
+        <span class="count" id="tok-count"></span>
+      </div>
+      <div class="table-wrap scroll"><table class="ref">
+        <thead><tr><th>Token</th><th>Template (Coral)</th><th>Aareal example</th><th>Wired into</th></tr></thead>
+        <tbody id="tok-body"></tbody>
+      </table></div>
+    </section>
+
+    <section id="fonts" aria-labelledby="fonts-h">
+      <p class="eyebrow">Section 2e</p>
+      <h2 id="fonts-h">Fonts</h2>
+      <div class="prose">
+        <p><code>$ui-font-family</code> sets the font everywhere: body, Bootstrap, headings, the Coral includes (one hardcodes "Lato", fixed in C2), <code>--now-font-family</code>, and after Sync the Next Experience Typography style.</p>
+        <p>The font also has to be <strong>loaded</strong>. Stock Coral embeds Lato as base64 WOFF2 in the stylesheet <code>portal-next-experience-lato-fonts</code> (include order 100, ~736 KB). For a client font:</p>
+        <ol>
+          <li>Create an sp_css with <code>@font-face</code> rules for the weights you use (400, 600 or 700). <code>python tools/embed_font.py "Family" 400=regular.woff2 700=bold.woff2</code> writes them with the WOFF2 embedded as base64, like the Lato sheet: self-contained and CSP-proof.</li>
+          <li>Add it as a CSS include on the client theme with a low order, e.g. 95.</li>
+          <li>Set <code>$ui-font-family: "Client Sans", Arial, sans-serif;</code> in 1d and click Sync.</li>
+          <li>Remove the Lato include from the client theme if nothing uses Lato any more.</li>
+        </ol>
+        <p>The Aareal example uses exactly this: the open-source slab Arvo (SIL OFL) stands in for Aareal's commercial ITC Lubalin Graph, embedded in the <code>aareal-fonts</code> include at order 95, with <code>$ui-font-family-heading: "Arvo", Rockwell, Georgia, serif;</code>. Never embed a commercial font without a web licence, and check the client's privacy and CSP rules before hot-linking a font CDN instead.</p>
+      </div>
+    </section>
+
+    <section id="edge" aria-labelledby="edge-h">
+      <p class="eyebrow">Limits</p>
+      <h2 id="edge-h">Edge cases</h2>
+      <div class="prose"><p>Things the theme can't cleanly control, and what to do about each.</p></div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Area</th><th>What happens</th><th>What to do</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Case status pills</strong> (home "Track your case updates")</td><td>Fixed pastels: New <code>#CBE9FC</code>, Open <code>#D1D2EE</code>, Awaiting <code>#FBF7BF</code>, Resolved <code>#D2EABC</code>, Closed <code>#C2C4CA</code>, text <code>#181A1F</code>. Set in the <code>portal_case_cards</code> instance option <code>state_highlight_colour</code> (JSON) and applied inline by script.</td><td>Edit the instance option per client if the pastels clash</td></tr>
+          <tr><td><strong>Logos and images</strong></td><td>Logo, taxonomy topic icons, empty-state illustrations, the default banner image are images</td><td>Supply a light logo for dark headers; topic icons are content</td></tr>
+          <tr><td><strong>Portal Banner options</strong></td><td>The widget has its own text colours and background image</td><td>Overridden by <code>$ui-hero-text</code> / <code>$ui-hero-bg</code>; set both to <code>null</code> to let the widget win</td></tr>
+          <tr><td><strong>KB article bodies</strong></td><td>Authored inline styles</td><td>Content clean-up</td></tr>
+          <tr><td><strong>Rich-text typing area</strong></td><td>TinyMCE's editable iframe keeps its own white content CSS</td><td>Toolbar and frame are themed (C13); fine on light themes</td></tr>
+          <tr><td><strong>select2 arrows</strong></td><td>A grey sprite image in the static bundle</td><td>Acceptable on light themes</td></tr>
+          <tr><td><strong>File-type icons, presence dots, Now Assist onboarding, guided tours</strong></td><td>Platform components with fixed palettes</td><td>Leave as is</td></tr>
+          <tr><td><strong>Footer logo, address, copyright, links</strong></td><td>Come from the portal record's footer settings (field <code>quick_start_config</code>, JSON <code>footer</code>: <code>logo_img_name</code>, <code>org_info</code>, <code>copyright</code>), not from the header logo or the theme</td><td>Set per portal. An uploaded logo works as <code>/&lt;attachment sys_id&gt;.iix</code>.</td></tr>
+          <tr><td><strong>Footer social icons</strong></td><td>Colour from the footer configuration (<code>social_icons_color</code>)</td><td>Set per client in the footer config</td></tr>
+          <tr><td><strong>Dark mode</strong></td><td>Not supported: Coral's dark variant is empty and the portal has no switch</td><td>–</td></tr>
+          <tr><td><strong>Dead OOTB rules</strong></td><td>Rules using undefined variables (<code>$panel-border-color</code>, <code>$brand-primary-dark</code>, <code>$tropical-rain</code>, <code>$gull-grey</code>, <code>$mesp-*</code>, <code>$selection-primary*</code>, <code>$navbar-invese-bg</code> typo…) never apply</td><td>Left dead on purpose. Defining them would change the stock look.</td></tr>
+          <tr><td><strong>OOTB SCSS bugs</strong></td><td><code>portal-banner</code>: <code>$sp-space--xxs: 2px; !default;</code> forces 2px. Coral declares <code>$navbar-inverse-*</code> twice (second block dead). Coral's <code>$now-sp-nass-*</code> lines run together (fixed in the template).</td><td>Harmless with the framework; noted so nobody chases them</td></tr>
+          <tr><td><strong>Next Experience components</strong></td><td>Keep old colours until synced</td><td>Click Sync after every palette or font change</td></tr>
+          <tr><td><strong>Next Experience shapes</strong></td><td>Sync generates colours and fonts only. Radii and shadows inside components such as the Product Catalog follow the base Coral UX theme (e.g. rounded panels on a square theme).</td><td>Accept, or extend <code>PortalBrandTokensUx</code> to generate the "Shape and Form" style too</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <section id="trouble" aria-labelledby="trouble-h">
+      <p class="eyebrow">When something looks wrong</p>
+      <h2 id="trouble-h">Troubleshooting</h2>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Symptom</th><th>Cause</th><th>Fix</th></tr></thead>
+        <tbody>
+          <tr><td>Portal, or a big part of it, unstyled</td><td>Parse error in CSS Variables; the whole stylesheet is dropped</td><td>System Log, filter <code>com.vaadin.sass</code>. Usual culprits: missing <code>;</code>, <code>;</code> inside a comment, map syntax, unbalanced brackets.</td></tr>
+          <tr><td>One thing stayed OOTB</td><td>Misspelt or undefined variable, or Section 1 referencing a <code>$ui-*</code> token</td><td>Check spelling; Section 1 uses only <code>$palette-*</code>, 1a colours and literals</td></tr>
+          <tr><td>Saved, but nothing changed</td><td>Theme CSS cache</td><td>Save the theme record (or click Sync, which force-updates it), then hard-refresh</td></tr>
+          <tr><td>Everything ~60% too big on a new portal</td><td>No <code>base_font</code> property for its URL suffix (default divisor 10)</td><td>Create <code>glide.service_portal.resize_text.&lt;suffix&gt;.base_font = 16</code></td></tr>
+          <tr><td>Product Catalog, AI Search, Now Assist in old colours</td><td>Generated UX theme stale or missing</td><td>Click Sync Next Experience theme</td></tr>
+          <tr><td>Old "(generated UX theme)" records lying around</td><td>Theme renamed after a sync</td><td>Delete the old generated theme and styles, sync again</td></tr>
+          <tr><td>A widget ignores a colour</td><td>Hardcoded, or a widget the audit didn't see (new release, custom widget)</td><td>Add a rule to the matching C-section of the override sheet</td></tr>
+        </tbody>
+      </table></div>
+      <div class="prose"><p><strong>Verification pages</strong>: <code>portal_b2b_home</code>, <code>csm_login</code>, <code>csm_registration</code>, <code>kb_home</code>, <code>kb_search</code>, <code>kb_article_view</code>, <code>sc_home</code>, <code>portal_taxonomy</code>, <code>product_catalog</code>, <code>csm_get_help</code>, <code>portal_cases</code>, <code>standard_ticket</code> (a case), <code>portal_approvals</code>, <code>portal_contacts</code>, <code>portal_install_base_items</code>, <code>csm_profile</code>, <code>sp_search</code>, <code>portal_faqs</code>, <code>sc_cart</code>, a 404. Check buttons, links, the active tab, the focus ring (Tab key), required asterisks, alerts, header, footer, banner, an open select2 dropdown, the date picker and the rich-text editor.</p></div>
+    </section>
+
+    <section id="maintain" aria-labelledby="maintain-h">
+      <p class="eyebrow">Keeping it working</p>
+      <h2 id="maintain-h">Maintenance and upgrades</h2>
+      <div class="prose">
+        <p><strong>Framework upgrade.</strong> Replace Sections 2–4 of each client theme, keep Section 1. Replace the shared override sheet and <code>PortalBrandTokensUx</code>. Sync each theme.</p>
+        <p><strong>After a ServiceNow upgrade, or when adding widgets</strong>, rerun the two audits on a lab portal:</p>
+        <ul>
+          <li><strong>Regression diff.</strong> Compile core with stock Coral and with the template and compare declaration by declaration. The endpoint compiles any theme: <code>/styles/scss/sp-bootstrap-rem.scss?portal_id=…&amp;theme_id=…&amp;uxf_theme_id=…</code>. Expect the same declaration count and only the known intentional differences.</li>
+          <li><strong>Loud-palette sweep.</strong> Put an obviously fake palette in the lab theme's Section 1 (sepia-tinted neutrals, magenta, purple and green brand colours), Sync, walk the verification pages. Anything still Coral teal, blue or grey is hardcoded. Find its source and add a fix.</li>
+        </ul>
+        <p><strong>Adding a fix</strong>: put it in the matching C-section, start the selector with <code>body</code>, use tokens only, never change layout, and name the widget or stylesheet in a comment.</p>
+        <p><strong>Adding a token</strong>: declare it in Section 2 with <code>!default</code> and a comment, map platform variables to it in Section 3, add it to the reference, and to <code>PortalBrandTokensUx.buildBaseColours()</code> if Next Experience components should follow it.</p>
+      </div>
+    </section>
+
+    <section id="deploy" aria-labelledby="deploy-h">
+      <p class="eyebrow">Update sets</p>
+      <h2 id="deploy-h">Deployment</h2>
+      <div class="prose">
+        <p><strong>Framework</strong>, once per instance (update set <em>Portal Brand Tokens - Framework</em>): the <code>portal-brand-tokens-overrides</code> stylesheet and include, the <code>PortalBrandTokensUx</code> script include, the two UI actions on <code>sp_theme</code>, and the <em>Business Portal Brand Template</em> theme with its 15 include records.</p>
+        <p><strong>Per client</strong>: the client theme and its include records (made by the clone), the portal's theme and logo, the <code>base_font</code> property if it's a new portal record, and the generated UX theme. Either move the generated <code>sys_ux_theme</code>, <code>sys_ux_style</code> and <code>m2m_theme_style</code> records, or click Sync once in the target instance after committing.</p>
+        <p><strong>Aareal example</strong>: update set <em>Portal Brand Tokens - Aareal Bank example</em> (theme, its includes, <code>aareal-fonts</code>, generated UX theme). It depends on the Framework set. The lab portal's logo and footer settings stay in the scratch set.</p>
+        <p>Use the UI actions in your own session so changes land in your current update set. Scripts that run as <code>system</code> (scheduled jobs, triggers) write to <em>Default</em>; move those records afterwards.</p>
+      </div>
+    </section>
+
+    <section id="records" aria-labelledby="records-h">
+      <p class="eyebrow">kev instance</p>
+      <h2 id="records-h">Records and files</h2>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Source file (portal-branding-framework/)</th><th>Instance record</th></tr></thead>
+        <tbody>
+          <tr><td><code>theme/css_variables.template.scss</code></td><td>sp_theme <em>Business Portal Brand Template</em> <code>6f3055f42b77cf10a5feffb86e91bf67</code></td></tr>
+          <tr><td><code>examples/aareal/css_variables.aareal.scss</code></td><td>sp_theme <em>Aareal Bank Theme (example)</em> <code>a32169b42b7bcf10a5feffb86e91bf12</code></td></tr>
+          <tr><td><code>examples/aareal/aareal-fonts.scss</code></td><td>sp_css <code>1b5161302b374350ff68f76a6e91bf01</code>, include <code>5f5161302b374350ff68f76a6e91bf02</code> (order 95 on the Aareal theme)</td></tr>
+          <tr><td><code>examples/noris/css_variables.noris.scss</code></td><td>sp_theme <em>noris Theme</em> <code>d71405382beacf54a5feffb86e91bf75</code> (test theme)</td></tr>
+          <tr><td><code>theme/portal-brand-tokens-overrides.scss</code></td><td>sp_css <code>39fcc9782b37cf10a5feffb86e91bf83</code>, include <code>010dc9782b37cf10a5feffb86e91bfa4</code></td></tr>
+          <tr><td><code>theme/PortalBrandTokensUx.js</code></td><td>sys_script_include <code>b61595742b734350ff68f76a6e91bf7a</code></td></tr>
+          <tr><td><code>theme/ui-actions.js</code></td><td>Sync <code>462559742b734350ff68f76a6e91bf60</code>, Clone <code>f23ad9f82bf7cf10a5feffb86e91bfb4</code></td></tr>
+          <tr><td><code>docs/</code></td><td>This guide as Markdown, token reference, variable inventory, screenshots</td></tr>
+        </tbody>
+      </table></div>
+      <div class="prose"><p>Reference: Business Portal <code>f264dbaccbfd52108d3f6a6fc041e4b5</code> · stock Coral theme <code>60bed96c93131210aa38860754891827</code> · base Coral UX theme <code>fad87d2ca304121029a4d1aed31e610f</code> · Aareal generated UX theme <code>c761e1302b374350ff68f76a6e91bfe4</code> · lab portal <code>/theme_lab</code> (currently showing the Aareal example).</p></div>
+    </section>
+
+    <section id="inventory" aria-labelledby="inventory-h">
+      <p class="eyebrow">Appendix</p>
+      <h2 id="inventory-h">Variable inventory</h2>
+      <div class="prose"><p>Every variable the stock Coral theme declares, plus the widget-level variables the framework adds, and what each now points at. <strong>Live</strong>: read by core, a Coral include, the header/footer or a widget. <strong>Legacy</strong>: read by nothing on the Business Portal, kept for compatibility. <strong>Added</strong>: not declared by Coral, so widgets fell back to hidden defaults (often hardcoded colours). Usage = sentinel hits in the canary compile of core, theme includes and widget CSS on public pages.</p></div>
+      <div class="controls">
+        <input type="search" id="inv-q" placeholder="Filter variables" aria-label="Filter variables">
+        <div class="pills" id="inv-status" role="group" aria-label="Status"></div>
+        <span class="count" id="inv-count"></span>
+      </div>
+      <div class="table-wrap scroll"><table>
+        <thead><tr><th>Variable</th><th>Status</th><th>Maps to</th><th>Group</th><th>Usage</th></tr></thead>
+        <tbody id="inv-body"></tbody>
+      </table></div>
+    </section>
+
+    <footer>Portal Brand Tokens framework v1.0 · built and verified on the kev instance, October 2026 · source in <code>portal-branding-framework/</code></footer>
+  </main>
+</div>
+
+<dialog id="lightbox" aria-label="Screenshot">
+  <button type="button" id="lb-close">Close</button>
+  <img id="lb-img" alt="">
+  <p id="lb-cap"></p>
+</dialog>
+
+<script>
+const DATA = __PAGEDATA__;
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+/* palette strip: Coral vs Aareal roles */
+(function () {
+  const names = ['primary', 'secondary', 'accent', 'focus', 'neutral-5', 'neutral-20', 'neutral-40', 'neutral-60', 'neutral-85', 'neutral-100', 'success', 'warning', 'danger', 'info'];
+  const map = {}; DATA.tokens.forEach(t => map[t.n] = t);
+  const strip = document.getElementById('strip');
+  strip.style.setProperty('--n', names.length);
+  const row = (label, key) => '<div class="strip-row"><span>' + label + '</span>' + names.map(n => {
+    const v = map['$palette-' + n][key];
+    return '<span class="chip" style="background:' + esc(v.v) + '" title="$palette-' + n + ' ' + esc(v.v) + '"></span>';
+  }).join('') + '</div>';
+  strip.innerHTML = row('Coral', 'c') + row('Aareal', 'o') +
+    '<div class="strip-row strip-labels"><span></span>' + names.map(n => '<span>' + n.replace('neutral-', 'n') + '</span>').join('') + '</div>';
+})();
+
+/* token reference */
+function preview(t, v) {
+  if (v.t === 'null') return '<span class="dash">null</span>';
+  const val = '<span class="mono">' + esc(v.v.length > 46 ? v.v.slice(0, 44) + '…' : v.v) + '</span>';
+  if (v.t === 'c') return '<span class="sw" style="background:' + esc(v.v) + '"></span>' + val;
+  if (v.t === 'g') return '<span class="sw" style="background:' + esc(v.v) + '"></span><span class="mono">gradient from palette</span>';
+  const n = t.n, px = parseFloat(v.v);
+  if (/radius/.test(n) && !isNaN(px)) return '<span class="pv-radius" style="border-radius:' + Math.min(px, 13) + 'px"></span>' + val;
+  if (/shadow/.test(n)) return '<span class="pv-shadow" style="box-shadow:' + esc(v.v) + '"></span>' + val;
+  if (/space|padding|gutter/.test(n) && !isNaN(px)) return '<span class="pv-bar" style="width:' + Math.max(2, Math.min(px, 48)) + 'px"></span>' + val;
+  if (/font-family/.test(n)) return '<span class="pv-font" style="font-family:' + esc(v.v) + '">Ag</span>' + val;
+  if (/font-weight/.test(n)) return '<span class="pv-font" style="font-weight:' + esc(v.v) + '">Ag</span>' + val;
+  return val;
+}
+function wired(t) {
+  const out = [];
+  t.p.slice(0, 4).forEach(p => out.push('<code>' + esc(p) + '</code>'));
+  if (t.p.length > 4) out.push('<code>+' + (t.p.length - 4) + '</code>');
+  t.f.slice(0, 3).forEach(p => out.push('<code>→ ' + esc(p) + '</code>'));
+  if (t.f.length > 3) out.push('<code>→ +' + (t.f.length - 3) + '</code>');
+  t.s.forEach(s => out.push('<code class="sec">' + esc(s) + '</code>'));
+  return out.length ? out.join('') : '<span class="dash">–</span>';
+}
+const groups = [...new Set(DATA.tokens.map(t => t.g))];
+const groupLabel = g => g.replace(/\s*\(.*\)$/, '');
+let tokGroup = 'all';
+const gEl = document.getElementById('tok-groups');
+gEl.innerHTML = '<button type="button" data-g="all" aria-pressed="true">All</button>' + groups.map(g => '<button type="button" data-g="' + esc(g) + '" aria-pressed="false">' + esc(groupLabel(g).split('. ')[0]) + '</button>').join('');
+gEl.addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b) return;
+  tokGroup = b.dataset.g;
+  gEl.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b ? 'true' : 'false'));
+  renderTokens();
+});
+function renderTokens() {
+  const q = document.getElementById('tok-q').value.trim().toLowerCase();
+  const onlyChanged = document.getElementById('tok-changed').checked;
+  let html = '', shown = 0, last = null;
+  DATA.tokens.forEach(t => {
+    if (tokGroup !== 'all' && t.g !== tokGroup) return;
+    const changed = t.c.v !== t.o.v;
+    if (onlyChanged && !changed) return;
+    if (q && !(t.n + ' ' + t.x + ' ' + t.p.join(' ')).toLowerCase().includes(q)) return;
+    if (t.g !== last) { html += '<tr class="grp"><td colspan="4">' + esc(groupLabel(t.g)) + '</td></tr>'; last = t.g; }
+    shown++;
+    html += '<tr><td><span class="tname">' + esc(t.n) + '</span><span class="tdesc">' + esc(t.x).replace(/`([^`]+)`/g, '<code>$1</code>') + '</span></td>' +
+      '<td><div class="val">' + preview(t, t.c) + '</div></td>' +
+      '<td><div class="val' + (changed ? '' : ' same') + '">' + (changed ? preview(t, t.o) : '<span class="dash">same</span>') + '</div></td>' +
+      '<td><div class="wired">' + wired(t) + '</div></td></tr>';
+  });
+  document.getElementById('tok-body').innerHTML = html || '<tr><td colspan="4">No tokens match. Clear the filter to see all 139.</td></tr>';
+  document.getElementById('tok-count').textContent = shown + ' of ' + DATA.tokens.length;
+}
+document.getElementById('tok-q').addEventListener('input', renderTokens);
+document.getElementById('tok-changed').addEventListener('change', renderTokens);
+renderTokens();
+
+/* inventory */
+let invStatus = 'all';
+const statusOf = r => r.o === 'added' ? 'added' : r.s;
+const sEl = document.getElementById('inv-status');
+const counts = { all: DATA.inventory.length };
+DATA.inventory.forEach(r => counts[statusOf(r)] = (counts[statusOf(r)] || 0) + 1);
+sEl.innerHTML = ['all', 'live', 'added', 'legacy'].map(s => '<button type="button" data-s="' + s + '" aria-pressed="' + (s === 'all') + '">' + (s === 'all' ? 'All' : s[0].toUpperCase() + s.slice(1)) + ' · ' + counts[s] + '</button>').join('');
+sEl.addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b) return;
+  invStatus = b.dataset.s;
+  sEl.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b ? 'true' : 'false'));
+  renderInv();
+});
+function renderInv() {
+  const q = document.getElementById('inv-q').value.trim().toLowerCase();
+  let html = '', shown = 0;
+  DATA.inventory.forEach(r => {
+    const st = statusOf(r);
+    if (invStatus !== 'all' && st !== invStatus) return;
+    if (q && !(r.n + ' ' + r.m + ' ' + r.g).toLowerCase().includes(q)) return;
+    shown++;
+    html += '<tr><td><code>' + esc(r.n) + '</code></td><td><span class="status ' + st + '">' + st + '</span></td><td class="wrap"><code>' + esc(r.m) + '</code></td><td>' + esc(r.g || '') + '</td><td>' + esc(r.u) + '</td></tr>';
+  });
+  document.getElementById('inv-body').innerHTML = html || '<tr><td colspan="5">No variables match.</td></tr>';
+  document.getElementById('inv-count').textContent = shown + ' of ' + DATA.inventory.length;
+}
+document.getElementById('inv-q').addEventListener('input', renderInv);
+renderInv();
+
+/* lightbox */
+const lb = document.getElementById('lightbox');
+document.querySelectorAll('.shot').forEach(b => b.addEventListener('click', () => {
+  const img = b.querySelector('img');
+  document.getElementById('lb-img').src = img.src;
+  document.getElementById('lb-img').alt = img.alt;
+  const fig = b.closest('figure');
+  document.getElementById('lb-cap').innerHTML = b.dataset.cap ? esc(b.dataset.cap) : (fig ? fig.querySelector('figcaption').innerHTML : '');
+  if (lb.showModal) lb.showModal();
+}));
+document.getElementById('lb-close').addEventListener('click', () => lb.close());
+lb.addEventListener('click', e => { if (e.target === lb) lb.close(); });
+</script>

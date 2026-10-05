@@ -1,0 +1,204 @@
+{
+ "_comment": "Hand-written content for the docs build. 'descriptions': what each token visibly changes (Markdown inline code allowed). 'screenshots': per token group (key = section code like 1b), [file in docs/screenshots, caption].",
+ "descriptions": {
+  "$palette-primary": "Main brand colour. Becomes `$ui-primary` (primary buttons, \"Actions\" menus, \"Hide details\" toggles, pagination, progress bars, carousel dots, active tab underline, brand fills), seeds the generated primary shades (2a) and tints the default home banner gradient.",
+  "$palette-secondary": "Links and text actions (`$ui-link`): text links such as KB article titles, \"Copy Permalink\" and \"Post a comment\", faceted search, condition-builder AND groups. Seeds the link hover shade.",
+  "$palette-accent": "Selected / active state (`$ui-selected`): active tab label, active pills, chosen dropdown and list items, toggles, select2 highlight. Second glow in the default banner gradient.",
+  "$palette-focus": "Keyboard focus ring on inputs, buttons, links and Next Experience components (`$ui-focus`). Needs at least 3:1 contrast with white.",
+  "$palette-white": "Card, panel, input, menu and modal surfaces; text and icons on coloured fills; default header background.",
+  "$palette-neutral-5": "Page background and subtle fills: table stripes, hover rows, panel headers, disabled inputs.",
+  "$palette-neutral-10": "Stronger fills: progress track, code background, active/hover table rows, skeleton loaders.",
+  "$palette-neutral-20": "Dividers and the borders of cards, panels, tables, dropdowns and modals (`$ui-border-subtle`). Default label background.",
+  "$palette-neutral-30": "Light grey (`$color-light`) and the matching Next Experience neutral step.",
+  "$palette-neutral-40": "Secondary borders (`$ui-border`): pagination hover, like/reply buttons, tab hover underline. Empty KB rating stars.",
+  "$palette-neutral-50": "Disabled controls and icons (Next Experience disabled states, KB attachment controls).",
+  "$palette-neutral-60": "Form input borders and the secondary button border (`$ui-border-strong`). Needs at least 3:1 contrast with white.",
+  "$palette-neutral-70": "Badge background, Bootstrap `$gray-light`, secondary button hover border.",
+  "$palette-neutral-80": "Mid-dark grey for Next Experience components and AI Search tertiary text.",
+  "$palette-neutral-85": "Muted text (`$ui-text-muted`): hints, placeholders, field labels, timestamps, breadcrumbs, editor toolbar icons.",
+  "$palette-neutral-90": "Secondary text (`$ui-text-secondary`): supporting text, legends, 'last updated' meta lines.",
+  "$palette-neutral-95": "Dark fills: `<kbd>`, preformatted text, Bootstrap `$gray-dark`.",
+  "$palette-neutral-100": "Body text (`$ui-text`) and the text on status fills (`$ui-status-text`).",
+  "$palette-black": "Modal backdrop and Bootstrap `$gray-base`; replaces the literal blacks in core CSS.",
+  "$palette-success": "Success status: icons, alert borders, `.btn-success`, timeline success badge.",
+  "$palette-success-light": "Success alert, label and banner fill.",
+  "$palette-warning": "Warning status: icons, alert borders, 'due today'.",
+  "$palette-warning-light": "Warning alert/label fill, journal 'note' comments, search-term highlight.",
+  "$palette-danger": "Danger status: required-field asterisks, error text and borders, `.btn-danger`, overdue dates.",
+  "$palette-danger-light": "Danger alert and label fill.",
+  "$palette-info": "Info status: icons, alert borders, info messages.",
+  "$palette-info-light": "Info alert and label fill.",
+  "$palette-rating": "Filled rating and favourite stars.",
+  "$palette-rating-dark": "Star outline.",
+  "$palette-primary-dark": "Hover / pressed state of everything primary (`$ui-primary-hover`).",
+  "$palette-primary-darkest": "Deepest brand shade (Bootstrap `$brand-primary-darkest`, Next Experience brand colour).",
+  "$palette-primary-light": "Light brand tint (`$brand-primary-lighter`, Next Experience interactive tint).",
+  "$palette-primary-lightest": "Light brand fill (`$ui-primary-subtle`): menu hover, chips, select2 hover, editor button hover.",
+  "$palette-primary-pale": "Faintest brand tint: primary label background, search result highlights, bottom of the default banner gradient.",
+  "$palette-secondary-dark": "Link hover colour (`$ui-link-hover`).",
+  "$palette-accent-dark": "Pressed / strong selected state (`$ui-selected-strong`).",
+  "$palette-accent-light": "Light selection tint (Next Experience selection scale).",
+  "$palette-accent-lightest": "Selected row background in data tables (`$ui-selected-subtle`).",
+  "$palette-success-dark": "Dark success shade (alert text/icon contrast in Next Experience).",
+  "$palette-warning-dark": "Dark warning shade.",
+  "$palette-danger-dark": "Dark danger shade; inline `<code>` text.",
+  "$palette-info-dark": "Dark info shade.",
+  "$palette-warning-mid": "`.btn-warning` background.",
+  "$palette-info-mid": "`.btn-info` background.",
+  "$ui-primary": "Primary brand role: Bootstrap `$brand-primary`, primary buttons (via `$ui-button-primary-bg`), pagination, progress bars, carousel indicators, tab underline, catalog/list accents, Next Experience primary scale.",
+  "$ui-primary-hover": "Hover / pressed state of primary elements, editor primary button hover, 'clear all' links.",
+  "$ui-primary-subtle": "Light brand fill: menu item hover, chips, select2 option hover, editor button hover.",
+  "$ui-on-primary": "Text and icons on a primary background (buttons, active pagination, primary panels).",
+  "$ui-link": "Text links, text buttons, pagination numbers, faceted search, condition-builder AND.",
+  "$ui-link-hover": "Link hover colour.",
+  "$ui-selected": "Active tab, selected list/dropdown item, active pill, toggles, select2 highlight.",
+  "$ui-selected-strong": "Pressed state of selected items.",
+  "$ui-selected-subtle": "Background of selected rows (data tables).",
+  "$ui-on-selected": "Text on a selected background.",
+  "$ui-focus": "Focus ring on inputs and controls (Bootstrap `$input-border-focus`, header search, KB search, select2, editor, Next Experience focus).",
+  "$ui-text": "Body text everywhere: Bootstrap text, inputs, dropdown items, labels, header nav, breadcrumbs (active), search, catalog, tickets.",
+  "$ui-text-secondary": "Supporting text: legends, 'last updated' lines, catalog field help.",
+  "$ui-text-muted": "Hints, placeholders, field labels, timestamps, disabled links, editor toolbar icons, header secondary text.",
+  "$ui-text-inverse": "Text on dark or coloured fills: success/danger buttons, badges, `<kbd>`, catalog error pills.",
+  "$ui-heading-color": "Colour of h1-h6 and widget titles. `inherit` = same as body text; set a colour for coloured headings.",
+  "$ui-page-bg": "Background behind everything (body, wells, breadcrumbs bar).",
+  "$ui-surface": "Cards, panels, inputs, dropdowns, popovers, modals, editor, secondary buttons.",
+  "$ui-surface-subtle": "Table stripes, hover rows, panel headers/footers, disabled inputs, input add-ons, comment backgrounds.",
+  "$ui-surface-strong": "Progress track, code background, active table row, default buttons in lists, skeleton loaders.",
+  "$ui-border-strong": "Form input borders, input add-on borders, secondary button border, search boxes.",
+  "$ui-border": "Secondary borders: pagination hover, tab hover, like/reply buttons, catalog quantity controls.",
+  "$ui-border-subtle": "Cards, panels, tables, dividers, dropdowns, modals, timelines, comments, editor chrome.",
+  "$ui-success": "Success colour (`$brand-success`): buttons, alert borders, timeline badge, positive Next Experience alerts.",
+  "$ui-success-bg": "Success alert / label fill.",
+  "$ui-warning": "Warning colour: alert borders, 'due today'.",
+  "$ui-warning-bg": "Warning alert/label fill, 'note' journal entries, search highlight (via `$ui-highlight-bg`).",
+  "$ui-danger": "Danger colour: required asterisks, error text/borders, `.btn-danger`, catalog validation.",
+  "$ui-danger-bg": "Danger alert / label fill.",
+  "$ui-info": "Info colour: alert borders, info messages, AI Search info.",
+  "$ui-info-bg": "Info alert / label / message fill.",
+  "$ui-status-text": "Text on all status fills (alerts, form-state messages).",
+  "$ui-rating-star": "Filled rating / favourite stars (KB articles, attachments).",
+  "$ui-rating-star-outline": "Star outline.",
+  "$ui-highlight-bg": "Search-term highlight in results (`<mark>` and the search widgets).",
+  "$ui-filter-or": "Colour of 'OR' groups in the condition builder.",
+  "$ui-header-bg": "Header (navbar) background. Footer and second menu row follow it unless set separately.",
+  "$ui-header-text": "Header links, menu labels, user name, search icon. Hover/active/disabled shades are derived from it.",
+  "$ui-header-text-muted": "Secondary header text.",
+  "$ui-header-hover-bg": "Header menu item hover background (derived: 5% text over bg, works on dark headers).",
+  "$ui-header-active-bg": "Header menu item active/open background (10% text over bg).",
+  "$ui-header-disabled-text": "Disabled header items (20% text over bg).",
+  "$ui-header-border": "Line under the header (same as bg = no line).",
+  "$ui-subnav-bg": "Second header row (menu bar).",
+  "$ui-header-height": "Header (navbar) height.",
+  "$ui-logo-max-height": "Maximum logo height in the header.",
+  "$ui-logo-margin-x": "Horizontal logo margin.",
+  "$ui-logo-margin-y": "Vertical logo margin.",
+  "$ui-footer-bg": "Footer background (defaults to the header background, like OOTB).",
+  "$ui-footer-text": "Footer text and links.",
+  "$ui-footer-heading": "Footer column headings.",
+  "$ui-footer-link-hover": "Footer link hover colour.",
+  "$ui-footer-divider": "Line above the footer's bottom bar.",
+  "$ui-hero-text": "Home banner and KB banner heading/subtitle colour. `null` = use the Portal Banner widget's colour options.",
+  "$ui-hero-bg": "Home banner and KB banner background (any CSS background: colour, gradient, `url()`). `null` = use the widget's Background Image option.",
+  "$ui-button-primary-bg": "Primary button background and border (incl. login button and editor primary button). Override to give CTAs a colour different from the brand primary.",
+  "$ui-button-primary-text": "Primary button text.",
+  "$ui-button-secondary-bg": "Secondary (default) button background.",
+  "$ui-button-secondary-text": "Secondary button text.",
+  "$ui-button-secondary-border": "Secondary button border.",
+  "$ui-button-secondary-hover-border": "Secondary button hover border.",
+  "$ui-button-secondary-active-border": "Secondary button pressed border.",
+  "$ui-font-family": "Font for everything: body, Bootstrap, Coral includes, `--now-font-family` and (after Sync) Next Experience components. The font must also be loaded, see Fonts.",
+  "$ui-font-family-heading": "Font for h1-h6.",
+  "$ui-font-size-base": "Base text size; every Bootstrap font size (h1-h6, small, large) is computed from it.",
+  "$ui-font-weight-heading": "Heading weight.",
+  "$ui-font-weight-strong": "Button and emphasised-label weight.",
+  "$ui-font-weight-medium": "Medium weight (small/meta text).",
+  "$ui-line-height": "Body line height.",
+  "$ui-line-height-tight": "Heading and small-control line height.",
+  "$ui-radius-sm": "Small radius: small inputs, tags, Next Experience small radius.",
+  "$ui-radius": "Default radius: inputs, dropdowns, pills, ticket/approval/catalog/KB elements, Next Experience medium radius.",
+  "$ui-radius-md": "Medium radius: ticket header cards, item panels, menus.",
+  "$ui-radius-lg": "Large radius: cards, panels, modals, comment bubbles.",
+  "$ui-radius-pill": "Fully rounded chips, badges, pagers.",
+  "$ui-radius-button": "Button radius (also login, Next Experience buttons). 999px = pill buttons.",
+  "$ui-radius-button-lg": "Large button radius.",
+  "$ui-radius-button-sm": "Small button radius.",
+  "$ui-radius-input": "Input radius (login, MFA, editor).",
+  "$ui-radius-input-sm": "Small input radius.",
+  "$ui-radius-input-lg": "Large input radius.",
+  "$ui-radius-card": "Panels/cards: KB tiles, ticket panels, catalog item panels, list widgets, datepicker.",
+  "$ui-radius-search": "Home banner, header and KB search boxes.",
+  "$ui-shadow-card": "Card / panel shadow (`$sp-panel-box-shadow`).",
+  "$ui-space-3xs": "1px spacing step (`$sp-space--3xs`).",
+  "$ui-space-xxs": "2px step.",
+  "$ui-space-xs": "4px step: small control padding, label margin, condensed table cells.",
+  "$ui-space-sm": "8px step: table cells, large control vertical padding, nav links, breadcrumbs.",
+  "$ui-space-md": "12px step: small control horizontal padding.",
+  "$ui-space-lg": "16px step: button horizontal padding, form-group spacing, alerts, modals.",
+  "$ui-space-xl": "24px step: panel body/heading padding, large buttons.",
+  "$ui-space-xxl": "32px step.",
+  "$ui-space-3xl": "40px step.",
+  "$ui-page-padding": "Padding around the page content (`$sp-page-padding-*`).",
+  "$ui-grid-gutter": "Bootstrap grid gutter (space between columns)."
+ },
+ "screenshots": {
+  "1b": [
+   [
+    "10-token-primary-home.jpg",
+    "`$palette-primary: #E6007E` - primary/secondary buttons, carousel dots, banner tint"
+   ],
+   [
+    "11-token-primary-case.jpg",
+    "`$palette-primary: #E6007E` on a case - Actions, Send, Hide details, active tab underline"
+   ],
+   [
+    "12-token-accent-case.jpg",
+    "`$palette-accent: #E6007E` - the active tab label (selected state)"
+   ],
+   [
+    "13-token-link-kb.jpg",
+    "`$palette-secondary: #7A00FF` - links on a KB article"
+   ],
+   [
+    "20-token-focus-danger-form.jpg",
+    "`$palette-focus: #E6007E` (ring on Subject) and `$palette-danger: #7A00FF` (required asterisks)"
+   ]
+  ],
+  "2b": [
+   [
+    "21-token-text-colours-case.jpg",
+    "`$ui-text: #7A00FF; $ui-text-secondary: #0057FF; $ui-text-muted: #E6007E; $ui-heading-color: #00A86B`"
+   ],
+   [
+    "19-token-surfaces-borders.jpg",
+    "`$ui-page-bg` and `$ui-surface-subtle: #FBE3EF`, `$ui-border-subtle: #E6007E`, `$ui-border-strong: #7A00FF`"
+   ]
+  ],
+  "2c": [
+   [
+    "14-token-header-hero.jpg",
+    "`$ui-header-bg: #2B1F5C; $ui-header-text: #FFFFFF; $ui-hero-bg: linear-gradient(120deg, #2B1F5C, #E6007E); $ui-hero-text: #FFFFFF`"
+   ],
+   [
+    "15-token-footer.jpg",
+    "`$ui-footer-bg: #E6007E; $ui-footer-text: #FFFFFF` - footer independent of the header"
+   ]
+  ],
+  "2e": [
+   [
+    "16-token-typography-case.jpg",
+    "`$ui-font-family: Georgia, serif; $ui-font-weight-heading: 700; $ui-heading-color: #E6007E`"
+   ]
+  ],
+  "2f": [
+   [
+    "17-token-shape-home.jpg",
+    "All radii 0, `$ui-radius-button: 999px` (pill buttons), deeper `$ui-shadow-card`"
+   ],
+   [
+    "18-token-shape-case.jpg",
+    "Same overrides on a ticket page: square cards, pill buttons"
+   ]
+  ]
+ }
+}

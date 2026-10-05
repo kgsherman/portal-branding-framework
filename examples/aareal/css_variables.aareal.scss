@@ -1,0 +1,743 @@
+// =============================================================================
+//  PORTAL BRAND TOKENS  .  framework v1.0  .  client: Aareal Bank (example)
+// =============================================================================
+//  This file has four sections. Only section 1 is edited per client.
+//
+//   1. CLIENT ............ the client's palette + any token overrides   EDIT
+//   2. BRAND TOKENS ...... framework defaults: what each colour is for  READ
+//   3. PLATFORM MAPPING .. wires every Bootstrap/ServiceNow variable    DO NOT EDIT
+//   4. LEGACY ............ old names nothing uses any more              DO NOT EDIT
+//
+//  Upgrading the framework = replace everything from "SECTION 2" down.
+//
+//  SYNTAX RULES (ServiceNow compiles this with the Vaadin Sass compiler):
+//   - One declaration per line, always end it with ";".
+//   - Put the ";" BEFORE any trailing // comment, never inside it.
+//   - No Sass maps. Colour functions (mix, darken, lighten, rgba) are fine.
+//   - In section 1, only reference $palette-* (tokens are defined later).
+//   - A typo here breaks EVERY stylesheet on the portal. Reload the portal
+//     after saving and check System Log for "com.vaadin.sass" errors.
+// =============================================================================
+
+
+// =============================================================================
+//  SECTION 1 . CLIENT                                              <<< EDIT <<<
+// =============================================================================
+
+// --- 1a. Brand guideline colours (optional) ----------------------------------
+// Aareal Bank AG - taken from aareal-bank.com (October 2026)
+$aareal-darkblue:      #002A5F;  // primary brand colour: header, headings, links, footer
+$aareal-lightblue:     #79BFE8;  // highlight: call-to-action buttons, tags on dark
+$aareal-cream:         #F6F5EE;  // section background
+$aareal-sand:          #EDEBDD;  // cards, teasers
+$aareal-royal-1:       #012C84;  // the four "light shard" blues of the footer artwork
+$aareal-royal-2:       #023293;
+$aareal-royal-3:       #033CAA;
+$aareal-royal-4:       #1B52A5;
+
+
+// --- 1b. Palette roles (required) --------------------------------------------
+// Brand colours
+$palette-primary:      $aareal-darkblue;   // main brand colour: brand fills, pagination, active tab line
+$palette-secondary:    $aareal-darkblue;   // links and text actions
+$palette-accent:       $aareal-royal-3;    // selected / active states
+$palette-focus:        $aareal-royal-4;    // keyboard focus ring (7.5:1 on white)
+
+// Neutrals, light to dark - Aareal's warm cream and sand, graded into navy greys
+$palette-white:        #FFFFFF;
+$palette-neutral-5:    $aareal-cream;                        // page background, subtle fills
+$palette-neutral-10:   $aareal-sand;                         // stronger fills
+$palette-neutral-20:   mix($aareal-darkblue, $aareal-sand, 12%);  // dividers, panel borders
+$palette-neutral-30:   mix($aareal-darkblue, $aareal-sand, 22%);
+$palette-neutral-40:   mix($aareal-darkblue, $aareal-sand, 34%);  // secondary borders
+$palette-neutral-50:   mix($aareal-darkblue, $aareal-sand, 46%);  // disabled
+$palette-neutral-60:   mix($aareal-darkblue, $aareal-sand, 58%);  // input borders (4.4:1 on white)
+$palette-neutral-70:   mix($aareal-darkblue, $aareal-sand, 68%);
+$palette-neutral-80:   mix($aareal-darkblue, $aareal-sand, 78%);
+$palette-neutral-85:   mix($aareal-darkblue, $aareal-sand, 85%);  // muted text
+$palette-neutral-90:   mix($aareal-darkblue, $aareal-sand, 90%);  // secondary text
+$palette-neutral-95:   mix($aareal-darkblue, $aareal-sand, 95%);
+$palette-neutral-100:  #000000;                              // body text (Aareal sets copy in black)
+$palette-black:        #000000;
+
+// Status
+$palette-success:        #3E8600;
+$palette-success-light:  #C7DCB5;
+$palette-warning:        #B29800;
+$palette-warning-light:  #ECE5BF;
+$palette-danger:         #C0262D;
+$palette-danger-light:   #F6CDCF;
+$palette-info:           $aareal-royal-4;
+$palette-info-light:     mix(#FFFFFF, $aareal-lightblue, 65%);
+
+// Special purpose
+$palette-rating:         #D1A940;  // rating / favourite stars
+$palette-rating-dark:    #C28C00;  // star outline
+
+
+// --- 1c. Optional: pin exact shades ------------------------------------------
+// Light brand tints come from Aareal's light blue rather than from washed-out navy.
+$palette-primary-light:     $aareal-lightblue;
+$palette-primary-lightest:  mix(#FFFFFF, $aareal-lightblue, 55%);
+$palette-primary-pale:      mix(#FFFFFF, $aareal-lightblue, 82%);
+$palette-accent-lightest:   mix(#FFFFFF, $aareal-lightblue, 70%);
+$palette-info-mid:          $aareal-lightblue;
+
+
+// --- 1d. Token overrides (optional) ------------------------------------------
+// Typography: slab headings (Arvo stands in for Aareal's ITC Lubalin Graph and is
+// loaded by the "aareal-fonts" CSS include), Helvetica Neue copy
+$ui-font-family:            "Helvetica Neue", Helvetica, Arial, sans-serif;
+$ui-font-family-heading:    "Arvo", Rockwell, Georgia, serif;
+$ui-font-weight-heading:    700;
+$ui-heading-color:          $aareal-darkblue;
+
+// Call to action: light blue with bold navy text, as on aareal-bank.com
+$ui-button-primary-bg:      $aareal-lightblue;
+$ui-button-primary-text:    $aareal-darkblue;
+
+// Navy header, menu bar and footer
+$ui-header-bg:              $aareal-darkblue;
+$ui-header-text:            #FFFFFF;
+$ui-header-height:          64px;
+$ui-logo-max-height:        44px;
+$ui-footer-link-hover:      $aareal-lightblue;
+
+// Home banner: Aareal's angled light shards on navy
+$ui-hero-bg:                linear-gradient(121deg, $aareal-darkblue 0%, $aareal-darkblue 30%, $aareal-royal-4 30%, $aareal-royal-4 33%, $aareal-royal-3 33%, $aareal-royal-3 41%, $aareal-royal-2 41%, $aareal-royal-2 58%, $aareal-royal-1 58%, $aareal-royal-1 100%);
+$ui-hero-text:              #FFFFFF;
+
+// Shape: square, flat cards; 4px only on buttons, inputs and tags
+$ui-radius-md:              0px;
+$ui-radius-lg:              0px;
+$ui-radius-search:          4px;
+$ui-shadow-card:            none;
+
+
+
+// =============================================================================
+//  SECTION 2 . BRAND TOKENS (framework defaults - override in 1d, not here)
+// =============================================================================
+
+// --- 2a. Generated shades (skipped for any shade pinned in 1c) ---------------
+$palette-primary-dark:      mix(#000000, $palette-primary, 33%) !default;
+$palette-primary-darkest:   mix(#000000, $palette-primary, 65%) !default;
+$palette-primary-light:     mix(#FFFFFF, $palette-primary, 37%) !default;
+$palette-primary-lightest:  mix(#FFFFFF, $palette-primary, 74%) !default;
+$palette-primary-pale:      mix(#FFFFFF, $palette-primary, 90%) !default;
+$palette-secondary-dark:    mix(#000000, $palette-secondary, 32%) !default;
+$palette-accent-dark:       mix(#000000, $palette-accent, 25%) !default;
+$palette-accent-light:      mix(#FFFFFF, $palette-accent, 42%) !default;
+$palette-accent-lightest:   mix(#FFFFFF, $palette-accent, 85%) !default;
+$palette-success-dark:      mix(#000000, $palette-success, 22%) !default;
+$palette-warning-dark:      mix(#000000, $palette-warning, 22%) !default;
+$palette-danger-dark:       mix(#000000, $palette-danger, 22%) !default;
+$palette-info-dark:         mix(#000000, $palette-info, 22%) !default;
+$palette-warning-mid:       mix(#FFFFFF, $palette-warning, 50%) !default;
+$palette-info-mid:          mix(#FFFFFF, $palette-info, 49%) !default;
+
+// --- 2b. Colour roles --------------------------------------------------------
+// Brand
+$ui-primary:               $palette-primary !default;          // primary buttons, pagination, progress bars, brand icons
+$ui-primary-hover:         $palette-primary-dark !default;     // hover/pressed state of anything primary
+$ui-primary-subtle:        $palette-primary-lightest !default; // light brand fill: menu hover, chips
+$ui-on-primary:            $palette-white !default;            // text and icons on a primary background
+$ui-link:                  $palette-secondary !default;        // text links, text buttons
+$ui-link-hover:            $palette-secondary-dark !default;
+$ui-selected:              $palette-accent !default;           // active tab, selected item, active pill, toggles
+$ui-selected-strong:       $palette-accent-dark !default;
+$ui-selected-subtle:       $palette-accent-lightest !default;
+$ui-on-selected:           $palette-white !default;
+$ui-focus:                 $palette-focus !default;            // focus ring on inputs and controls
+
+// Text
+$ui-text:                  $palette-neutral-100 !default;      // body text
+$ui-text-secondary:        $palette-neutral-90 !default;       // supporting text, legends
+$ui-text-muted:            $palette-neutral-85 !default;       // hints, placeholders, meta data
+$ui-text-inverse:          $palette-white !default;            // text on dark/coloured fills
+$ui-heading-color:         inherit !default;                   // h1-h6; set to a colour for coloured headings
+
+// Surfaces
+$ui-page-bg:               $palette-neutral-5 !default;        // behind everything
+$ui-surface:               $palette-white !default;            // cards, panels, inputs, menus, modals
+$ui-surface-subtle:        $palette-neutral-5 !default;        // stripes, hovers, panel headers, disabled inputs
+$ui-surface-strong:        $palette-neutral-10 !default;       // progress track, code, active row
+
+// Borders
+$ui-border-strong:         $palette-neutral-60 !default;       // form inputs
+$ui-border:                $palette-neutral-40 !default;       // secondary borders
+$ui-border-subtle:         $palette-neutral-20 !default;       // cards, panels, dividers, tables
+
+// Status (base = icons/borders, bg = alert fill, text = text on the fill)
+$ui-success:               $palette-success !default;
+$ui-success-bg:            $palette-success-light !default;
+$ui-warning:               $palette-warning !default;
+$ui-warning-bg:            $palette-warning-light !default;
+$ui-danger:                $palette-danger !default;
+$ui-danger-bg:             $palette-danger-light !default;
+$ui-info:                  $palette-info !default;
+$ui-info-bg:               $palette-info-light !default;
+$ui-status-text:           $palette-neutral-100 !default;
+
+// Special purpose
+$ui-rating-star:           $palette-rating !default;
+$ui-rating-star-outline:   $palette-rating-dark !default;
+$ui-highlight-bg:          $ui-warning-bg !default;            // search-term highlight
+$ui-filter-or:             #A43A0C !default;                   // "OR" group colour in the condition builder
+
+// --- 2c. Header, footer, hero ------------------------------------------------
+$ui-header-bg:             $palette-white !default;
+$ui-header-text:           $ui-text !default;
+$ui-header-text-muted:     $ui-text-muted !default;
+$ui-header-hover-bg:       mix($ui-header-text, $ui-header-bg, 5%) !default;   // derived: works for light and dark headers
+$ui-header-active-bg:      mix($ui-header-text, $ui-header-bg, 10%) !default;
+$ui-header-disabled-text:  mix($ui-header-text, $ui-header-bg, 20%) !default;
+$ui-header-border:         $ui-header-bg !default;             // line under the header (same as bg = no line)
+$ui-subnav-bg:             $ui-header-bg !default;             // second header row (menu bar)
+$ui-header-height:         60px !default;
+$ui-logo-max-height:       40px !default;
+$ui-logo-margin-x:         6px !default;
+$ui-logo-margin-y:         6px !default;
+$ui-footer-bg:             $ui-header-bg !default;             // OOTB the footer copies the header colours
+$ui-footer-text:           $ui-header-text !default;
+$ui-footer-heading:        $ui-footer-text !default;
+$ui-footer-link-hover:     $ui-footer-text !default;
+$ui-footer-divider:        mix($ui-footer-text, $ui-footer-bg, 80%) !default;
+$ui-hero-text:             $ui-text !default;                  // home banner heading; null = use the widget's colour option
+$ui-hero-bg:               radial-gradient(ellipse 90% 120% at 30% -20%, rgba($palette-accent, .30) 0%, rgba($palette-accent, 0) 70%), radial-gradient(ellipse 70% 110% at 75% -30%, rgba($palette-primary, .28) 0%, rgba($palette-primary, 0) 70%), linear-gradient(180deg, $palette-primary-pale 0%, $palette-white 100%) !default; // null = use the widget's Background Image option
+
+// --- 2d. Buttons --------------------------------------------------------------
+$ui-button-primary-bg:     $ui-primary !default;
+$ui-button-primary-text:   $ui-on-primary !default;
+$ui-button-secondary-bg:   $ui-surface !default;
+$ui-button-secondary-text: $ui-primary !default;
+$ui-button-secondary-border: $ui-border-strong !default;
+$ui-button-secondary-hover-border:  $palette-neutral-70 !default;
+$ui-button-secondary-active-border: $palette-neutral-85 !default;
+
+// --- 2e. Typography -----------------------------------------------------------
+$ui-font-family:           "Lato", sans-serif !default;        // must also be loaded - see docs "Fonts"
+$ui-font-family-heading:   $ui-font-family !default;
+$ui-font-size-base:        16px !default;                      // every text size scales from this
+$ui-font-weight-heading:   600 !default;
+$ui-font-weight-strong:    600 !default;                       // buttons, emphasised labels
+$ui-font-weight-medium:    500 !default;
+$ui-line-height:           1.4 !default;
+$ui-line-height-tight:     1.1 !default;                       // headings, small controls
+
+// --- 2f. Shape & elevation ----------------------------------------------------
+$ui-radius-sm:             2px !default;
+$ui-radius:                4px !default;                       // default corner radius
+$ui-radius-md:             6px !default;                       // ticket header cards, item panels, menus
+$ui-radius-lg:             8px !default;                       // cards, panels, modals
+$ui-radius-pill:           999px !default;                     // fully rounded chips and badges
+$ui-radius-button:         $ui-radius !default;
+$ui-radius-button-lg:      $ui-radius-button !default;
+$ui-radius-button-sm:      $ui-radius-button !default;
+$ui-radius-input:          $ui-radius !default;
+$ui-radius-input-sm:       $ui-radius-sm !default;
+$ui-radius-input-lg:       $ui-radius-lg !default;
+$ui-radius-card:           $ui-radius-lg !default;
+$ui-radius-search:         9.6px !default;                     // KB / header / banner search boxes
+$ui-shadow-card:           0 4px 8px 0 rgba(56, 56, 56, 0.25) !default;
+
+// --- 2g. Spacing & layout -----------------------------------------------------
+$ui-space-3xs:             1px !default;
+$ui-space-xxs:             2px !default;
+$ui-space-xs:              4px !default;
+$ui-space-sm:              8px !default;
+$ui-space-md:              12px !default;
+$ui-space-lg:              16px !default;
+$ui-space-xl:              24px !default;
+$ui-space-xxl:             32px !default;
+$ui-space-3xl:             40px !default;
+$ui-page-padding:          10px !default;
+$ui-grid-gutter:           32px !default;
+
+
+
+// =============================================================================
+//  SECTION 3 . PLATFORM MAPPING                                 DO NOT EDIT
+//  Every variable below is read by Bootstrap 3.4 core, the Coral theme
+//  stylesheets, the portal header/footer or OOTB widgets.
+// =============================================================================
+
+// --- Text ---------------------------------------------------------------------
+$text-primary:                 $ui-text;
+$text-secondary:               $ui-text-secondary;
+$text-tertiary:                $ui-text-muted;
+$text-white:                   $ui-text-inverse;
+$text-color:                   $ui-text;
+$text-muted:                   $ui-text-muted;
+
+// --- Backgrounds & borders ----------------------------------------------------
+$body-bg:                      $ui-page-bg;
+$background-primary:           $ui-surface;
+$background-secondary:         $ui-surface-subtle;
+$background-tertiary:          $ui-surface-strong;
+$border-primary:               $ui-border-strong;
+$border-secondary:             $ui-border;
+$border-tertiary:              $ui-border-subtle;
+$border:                       $ui-border-subtle;
+$line-separator-color:         $ui-border-subtle;
+$kb-tile-border:               $ui-border-subtle;
+$sp-b-border-color:            $ui-border-subtle;
+
+// --- Selection ------------------------------------------------------------------
+$select-primary:               $ui-selected;
+$select-primary-darker:        $ui-selected-strong;
+$component-active-color:       $ui-on-selected;
+$component-active-bg:          $ui-selected;
+
+// --- Brand ------------------------------------------------------------------------
+$brand-primary:                $ui-primary;
+$brand-primary-darkest:        $palette-primary-darkest;
+$brand-primary-darker:         $ui-primary-hover;
+$brand-primary-lighter:        $palette-primary-light;
+$brand-primary-lightest:       $ui-primary-subtle;
+$btn-secondary-color-hover:    $ui-primary-hover;
+$brand-success:                $ui-success;
+$brand-info:                   $ui-info;
+$brand-warning:                $ui-warning;
+$brand-danger:                 $ui-danger;
+$primary:                      $ui-primary;
+$success:                      $ui-success;
+$info:                         $ui-info;
+$warning:                      $ui-warning;
+$danger:                       $ui-danger;
+$sp-agent-chat-bg:             $ui-primary;
+
+// --- Greys (Bootstrap) -------------------------------------------------------------
+$gray-base:                    $palette-black;
+$gray-darker:                  $palette-neutral-100;
+$gray-dark:                    $palette-neutral-95;
+$gray:                         $palette-neutral-85;
+$gray-light:                   $palette-neutral-70;
+$gray-lighter:                 $palette-neutral-5;
+$color-darkest:                $palette-neutral-100;
+$color-darker:                 $palette-neutral-85;
+$color-light:                  $palette-neutral-30;
+$color-lighter:                $palette-neutral-10;
+
+// --- Links ---------------------------------------------------------------------------
+$link-color:                   $ui-link;
+$link-hover-color:             $ui-link-hover;
+$filter-group-and-color:       $ui-link;
+$filter-group-or-color:        $ui-filter-or;
+
+// --- Typography ----------------------------------------------------------------------
+$font-family-sans-serif:       $ui-font-family;
+$now-sp-font-family-sans-serif: $ui-font-family;
+$headings-font-family:         $ui-font-family-heading;
+$headings-font-weight:         $ui-font-weight-heading;
+$headings-line-height:         $ui-line-height-tight;
+$headings-color:               $ui-heading-color;
+$font-weight-small:            $ui-font-weight-medium;
+$line-height-base:             $ui-line-height;
+$line-height-small:            $ui-line-height-tight;
+$font-size-base:               $ui-font-size-base;
+$font-size-3xl:                ceil(($font-size-base * 2.25));
+$font-size-xxl:                ceil(($font-size-base * 1.875));
+$font-size-xl:                 ceil(($font-size-base * 1.5));
+$font-size-large:              ceil(($font-size-base * 1.25));
+$font-size-md:                 $font-size-base;
+$font-size-small:              ceil(($font-size-base * 0.875));
+$font-size-sm:                 ceil(($font-size-base * 0.938));
+$font-size-xs:                 ceil(($font-size-base * 0.75));
+$font-size-h1:                 ceil(($font-size-base * 2));
+$font-size-h2:                 ceil(($font-size-base * 1.5));
+$font-size-h3:                 ceil(($font-size-base * 1.25));
+$font-size-h4:                 ceil(($font-size-base * 1.125));
+$font-size-h5:                 $font-size-base;
+$font-size-h6:                 ceil(($font-size-base * 0.875));
+
+// --- Spacing -------------------------------------------------------------------------
+$sp-space--3xs:                $ui-space-3xs;
+$sp-space--xxs:                $ui-space-xxs;
+$sp-space--xs:                 $ui-space-xs;
+$sp-space--sm:                 $ui-space-sm;
+$sp-space--md:                 $ui-space-md;
+$sp-space--lg:                 $ui-space-lg;
+$sp-space--xl:                 $ui-space-xl;
+$sp-space--xxl:                $ui-space-xxl;
+$sp-space--3xl:                $ui-space-3xl;
+$padding-base-vertical:        6px;
+$padding-base-horizontal:      $ui-space-lg;
+$padding-large-vertical:       $ui-space-sm;
+$padding-large-horizontal:     $ui-space-xl;
+$padding-small-vertical:       $ui-space-xs;
+$padding-small-horizontal:     $ui-space-md;
+$padding-xs-vertical:          $ui-space-xs;
+$padding-xs-horizontal:        $ui-space-sm;
+$sp-page-padding-top:          $ui-page-padding;
+$sp-page-padding-bottom:       $ui-page-padding;
+$sp-page-padding-left:         $ui-page-padding;
+$sp-page-padding-right:        $ui-page-padding;
+$grid-gutter-width:            $ui-grid-gutter;
+$flex-paperclip-margin-left:   15px;
+$form-textbox-button-height:   36px;
+$form-group-margin-bottom:     $ui-space-lg;
+$label-margin-bottom:          $ui-space-xs;
+
+// --- Shape & elevation ----------------------------------------------------------------
+$border-radius-small:          $ui-radius-sm;
+$border-radius-base:           $ui-radius;
+$border-radius-large:          $ui-radius-lg;
+$btn-border-radius-small:      $ui-radius-button-sm;
+$btn-border-radius-base:       $ui-radius-button;
+$btn-border-radius-large:      $ui-radius-button-lg;
+$input-border-radius:          $ui-radius-input;
+$input-border-radius-small:    $ui-radius-input-sm;
+$input-border-radius-large:    $ui-radius-input-lg;
+$panel-border-radius:          $ui-radius-card;
+$nav-pills-border-radius:      $ui-radius;
+$pager-border-radius:          $ui-radius-pill;
+$sp-panel-box-shadow:          $ui-shadow-card;
+
+// --- Header (navbar) ------------------------------------------------------------------
+$sp-navbar-height:             $ui-header-height;
+$navbar-height:                $ui-header-height;
+$sp-logo-max-height:           $ui-logo-max-height;
+$sp-logo-margin-x:             $ui-logo-margin-x;
+$sp-logo-margin-y:             $ui-logo-margin-y;
+$sp-tagline-color:             $ui-header-text;
+$sp-navbar-divider-color:      $ui-subnav-bg;
+$navbar-default-link-hover-color: $ui-header-hover-bg;
+$navbar-inverse-bg:            $ui-header-bg;
+$navbar-inverse-border:        $ui-header-border;
+$navbar-inverse-color:         $ui-header-text-muted;
+$navbar-inverse-link-color:    $ui-header-text;
+$navbar-inverse-link-hover-color: $ui-header-text;
+$navbar-inverse-link-hover-bg: $ui-header-hover-bg;
+$navbar-inverse-link-active-color: $ui-header-text;
+$navbar-inverse-link-active-bg: $ui-header-active-bg;
+$navbar-inverse-link-disabled-color: $ui-header-disabled-text;
+$navbar-inverse-link-disabled-bg: transparent;
+$navbar-inverse-brand-color:   $ui-header-text;
+$navbar-inverse-brand-hover-color: $ui-header-text;
+$navbar-inverse-brand-hover-bg: transparent;
+$navbar-secondary-color:       $ui-text-muted;
+
+// --- Navs, tabs, pills ----------------------------------------------------------------
+$nav-link-padding:             $ui-space-sm $ui-space-lg;
+$nav-link-hover-bg:            $ui-surface-subtle;
+$nav-disabled-link-color:      $ui-text-muted;
+$nav-disabled-link-hover-color: $ui-text-muted;
+$nav-tabs-border-color:        $ui-border-subtle;
+$nav-tabs-link-hover-border-color: transparent;
+$nav-tabs-active-link-hover-bg: $ui-selected;
+$nav-tabs-active-link-hover-color: $ui-on-selected;
+$nav-tabs-active-link-hover-border-color: $ui-selected;
+$nav-tabs-justified-link-border-color: transparent;
+$nav-tabs-justified-active-link-border-color: $ui-selected;
+$nav-pills-active-link-hover-bg: $ui-selected;
+$nav-pills-active-link-hover-color: $ui-on-selected;
+
+// --- Buttons ----------------------------------------------------------------------------
+$btn-font-weight:              $ui-font-weight-strong;
+$btn-default-color:            $ui-button-secondary-text;
+$btn-default-bg:               $ui-button-secondary-bg;
+$btn-default-border:           $ui-button-secondary-border;
+$border-tertiary-actionable:   $ui-button-secondary-border;
+$secondary-button-hover-border-color: $ui-button-secondary-hover-border;
+$secondary-button-active-border-color: $ui-button-secondary-active-border;
+$btn-primary-color:            $ui-button-primary-text;
+$btn-primary-bg:               $ui-button-primary-bg;
+$btn-primary-border:           $ui-button-primary-bg;
+$btn-success-color:            $ui-text-inverse;
+$btn-success-bg:               $ui-success;
+$btn-success-border:           $ui-success;
+$btn-info-color:               $ui-text;
+$btn-info-bg:                  $palette-info-mid;
+$btn-info-border:              $palette-info-mid;
+$btn-warning-color:            $ui-text;
+$btn-warning-bg:               $palette-warning-mid;
+$btn-warning-border:           $palette-warning-mid;
+$btn-danger-color:             $ui-text-inverse;
+$btn-danger-bg:                $ui-danger;
+$btn-danger-border:            $ui-danger;
+$btn-link-disabled-color:      $ui-text-muted;
+$tox-primary-bg:               $ui-button-primary-bg;
+$tox-primary-hover-bg:         $ui-primary-hover;
+$tox-secondary-bg:             $ui-surface;
+$tox-secondary-hover-bg:       $ui-surface-subtle;
+
+// --- Forms --------------------------------------------------------------------------------
+$input-bg:                     $ui-surface;
+$input-bg-disabled:            $ui-surface-subtle;
+$input-color:                  $ui-text;
+$input-border:                 $ui-border-strong;
+$input-border-focus:           $ui-focus;
+$input-color-placeholder:      $ui-text-muted;
+$input-group-addon-bg:         $ui-surface-subtle;
+$input-group-addon-border-color: $ui-border-strong;
+$legend-color:                 $ui-text-secondary;
+$legend-border-color:          $ui-border-subtle;
+$sc-field-error-color:         $ui-text-secondary;
+$form-label-bg-color:          mix(#FFFFFF, $palette-info, 64%);
+$sc-reqd-focus-outline-offset: 0px;
+$sc-reqd-focus-outline:        0px solid $ui-primary;
+
+// --- Dropdowns ------------------------------------------------------------------------------
+$dropdown-bg:                  $ui-surface;
+$dropdown-border:              $ui-border-subtle;
+$dropdown-fallback-border:     $ui-border-subtle;
+$dropdown-divider-bg:          $ui-border-subtle;
+$dropdown-link-color:          $ui-text;
+$dropdown-link-hover-color:    $ui-text;
+$dropdown-link-hover-bg:       $ui-surface-subtle;
+$dropdown-link-active-color:   $ui-on-selected;
+$dropdown-link-active-bg:      $ui-selected;
+$dropdown-link-disabled-color: $ui-text-muted;
+$dropdown-header-color:        $ui-text-muted;
+
+// --- Tables -------------------------------------------------------------------------------------
+$table-cell-padding:           $ui-space-sm;
+$table-condensed-cell-padding: $ui-space-xs;
+$table-bg:                     transparent;
+$table-bg-accent:              $ui-surface-subtle;
+$table-bg-hover:               $ui-surface-strong;
+$table-border-color:           $ui-border-subtle;
+
+// --- Pagination -----------------------------------------------------------------------------------
+$pagination-color:             $ui-link;
+$pagination-bg:                $ui-surface;
+$pagination-border:            $ui-border-subtle;
+$pagination-hover-color:       $ui-link-hover;
+$pagination-hover-bg:          $ui-surface-subtle;
+$pagination-hover-border:      $ui-border;
+$pagination-active-color:      $ui-on-primary;
+$pagination-active-bg:         $ui-primary;
+$pagination-active-border:     $ui-primary;
+$pagination-disabled-color:    $ui-text-muted;
+$pagination-disabled-bg:       $ui-surface;
+$pagination-disabled-border:   $ui-border-subtle;
+
+// --- Alerts & form states ---------------------------------------------------------------------------
+$state-success-text:           $ui-status-text;
+$state-success-bg:             $ui-success-bg;
+$state-success-border:         $ui-success;
+$state-info-text:              $ui-status-text;
+$state-info-bg:                $ui-info-bg;
+$state-info-border:            $ui-info;
+$state-warning-text:           $ui-status-text;
+$state-warning-bg:             $ui-warning-bg;
+$state-warning-border:         $ui-warning;
+$state-danger-text:            $ui-status-text;
+$state-danger-bg:              $ui-danger-bg;
+$state-danger-border:          $ui-danger;
+$alert-padding:                $ui-space-lg;
+$alert-success-bg:             $ui-success-bg;
+$alert-success-text:           $ui-status-text;
+$alert-success-border:         $ui-success;
+$alert-info-bg:                $ui-info-bg;
+$alert-info-text:              $ui-status-text;
+$alert-info-border:            $ui-info;
+$alert-warning-bg:             $ui-warning-bg;
+$alert-warning-text:           $ui-status-text;
+$alert-warning-border:         $ui-warning;
+$alert-danger-bg:              $ui-danger-bg;
+$alert-danger-text:            $ui-status-text;
+$alert-danger-border:          $ui-danger;
+$alert-info-message-bg:        $ui-info-bg;
+$alert-info-message-border:    $ui-info;
+
+// --- Popovers, labels, badges -------------------------------------------------------------------------
+$popover-bg:                   $ui-surface;
+$popover-border-color:         $ui-border-subtle;
+$popover-fallback-border-color: $ui-border-subtle;
+$popover-title-bg:             $ui-surface-subtle;
+$label-default-bg:             $palette-neutral-20;
+$label-primary-bg:             $palette-primary-pale;
+$label-success-bg:             $ui-success-bg;
+$label-info-bg:                $ui-info-bg;
+$label-warning-bg:             $ui-warning-bg;
+$label-danger-bg:              $ui-danger-bg;
+$label-color:                  $ui-text;
+$label-link-hover-color:       $ui-text;
+$badge-color:                  $ui-text-inverse;
+$badge-link-hover-color:       $ui-text-inverse;
+$badge-bg:                     $palette-neutral-70;
+$badge-active-color:           $ui-link;
+$badge-active-bg:              $ui-surface;
+
+// --- Modals ------------------------------------------------------------------------------------------------
+$modal-inner-padding:          $ui-space-lg;
+$modal-title-padding:          $ui-space-lg;
+$modal-content-bg:             $ui-surface;
+$modal-content-border-color:   $ui-border-subtle;
+$modal-content-fallback-border-color: $ui-border-subtle;
+$modal-backdrop-bg:            $palette-black;
+$modal-backdrop-opacity:       .5;
+$modal-header-border-color:    $ui-border-subtle;
+$modal-footer-border-color:    $ui-border-subtle;
+
+// --- Progress, list groups, panels, wells ----------------------------------------------------------------
+$progress-bg:                  $ui-surface-strong;
+$progress-bar-color:           $ui-on-primary;
+$list-group-bg:                $ui-surface;
+$list-group-border:            $ui-border-subtle;
+$list-group-hover-bg:          $ui-surface-subtle;
+$list-group-active-color:      $ui-on-selected;
+$list-group-active-bg:         $ui-selected;
+$list-group-active-border:     $ui-selected;
+$list-group-active-text-color: $ui-on-selected;
+$list-group-disabled-color:    $ui-text-muted;
+$list-group-disabled-bg:       $ui-surface-subtle;
+$list-group-disabled-text-color: $ui-text-muted;
+$list-group-link-color:        $ui-text;
+$list-group-link-hover-color:  $ui-text;
+$list-group-link-heading-color: $ui-text;
+$panel-bg:                     $ui-surface;
+$panel-body-padding:           0 $ui-space-xl $ui-space-xl $ui-space-xl;
+$panel-heading-padding:        $ui-space-xl;
+$panel-inner-border:           $ui-border-subtle;
+$panel-footer-bg:              $ui-surface-subtle;
+$panel-default-text:           $ui-text;
+$panel-default-border:         $ui-border-subtle;
+$panel-default-heading-bg:     $ui-surface-subtle;
+$panel-primary-text:           $ui-on-primary;
+$thumbnail-padding:            $ui-space-xs;
+$thumbnail-border:             $ui-border-subtle;
+$thumbnail-caption-padding:    $ui-space-sm;
+$well-bg:                      $ui-page-bg;
+$well-border:                  $ui-border-subtle;
+
+// --- Breadcrumbs, carousel, code, typography details ------------------------------------------------------
+$breadcrumb-padding-vertical:  $ui-space-sm;
+$breadcrumb-padding-horizontal: $ui-space-lg;
+$breadcrumb-bg:                $ui-page-bg;
+$breadcrumb-color:             $ui-text-muted;
+$breadcrumb-active-color:      $ui-text;
+$carousel-indicator-active-bg: $ui-primary;
+$code-color:                   $palette-danger-dark;
+$code-bg:                      $ui-surface-strong;
+$kbd-color:                    $ui-text-inverse;
+$kbd-bg:                       $palette-neutral-95;
+$pre-bg:                       $ui-surface-subtle;
+$pre-color:                    $palette-neutral-95;
+$pre-border-color:             $ui-border-subtle;
+$abbr-border-color:            $ui-border-subtle;
+$headings-small-color:         $ui-text-muted;
+$blockquote-small-color:       $ui-text-muted;
+$blockquote-border-color:      $ui-border-subtle;
+$page-header-border-color:     $ui-border-subtle;
+$hr-border:                    $ui-border-subtle;
+
+// --- Ratings & favourites -----------------------------------------------------------------------------------
+$fav-star-color:               $ui-rating-star;
+$fav-star-color-off:           $palette-white;
+$fav-star-outline-color:       $ui-rating-star-outline;
+$fav-star-outline:             -1px 0 $ui-rating-star-outline, 0 1px $ui-rating-star-outline, 1px 0 $ui-rating-star-outline, 0 -1px $ui-rating-star-outline;
+
+// --- Loaders --------------------------------------------------------------------------------------------------
+$sp-loading-color:             $ui-text;
+
+// --- Widget-level knobs (OOTB widgets declare these with !default) ----------------------------------------------
+$sp-nav-tabs-active-tab:       $ui-primary;
+$sp-nav-tabs-hover-color:      $ui-primary;
+$sp-sc-category-list-hover-color: $ui-primary;
+$sp-clear-all-color:           $ui-primary-hover;
+$sc-label-color:               $ui-text-muted;
+$table-heading:                $ui-primary;
+$timeline-badge-success:       $ui-success;
+$background-button-default:    $ui-surface-strong;
+$kb-border:                    $ui-border-subtle;
+$kb-attachment-content:        $ui-text;
+$kb-attachment-star-empty:     $palette-neutral-40;
+$kb-attachment-star-color:     $ui-rating-star;
+$kb-attachment-star-shadow:    $ui-rating-star-outline;
+$banner-secondary-btn-bgcolor: transparent;
+$login-btn-bg:                 $ui-button-primary-bg;
+$login-btn-border:             $ui-button-primary-bg;
+$login-mask-btn-bg:            $ui-surface-subtle;
+$sp-homepage-bg:               $ui-surface;
+$sp-page-bg:                   $ui-surface;
+$data-table-selected:          $ui-selected-subtle;
+$sp-list-cell-color-selected:  $ui-text;
+$sc-field-error-text-color:    $ui-text-inverse;
+$sp-search-results-highlight-color: $ui-highlight-bg;
+$sp-faceted-search-interactive-color: $ui-link;
+$sp-now-tabs-color-selected:   $ui-selected;
+$sp-now-tabs-color-hover:      $ui-selected;
+$sp-now-tabs-color-active:     $ui-selected-strong;
+$sp-now-tabs-border-color-hover: $ui-border;
+$default-comment-border-color: $ui-border-subtle;
+$note-comment-border-color:    $ui-warning-bg;
+$note-comment-background-color: rgba($ui-warning-bg, .2);
+$kb-comment-text-color:        $ui-text-muted;
+$kb-comment-bg:                $ui-surface-subtle;
+$kb-reply-btn-bg:              $ui-surface-subtle;
+$kb-comment-disbaled:          $ui-text-muted;
+$kb-comment-likes-border:      $ui-border;
+$kb-attachment-icon-color:     $ui-surface-strong;
+$kb-attchment-content:         $ui-text;
+$kb-comment-author-link:       $ui-text;
+$kb-create-comment-bg:         $ui-surface;
+$kb-helpicon-box-shadow-color: $ui-border-strong;
+$kb-icon-color:                $ui-surface-strong;
+
+// --- Next-gen AI Search (NASS) - only compiled when AI Search is enabled ----------------------------------------
+$now-sp-nass-base-shadow-color: #383838;
+$now-sp-nass-bg-color:         transparent;
+$now-sp-nass-overlay-area-color: transparent;
+$now-sp-nass-color-alert-moderate-3: #7B56FF;
+$now-sp-nass-color-text-primary-actionable: $ui-on-primary;
+$now-sp-nass-color-primary-0:  $palette-primary-lightest;
+$now-sp-nass-color-primary-2:  $palette-primary-dark;
+$now-sp-nass-color-alert-info-2: $ui-info;
+$now-sp-nass-color-text-tertiary: $palette-neutral-80;
+$now-sp-nass-color-neutral-10: $palette-neutral-80;
+$now-sp-nass-color-background-secondary-actionable: $palette-neutral-90;
+
+
+
+// =============================================================================
+//  SECTION 4 . LEGACY                                            DO NOT EDIT
+//  Declared by the old Coral theme but read by nothing on the Business Portal
+//  (verified 2026-10). Kept, mapped to tokens, so custom widgets that still
+//  reference them keep compiling. Safe to ignore.
+// =============================================================================
+$select-primary-lighter:       $ui-selected-subtle;
+$brand-danger-darker:          $palette-danger-dark;
+$brand-warning-darker:         $palette-warning-dark;
+$brand-success-darker:         $palette-success-dark;
+$brand-info-darker:            $palette-info-dark;
+$brand-moderate:               #7B56FF;
+$brand-moderate-darker:        #6245CC;
+$brand-low:                    #757681;
+$brand-low-darker:             #585961;
+$error:                        $ui-danger;
+$sp-nav-subnav:                $ui-subnav-bg;
+$sp-navbar-inverse-bg:         $ui-header-bg;
+$sp-body-bg:                   $ui-page-bg;
+$table-hover:                  $palette-primary-pale;
+$container-min-height:         420px;
+$color-dark:                   $palette-neutral-80;
+$color-disabled:               $palette-neutral-50;
+$color-lightest:               $palette-white;
+$color-accent:                 $ui-selected;
+$color-accent-light:           $palette-accent-light;
+$color-accent-lightest:        $ui-selected-subtle;
+$color-blue-lightest:          #C4DBFE;
+$color-blue-light:             #89B7FD;
+$color-blue-dark:              #0F55C1;
+$color-grey:                   #B8BCBC;
+$color-green-dark:             #004B2D;
+$panel-primary:                $ui-border-subtle;
+$overdue:                      $ui-danger;
+$due-today:                    $ui-warning;
+$due-later:                    $ui-success;
+$complete:                     #757681;
+$in-progress:                  $ui-success;
+$progress-bar:                 $ui-primary;
+$preview-outline:              #1A4E70;
+$preview-outline-text-color:   #FFFFFF;
+$font-size-2xl:                ceil(($font-size-base * 1.375));
+$font-size-h1-3x:              ceil(($font-size-base * 2.812));
+$now-sp-tabs--selected--color: $ui-selected;
+$now-sp-tabs--color--hover:    $ui-selected;
+$now-sp-tabs--border-color:    $ui-border-subtle;
+$now-sp-tabs--selected--background-color: $ui-selected;
+$rp-default-bg:                $ui-surface;
+$label-success-background:     $ui-success-bg;

@@ -1,0 +1,710 @@
+// =============================================================================
+//  PORTAL BRAND TOKENS - OVERRIDES  .  framework v1.0
+// =============================================================================
+//  ONE shared stylesheet for every client theme. Never edit per client -
+//  change the tokens in the theme's css_variables instead.
+//
+//  Install: Theme > CSS Includes > "portal-brand-tokens-overrides", Order 1000
+//  (after all Coral stylesheets).
+//
+//  What it does:
+//   A. NEXT EXPERIENCE BRIDGE - feeds the tokens into the --now-* custom
+//      properties used by Next Experience components (search, Now Assist,
+//      macroponents). Without this they keep the colours of the separate
+//      UX theme record. Uses html:root so it beats that block.
+//   B. FOOTER & HERO - lets footer and home banner differ from the header.
+//   C. HARDCODED FIXES - OOTB stylesheets and widgets that ignore the theme.
+//      Only colours, radii and fonts are touched, never layout.
+//      Widget CSS is injected after this file, so selectors start with
+//      "body" to win. Each block names what it fixes, so it can be deleted
+//      once ServiceNow fixes the source.
+// =============================================================================
+
+@function ui-rgb($c) { @return #{red($c)}, #{green($c)}, #{blue($c)}; }
+
+
+// =============================================================================
+//  A. NEXT EXPERIENCE BRIDGE
+// =============================================================================
+html:root {
+  // typography & shape
+  --now-font-family: #{$ui-font-family};
+  --now-global-border-radius--sm: #{$ui-radius-sm};
+  --now-global-border-radius--md: #{$ui-radius};
+  --now-global-border-radius--lg: #{$ui-radius-lg};
+  --now-button--border-radius: #{$ui-radius-button};
+  --now-container--border-radius: #{$ui-radius-card};
+
+  // brand / interactive scales
+  --now-color--primary-0: ui-rgb($palette-primary-lightest);
+  --now-color--primary-1: ui-rgb($ui-primary);
+  --now-color--primary-2: ui-rgb($palette-primary-dark);
+  --now-color--primary-3: ui-rgb($palette-primary-darkest);
+  --now-color--secondary-0: ui-rgb($palette-primary-lightest);
+  --now-color--secondary-1: ui-rgb($palette-primary-dark);
+  --now-color--secondary-2: ui-rgb(mix(#000000, $ui-primary, 50%));
+  --now-color--secondary-3: ui-rgb($palette-primary-darkest);
+  --now-color--interactive-0: ui-rgb($palette-primary-lightest);
+  --now-color--interactive-1: ui-rgb($palette-primary-light);
+  --now-color--interactive-2: ui-rgb($ui-primary);
+  --now-color--interactive-3: ui-rgb($palette-primary-dark);
+  --now-color--interactive-4: ui-rgb($palette-primary-darkest);
+  --now-color_brand--primary: ui-rgb($palette-primary-darkest);
+  --now-color_brand--secondary: ui-rgb($palette-primary-dark);
+  --now-color_brand--neutral: ui-rgb($palette-neutral-85);
+  --now-color_surface--brand-1: ui-rgb(mix(#FFFFFF, $ui-primary, 95%));
+  --now-color_surface--brand-2: ui-rgb(mix(#FFFFFF, $ui-primary, 90%));
+  --now-color_surface--brand-3: ui-rgb(mix(#FFFFFF, $ui-primary, 85%));
+  --now-color_surface--brand-4: ui-rgb(mix(#FFFFFF, $ui-primary, 80%));
+  --now-color_surface--brand-5: ui-rgb(mix(#FFFFFF, $ui-primary, 75%));
+  --now-color_surface--brand-6: ui-rgb(mix(#FFFFFF, $ui-primary, 70%));
+
+  // links & focus
+  --now-color--link-1: ui-rgb(mix(#FFFFFF, $ui-link, 35%));
+  --now-color--link-2: ui-rgb($ui-link);
+  --now-color--link-3: ui-rgb($ui-link-hover);
+  --now-color--link-4: ui-rgb(mix(#000000, $ui-link, 63%));
+  --now-color--focus-1: ui-rgb(mix(#FFFFFF, $ui-focus, 35%));
+  --now-color--focus-2: ui-rgb($ui-focus);
+  --now-color--focus-3: ui-rgb(mix(#000000, $ui-focus, 65%));
+  --now-color--focus-ring: ui-rgb($ui-focus);
+  --now-color_focus-ring: ui-rgb($ui-focus);
+  --sp-agent-focus-color: ui-rgb($ui-focus);
+
+  // selection
+  --now-color_selection--primary-0: ui-rgb($ui-selected-subtle);
+  --now-color_selection--primary-1: ui-rgb($palette-accent-light);
+  --now-color_selection--primary-2: ui-rgb($ui-selected);
+  --now-color_selection--primary-3: ui-rgb($ui-selected-strong);
+  --now-color_selection--primary-4: ui-rgb(mix(#000000, $ui-selected, 50%));
+  --now-color_selection--secondary-0: ui-rgb($palette-primary-lightest);
+  --now-color_selection--secondary-1: ui-rgb($palette-primary-light);
+  --now-color_selection--secondary-2: ui-rgb($ui-primary);
+  --now-color_selection--secondary-3: ui-rgb($palette-primary-dark);
+  --now-color_selection--secondary-4: ui-rgb($palette-primary-darkest);
+
+  // text
+  --now-color--text-primary: ui-rgb($ui-text);
+  --now-color--text-secondary: ui-rgb($ui-text-secondary);
+  --now-color--text-tertiary: ui-rgb($ui-text-muted);
+  --now-color_text--primary: ui-rgb($ui-text);
+  --now-color_text--secondary: ui-rgb($ui-text-secondary);
+  --now-color_text--tertiary: ui-rgb($ui-text-muted);
+  --now-color_text--primary-actionable: ui-rgb($ui-on-primary);
+  --now-color_text--secondary-actionable: ui-rgb($palette-neutral-5);
+  --now-color_text--tertiary-actionable: ui-rgb($palette-neutral-10);
+  --now-label-value-inline--color: ui-rgb($ui-text);
+
+  // backgrounds
+  --now-color--background-primary: ui-rgb($ui-surface);
+  --now-color--background-secondary: ui-rgb($ui-surface-subtle);
+  --now-color--background-tertiary: ui-rgb($ui-surface-strong);
+  --now-color_background--primary: ui-rgb($ui-surface);
+  --now-color_background--secondary: ui-rgb($ui-surface-subtle);
+  --now-color_background--tertiary: ui-rgb($ui-surface-strong);
+  --now-color_background--primary-actionable: ui-rgb($palette-neutral-70);
+  --now-color_background--secondary-actionable: ui-rgb($palette-neutral-80);
+  --now-color_background--tertiary-actionable: ui-rgb($palette-neutral-85);
+
+  // borders & dividers
+  --now-color--border-primary: ui-rgb($ui-border);
+  --now-color--border-secondary: ui-rgb($ui-border-subtle);
+  --now-color--border-tertiary: ui-rgb(mix(#FFFFFF, $ui-border-subtle, 40%));
+  --now-color_border--primary: ui-rgb($ui-border);
+  --now-color_border--secondary: ui-rgb($ui-border-subtle);
+  --now-color_border--tertiary: ui-rgb(mix(#FFFFFF, $ui-border-subtle, 40%));
+  --now-color_border--primary-actionable: ui-rgb($ui-border-strong);
+  --now-color_border--secondary-actionable: ui-rgb($palette-neutral-50);
+  --now-color_border--tertiary-actionable: ui-rgb($ui-border);
+  --now-color--divider-primary: ui-rgb($ui-border);
+  --now-color--divider-secondary: ui-rgb(mix($ui-border, $ui-border-subtle, 50%));
+  --now-color--divider-tertiary: ui-rgb($ui-border-subtle);
+  --now-color_divider--primary: ui-rgb($ui-border);
+  --now-color_divider--secondary: ui-rgb(mix($ui-border, $ui-border-subtle, 50%));
+  --now-color_divider--tertiary: ui-rgb($ui-border-subtle);
+
+  // neutral scale
+  --now-color--neutral-0: ui-rgb($palette-white);
+  --now-color--neutral-1: ui-rgb($palette-neutral-5);
+  --now-color--neutral-2: ui-rgb($palette-neutral-10);
+  --now-color--neutral-3: ui-rgb($palette-neutral-20);
+  --now-color--neutral-4: ui-rgb($palette-neutral-30);
+  --now-color--neutral-5: ui-rgb($palette-neutral-40);
+  --now-color--neutral-6: ui-rgb($palette-neutral-50);
+  --now-color--neutral-7: ui-rgb(mix($palette-neutral-50, $palette-neutral-60, 50%));
+  --now-color--neutral-8: ui-rgb($palette-neutral-60);
+  --now-color--neutral-9: ui-rgb($palette-neutral-70);
+  --now-color--neutral-10: ui-rgb($palette-neutral-80);
+  --now-color--neutral-11: ui-rgb(mix($palette-neutral-80, $palette-neutral-85, 50%));
+  --now-color--neutral-12: ui-rgb($palette-neutral-85);
+  --now-color--neutral-13: ui-rgb(mix($palette-neutral-85, $palette-neutral-90, 50%));
+  --now-color--neutral-14: ui-rgb($palette-neutral-90);
+  --now-color--neutral-15: ui-rgb(mix($palette-neutral-90, $palette-neutral-95, 50%));
+  --now-color--neutral-16: ui-rgb($palette-neutral-95);
+  --now-color--neutral-17: ui-rgb(mix($palette-neutral-95, $palette-neutral-100, 50%));
+  --now-color--neutral-18: ui-rgb($palette-neutral-100);
+  --now-color--neutral-19: ui-rgb(mix($palette-black, $palette-neutral-100, 30%));
+  --now-color--neutral-20: ui-rgb(mix($palette-black, $palette-neutral-100, 60%));
+  --now-color--neutral-21: ui-rgb($palette-black);
+
+  // status scales (0 = lightest fill ... 5 = darkest)
+  --now-color_alert--positive-0: ui-rgb($ui-success-bg);
+  --now-color_alert--positive-1: ui-rgb(mix(#FFFFFF, $ui-success, 50%));
+  --now-color_alert--positive-2: ui-rgb($ui-success);
+  --now-color_alert--positive-3: ui-rgb($palette-success-dark);
+  --now-color_alert--positive-4: ui-rgb(mix(#000000, $ui-success, 45%));
+  --now-color_alert--positive-5: ui-rgb(mix(#000000, $ui-success, 75%));
+  --now-color_alert--critical-0: ui-rgb($ui-danger-bg);
+  --now-color_alert--critical-1: ui-rgb(mix(#FFFFFF, $ui-danger, 50%));
+  --now-color_alert--critical-2: ui-rgb($ui-danger);
+  --now-color_alert--critical-3: ui-rgb($palette-danger-dark);
+  --now-color_alert--critical-4: ui-rgb(mix(#000000, $ui-danger, 45%));
+  --now-color_alert--critical-5: ui-rgb(mix(#000000, $ui-danger, 75%));
+  --now-color_alert--warning-0: ui-rgb($ui-warning-bg);
+  --now-color_alert--warning-1: ui-rgb($palette-warning-mid);
+  --now-color_alert--warning-2: ui-rgb($ui-warning);
+  --now-color_alert--warning-3: ui-rgb($palette-warning-dark);
+  --now-color_alert--warning-4: ui-rgb(mix(#000000, $ui-warning, 45%));
+  --now-color_alert--warning-5: ui-rgb(mix(#000000, $ui-warning, 75%));
+  --now-color_alert--info-0: ui-rgb($ui-info-bg);
+  --now-color_alert--info-1: ui-rgb($palette-info-mid);
+  --now-color_alert--info-2: ui-rgb($ui-info);
+  --now-color_alert--info-3: ui-rgb($palette-info-dark);
+  --now-color_alert--info-4: ui-rgb(mix(#000000, $ui-info, 45%));
+  --now-color_alert--info-5: ui-rgb(mix(#000000, $ui-info, 75%));
+  --now-color--alert-positive-0: ui-rgb($ui-success-bg);
+  --now-color--alert-positive-2: ui-rgb($ui-success);
+  --now-color--alert-positive-3: ui-rgb($palette-success-dark);
+  --now-color--alert-critical-0: ui-rgb($ui-danger-bg);
+  --now-color--alert-critical-2: ui-rgb($ui-danger);
+  --now-color--alert-critical-3: ui-rgb($palette-danger-dark);
+  --now-color--alert-warning-0: ui-rgb($ui-warning-bg);
+  --now-color--alert-warning-2: ui-rgb($ui-warning);
+  --now-color--alert-warning-3: ui-rgb($palette-warning-dark);
+  --now-color--alert-info-0: ui-rgb($ui-info-bg);
+  --now-color--alert-info-2: ui-rgb($ui-info);
+  --now-color--alert-info-3: ui-rgb($palette-info-dark);
+
+  // OOTB bugs: these are static or literally "$now-sp-..." in sp-bootstrap
+  --now-button-iconic--bare_tertiary--color--hover: ui-rgb($ui-text);
+  --now-button-iconic--bare_tertiary--background-color--hover: ui-rgb($ui-surface-subtle);
+  --now-assist-selfservice_bot_bubble_bg_color: ui-rgb($ui-surface-strong);
+  --now-assist-selfservice_modal_header_bg_color: ui-rgb($ui-surface-subtle);
+  --now-assist-selfservice_hover_bg_multichoice_color: ui-rgb($ui-surface-strong);
+  --now-assist-selfservice_disabled_input_bg_color: ui-rgb($ui-surface-subtle);
+  --now-assist-selfservice_tooltip_bg_color: ui-rgb($ui-text);
+  --now-assist-selfservice_tooltip_text_color: ui-rgb($ui-text-inverse);
+  --now-assist-selfservice_primary_button_action_text_color: ui-rgb($ui-on-primary);
+}
+
+
+// =============================================================================
+//  B. FOOTER & HERO
+// =============================================================================
+// Footer (portal-next-experience-footer) - OOTB reuses the header colours.
+body .v5cf9e3234305ce107b228dc226b8f2a2 .scrub-footer { background: $ui-footer-bg; }
+body .v5cf9e3234305ce107b228dc226b8f2a2 .scrub-footer .sf-main,
+body .v5cf9e3234305ce107b228dc226b8f2a2 .scrub-footer .sf-bottom,
+body .v5cf9e3234305ce107b228dc226b8f2a2 .scrub-footer .sf-logo-container .sf-logo-content,
+body .v5cf9e3234305ce107b228dc226b8f2a2 .scrub-footer .sf-main .sf-links-container .masonry-root .sf-menu .sf-link a,
+body .v5cf9e3234305ce107b228dc226b8f2a2 .scrub-footer .sf-bottom .sf-bottom-right .sf-bottom-links .sf-bottom-link a,
+body .v5cf9e3234305ce107b228dc226b8f2a2 .scrub-footer .sf-bottom .sf-bottom-right .sf-social-icons .sf-social-icon a { color: $ui-footer-text; }
+body .v5cf9e3234305ce107b228dc226b8f2a2 .scrub-footer .sf-main .sf-links-container .masonry-root .sf-menu .sf-menu-label { color: $ui-footer-heading; }
+body .v5cf9e3234305ce107b228dc226b8f2a2 .scrub-footer .sf-main .sf-links-container .masonry-root .sf-menu .sf-link a:hover,
+body .v5cf9e3234305ce107b228dc226b8f2a2 .scrub-footer .sf-bottom .sf-bottom-right .sf-bottom-links .sf-bottom-link a:hover,
+body .v5cf9e3234305ce107b228dc226b8f2a2 .scrub-footer .sf-bottom .sf-bottom-right .sf-social-icons .sf-social-icon a:hover { color: $ui-footer-link-hover; }
+body .v5cf9e3234305ce107b228dc226b8f2a2 .scrub-footer .sf-main .sf-links-container .masonry-root .sf-menu .sf-link a:focus,
+body .v5cf9e3234305ce107b228dc226b8f2a2 .scrub-footer .sf-bottom .sf-bottom-right .sf-bottom-links .sf-bottom-link a:focus,
+body .v5cf9e3234305ce107b228dc226b8f2a2 .scrub-footer .sf-bottom .sf-bottom-right .sf-social-icons .sf-social-icon a:focus { outline-color: $ui-footer-link-hover !important; }
+body .v5cf9e3234305ce107b228dc226b8f2a2 .scrub-footer hr { border-color: $ui-footer-divider; }
+
+// Hero / home banner (portal-banner). Its colours and image are widget-instance
+// options applied inline; set $ui-hero-text / $ui-hero-bg to take control.
+@if $ui-hero-bg != null {
+  body .v72caf7f8adb12910f8772457eb7e59d3 #bckgd-img { background: $ui-hero-bg !important; }
+}
+@if $ui-hero-text != null {
+  body .v72caf7f8adb12910f8772457eb7e59d3 .heading,
+  body .v72caf7f8adb12910f8772457eb7e59d3 .description { color: $ui-hero-text !important; }
+}
+
+
+// =============================================================================
+//  C. HARDCODED FIXES
+// =============================================================================
+
+// --- C1. Core sp-bootstrap ---------------------------------------------------
+body .form-control[disabled],
+body .form-control[readonly],
+body fieldset[disabled] .form-control,
+body .select2-container.select2-container-disabled .select2-choice,
+body .select2-container.select2-container-disabled .select2-choice .select2-arrow { background-color: $ui-surface-strong; }
+body .timeline:before { border-right-color: $ui-border-subtle; }
+body .timeline .avatar-container,
+body .timeline > li > .timeline-panel { border-color: $ui-border-subtle; }
+body mark,
+body .mark { background-color: $ui-highlight-bg; }
+body fieldset { border-color: $ui-border-subtle; }
+body sn-mention { background-color: $ui-primary-subtle; }
+body sp-attachment-picker .sn-file-drop-zone .sn-file-drop-zone__info .sn-file-drop-zone__cloud-icon.fa::before { color: $ui-border; }
+@media (max-width: 767px) {
+  body .sp-facet-lists .heading { color: $ui-text; }
+}
+body .otto-onboarding-modal .modal-title,
+body .otto-onboarding-modal .otto-onboarding-modal-body-text { color: $ui-text; }
+body .otto-onboarding-modal .btn-primary { background-color: $ui-button-primary-bg; border-color: $ui-button-primary-bg; color: $ui-button-primary-text; }
+body .otto-onboarding-modal .btn-primary:hover,
+body .otto-onboarding-modal .btn-primary:focus,
+body .otto-onboarding-modal .btn-primary:active { background-color: darken($ui-button-primary-bg, 10%); border-color: darken($ui-button-primary-bg, 10%); }
+
+// --- C1b. Core sp-bootstrap: literal white / black / greys --------------------
+body .form-control,
+body .select2-container,
+body .select2-search input,
+body .select2-results .select2-searching,
+body .select2-container-multi .select2-choices .select2-search-choice,
+body .ref-picker-container,
+body .ref-picker-container.field-has-reference .btn-default:hover,
+body .breadcrumbs-container,
+body .list-action:hover,
+body .timeline .avatar-container,
+body .uxa-analytics-modal,
+body .sp-ac-root .sp-ac-conversation { background-color: $ui-surface; }
+body .form-control[disabled],
+body .form-control[readonly],
+body fieldset[disabled] .form-control { background-color: $ui-surface-strong; }
+body .timeline > li > .timeline-panel:after { border-left-color: $ui-surface; border-right-color: $ui-surface; }
+body .timeline > li > .timeline-badge { color: $ui-text-inverse; }
+body .tooltip-inner { background-color: $palette-black; border-color: $palette-black; color: $ui-text-inverse; }
+body .tooltip.top .tooltip-arrow, body .tooltip.top-left .tooltip-arrow, body .tooltip.top-right .tooltip-arrow { border-top-color: $palette-black; }
+body .tooltip.right .tooltip-arrow { border-right-color: $palette-black; }
+body .tooltip.left .tooltip-arrow { border-left-color: $palette-black; }
+body .tooltip.bottom .tooltip-arrow, body .tooltip.bottom-left .tooltip-arrow, body .tooltip.bottom-right .tooltip-arrow { border-bottom-color: $palette-black; }
+body .close, body .close:hover, body .close:focus { color: $ui-text; text-shadow: 0 1px 0 $ui-surface; }
+body .panel-primary > .panel-heading,
+body .bg-primary { color: $ui-on-primary; }
+body .panel-info > .panel-heading, body .panel-success > .panel-heading,
+body .panel-danger > .panel-heading, body .panel-warning > .panel-heading,
+body .bg-dark, body .text-white { color: $ui-text-inverse !important; }
+body mark, body .mark,
+body .alert-success .alert-link, body .alert-info .alert-link,
+body .alert-warning .alert-link, body .alert-danger .alert-link,
+body a.text-success:hover, body a.text-info:hover, body a.text-warning:hover, body a.text-danger:hover { color: $ui-text; }
+body .dropdown-header,
+body .sp-facet-list .clear-all .disabled { color: $ui-text-muted; }
+body .nav .nav-divider { background-color: $ui-border-subtle; }
+body .type-boolean label input[type="checkbox"]:checked ~ span:after { border-color: $ui-on-selected; }
+body .input-switch input[type=checkbox] ~ .switch { box-shadow: inset 0 0 3px 0 $ui-border-strong; }
+body .input-switch input[type=checkbox]:focus ~ .switch { box-shadow: 0 0 6px 1px $ui-focus, inset 0 0 3px 0 $ui-border-strong; }
+body .sp-list-menu .panel-heading { border-bottom-color: $ui-border-subtle; }
+body .carousel-indicators button { background-color: $ui-surface; }
+body #uiNotificationContainer .clear-all-button > button { background: $palette-black; border-color: $ui-text-inverse; color: $ui-text-inverse; }
+body button.sp-ac-btn, body .sp-ac-root .sp-ac-conversation { box-shadow: 0 2px 11px $ui-border; }
+@media (max-width: 767px) {
+  body .sp-facet-lists .heading { background-color: $ui-surface-subtle; border-color: $ui-border-subtle; }
+  body .sp-list-menu-item { border-bottom-color: $ui-border-subtle; }
+}
+// mobile menu toggle (hamburger) in the header
+body .navbar-inverse .navbar-toggle { border-color: rgba($ui-header-text, .25); }
+body .navbar-inverse .navbar-toggle:hover,
+body .navbar-inverse .navbar-toggle:focus { background-color: $ui-header-hover-bg; }
+body .navbar-inverse .navbar-toggle .icon-bar { background-color: $ui-header-text; }
+
+// --- C2. Coral theme stylesheets ---------------------------------------------
+// portal-next-experience-kb-rem-px-theme: attachment modal
+@media only screen and (min-width: 992px) {
+  body .attachments-title { border-right-color: $ui-border-subtle; }
+}
+body .attachment-list-modal .att-main-content { border-bottom-color: $ui-border-subtle; }
+body .modal-content .attachment-edit-modal .att-main-content { border-top-color: $ui-border-subtle; }
+body .modal-content .attachment-edit-modal .files-drop,
+body .modal-content .attachment-edit-modal .files-drop[disabled]:hover { border-color: $ui-border; }
+body .modal-content .attachment-edit-modal .files-drop:hover,
+body .modal-content .attachment-edit-modal .files-drop-dragover { border-color: $ui-primary; }
+// portal-next-experience-rem-px-theme
+body .modal-attachment-picker .modal-attachment-picker__header { border-bottom-color: $ui-border-subtle; }
+body .sp-form-modal-body .sp-form-modal-close-button { border-top-right-radius: $ui-radius !important; }
+// portal-next-experience-common-theme: .btn-primary { border-radius: $sp-space--xs !important }
+// (a spacing variable used as a radius - primary buttons ignore the button radius)
+body .btn-primary { border-radius: $ui-radius-button !important; }
+body .btn-primary.btn-lg { border-radius: $ui-radius-button-lg !important; }
+body .btn-primary.btn-sm, body .btn-primary.btn-xs { border-radius: $ui-radius-button-sm !important; }
+// portal-next-experience-catalogs-theme: alert radius from $sp-space--xs
+body .v3c29786e87133200e0ef0cf888cb0bdf .right-side-cart > div .sc-item-error-messages > .row.alert { border-radius: $ui-radius; }
+// portal-next-experience-catalogs-theme: hardcoded "Lato" on item descriptions
+body .v3c29786e87133200e0ef0cf888cb0bdf .panel-default .sc-item-description { font-family: $ui-font-family !important; }
+body .v3c29786e87133200e0ef0cf888cb0bdf .panel-body { border-radius: $ui-radius-md; }
+// portal-coral-common-theme: select2 highlight
+body .select2-drop .select2-results .select2-highlighted { border-radius: $ui-radius-md; }
+// portal-coral-knowledge-theme-upgrade: search boxes redeclare $border-primary: #737F84 locally
+body .v04ec050ddb53220099f93691f0b8f538 .cm-main-search .cm-search-box .input-group input[name="query"] { border-color: $ui-border-strong !important; border-radius: $ui-radius-search 0 0 $ui-radius-search !important; }
+body .v04ec050ddb53220099f93691f0b8f538 .cm-main-search .cm-search-box .input-group .input-group-btn > button { border-color: $ui-border-strong !important; border-radius: 0 $ui-radius-search $ui-radius-search 0 !important; }
+body .v6df47e71db12220099f93691f0b8f560 .btn,
+body .v6df47e71db12220099f93691f0b8f560 .form-control,
+body .vfa20ec02cb31020000f8d856634c9ce9 .form-control { border-color: $ui-border-strong; border-radius: $ui-radius-search; }
+body .vfa20ec02cb31020000f8d856634c9ce9 .input-group-btn > .btn { border-color: $ui-border-strong; border-radius: 0 $ui-radius-search $ui-radius-search 0; }
+body .v1e6b5b3adb20320099f93691f0b8f5a8 a:focus,
+body .vff26f2b1db12220099f93691f0b8f5ce a:focus { color: mix(#000000, $ui-link, 63%); }
+body .va47ea1cb0b9432004ce28ffe15673a5b .alert a:hover { color: mix(#000000, $ui-link, 63%) !important; }
+
+// --- C3. Header (portal-coral-header) ----------------------------------------
+body .v45306dec93131210aa3886075489187d .navbar-inverse .cart-dropdown li.media,
+body .v45306dec93131210aa3886075489187d .navbar-inverse .wishlist-menu li.media,
+body .v45306dec93131210aa3886075489187d .navbar-inverse .gtd-dropdown-container .empty-dropdown li.media { border-top-color: $ui-border-subtle; }
+body .v45306dec93131210aa3886075489187d .navbar-inverse .cart-dropdown .btn-clear,
+body .v45306dec93131210aa3886075489187d .navbar-inverse .wishlist-menu .btn-clear,
+body .v45306dec93131210aa3886075489187d .navbar-inverse .gtd-dropdown-container .empty-dropdown .btn-clear { color: $ui-text; }
+// loading dots while the menus load use $sp-loading-color (body text) - invisible on a dark header
+body .v45306dec93131210aa3886075489187d .sp-loading-indicator { color: $ui-header-text; }
+@media (min-width: 320px) and (max-width: 767px) {
+  body .v45306dec93131210aa3886075489187d .navbar-inverse .navbar-toggle { border-color: rgba($ui-header-text, .25); }
+  body .v45306dec93131210aa3886075489187d .navbar-inverse .navbar-toggle:focus { -webkit-box-shadow: 0 0 .5rem $ui-focus; box-shadow: 0 0 .5rem $ui-focus; }
+}
+
+// --- C4. Search -------------------------------------------------------------------
+// typeahead-search
+body .vfa20ec02cb31020000f8d856634c9ce9 .aisearch-container { background-color: $ui-surface; border-radius: $ui-radius; }
+body .vfa20ec02cb31020000f8d856634c9ce9 ul.dropdown-menu { border-radius: 0 0 $ui-radius $ui-radius; }
+// faceted_search
+body .v12fbe2d287330300a785940307cb0b1b a.question-tag { color: $ui-link; background-color: $palette-primary-pale; border-color: $palette-primary-pale; }
+body .v12fbe2d287330300a785940307cb0b1b .filter-icon { color: $ui-surface; -webkit-text-stroke-color: $ui-border-strong; }
+body .v12fbe2d287330300a785940307cb0b1b .disabled { color: $ui-border-subtle; }
+body .v12fbe2d287330300a785940307cb0b1b .ai-search .fa-filter { color: $ui-text-inverse; }
+
+// --- C5. Knowledge ----------------------------------------------------------------
+// kb-bases-browse
+@media (min-width: 480px) {
+  body .vabe00f1bdb50320099f93691f0b8f57b .kb-browse-section .vertical-divider { border-right-color: $ui-border; }
+}
+body .vabe00f1bdb50320099f93691f0b8f57b .kb-browse-section .kb-browse-content .kb-tile-block .kb-tile .kb-tile-link .link-icon img,
+body .vabe00f1bdb50320099f93691f0b8f57b .kb-browse-section .kb-browse-content .kb-tile-block .kb-tile .kb-tile-link .link-icon i { color: $ui-text; }
+// kb-list-widget-template, kb-attachments, related_catalog_item
+body .v1e6b5b3adb20320099f93691f0b8f5a8 .kb-mobile .kb-mobile-panel .kb-item-block { border-radius: $ui-radius-card; }
+body .v405cf5910ba832004ce28ffe15673aff .attachment-box { border-radius: $ui-radius; }
+body .v806f40990fab2300b7b2c8337a767e6f .panel-mobile { box-shadow: $ui-shadow-card; }
+// kb-affected-products, kb-attached-tasks: ratings
+body .v344806550ba832004ce28ffe15673aeb .secondary-info,
+body .v6cf446150ba832004ce28ffe15673a30 .secondary-info { color: $ui-text-muted; }
+body .v344806550ba832004ce28ffe15673aeb .glyphicon-star:before,
+body .v6cf446150ba832004ce28ffe15673a30 .glyphicon-star:before { color: $ui-rating-star; text-shadow: 0 1px 0 $ui-rating-star-outline; }
+body .v344806550ba832004ce28ffe15673aeb .glyphicon-star-empty,
+body .v6cf446150ba832004ce28ffe15673a30 .glyphicon-star-empty { color: $palette-neutral-40; text-shadow: 0 1px 0 $palette-neutral-40; }
+// KB search facets: kb-tags-facet, kb-query-facet, kb-resource-facet, kb-field-facet,
+// kb_language_facet, knowledge_fixed_facet_header, kb-facet-header
+body .vc315f09adb00320099f93691f0b8f538 .panel, body .v72e1a6cbdb83220099f93691f0b8f549 .panel,
+body .v28c358d2db00320099f93691f0b8f51c .panel, body .vaa0afab1db12220099f93691f0b8f578 .panel,
+body .v074be90453231300cc376512a2dc34ec .panel, body .v15d364db0b20320026eba6c125673abd .panel,
+body .v7cb8fab1db12220099f93691f0b8f535 .panel { border-color: $ui-border-subtle; }
+body .v074be90453231300cc376512a2dc34ec .panel, body .v15d364db0b20320026eba6c125673abd .panel,
+body .v7cb8fab1db12220099f93691f0b8f535 .panel { border-top-left-radius: $ui-radius; border-top-right-radius: $ui-radius; }
+body .vc315f09adb00320099f93691f0b8f538 .facet-search, body .vaa0afab1db12220099f93691f0b8f578 .facet-search,
+body .v074be90453231300cc376512a2dc34ec .facet-search, body .v074be90453231300cc376512a2dc34ec .panel-heading,
+body .vaa0afab1db12220099f93691f0b8f578 .border-top { border-color: $ui-border-subtle; }
+body .vc315f09adb00320099f93691f0b8f538 .cat-facet-title, body .v72e1a6cbdb83220099f93691f0b8f549 .cat-facet-title,
+body .v28c358d2db00320099f93691f0b8f51c .cat-facet-title, body .vaa0afab1db12220099f93691f0b8f578 .cat-facet-title,
+body .v074be90453231300cc376512a2dc34ec .cat-facet-title { border-top-color: $ui-border-subtle; }
+body .vc315f09adb00320099f93691f0b8f538 li, body .v72e1a6cbdb83220099f93691f0b8f549 li,
+body .v28c358d2db00320099f93691f0b8f51c li, body .vaa0afab1db12220099f93691f0b8f578 li { background-color: $ui-surface; }
+body .vc315f09adb00320099f93691f0b8f538 .panel-title, body .vc315f09adb00320099f93691f0b8f538 .panel-title a,
+body .v28c358d2db00320099f93691f0b8f51c .panel-title, body .v28c358d2db00320099f93691f0b8f51c .panel-title a,
+body .v074be90453231300cc376512a2dc34ec .panel-title, body .v074be90453231300cc376512a2dc34ec .panel-title a,
+body .v15d364db0b20320026eba6c125673abd .panel-title { color: $ui-text; }
+body .vc315f09adb00320099f93691f0b8f538 a.active, body .vc315f09adb00320099f93691f0b8f538 .checkbox-label.active,
+body .vc315f09adb00320099f93691f0b8f538 a:hover, body .vc315f09adb00320099f93691f0b8f538 a:focus,
+body .vc315f09adb00320099f93691f0b8f538 .checkbox-label:hover, body .vc315f09adb00320099f93691f0b8f538 .checkbox-label:focus,
+body .v28c358d2db00320099f93691f0b8f51c a.active, body .v28c358d2db00320099f93691f0b8f51c a:hover, body .v28c358d2db00320099f93691f0b8f51c a:focus,
+body .v074be90453231300cc376512a2dc34ec a.active, body .v074be90453231300cc376512a2dc34ec button.active, body .v074be90453231300cc376512a2dc34ec .checkbox-label.active,
+body .v074be90453231300cc376512a2dc34ec a:hover, body .v074be90453231300cc376512a2dc34ec a:focus,
+body .v074be90453231300cc376512a2dc34ec .checkbox-label:hover, body .v074be90453231300cc376512a2dc34ec .checkbox-label:focus { color: $ui-text; }
+body .vc315f09adb00320099f93691f0b8f538 .glyphicon-star:before, body .v28c358d2db00320099f93691f0b8f51c .glyphicon-star:before { color: $ui-rating-star; }
+body .vc315f09adb00320099f93691f0b8f538 .glyphicon-star-empty, body .v28c358d2db00320099f93691f0b8f51c .glyphicon-star-empty { color: $palette-neutral-40; }
+body .v15d364db0b20320026eba6c125673abd .facet-data { color: $ui-link; }
+body .v15d364db0b20320026eba6c125673abd .clear-disable { color: $palette-neutral-50; }
+
+// --- C6. Tickets & approvals -----------------------------------------------------------
+// standard_ticket_header
+body .v8face42a131d0810da297ad66144b0e2 .b { border-radius: $ui-radius-md; }
+body .v8face42a131d0810da297ad66144b0e2 .popover-box { background: $ui-surface; border-radius: $ui-radius-md; }
+body .v8face42a131d0810da297ad66144b0e2 .header-fields .ticket-status { background-color: $ui-surface-strong; color: $ui-text; border-radius: $ui-radius-pill; }
+// standard_ticket_summary_modal
+body .v7f4a85ec2bba6210d24ff691ce91bf5d .card-header { border-bottom-color: $ui-border-subtle; }
+body .v7f4a85ec2bba6210d24ff691ce91bf5d .header-actions .fa { color: $ui-text-muted; }
+body .v7f4a85ec2bba6210d24ff691ce91bf5d .card-body { background: $ui-surface-subtle; border-radius: $ui-radius-card; }
+@media only screen and (max-width: 767px) {
+  body .v7f4a85ec2bba6210d24ff691ce91bf5d .card-header,
+  body .v7f4a85ec2bba6210d24ff691ce91bf5d .card-footer { background: $ui-surface; border-color: $ui-border-subtle; }
+  body .v7f4a85ec2bba6210d24ff691ce91bf5d .card-body { background: $ui-surface-subtle; }
+}
+// std_ticket_tab
+body .vd1cfa4ea131d0810da297ad66144b091 .tick-mark:focus::before,
+body .vd1cfa4ea131d0810da297ad66144b091 .uib-more-tab :focus { color: $ui-text-inverse; }
+body .vd1cfa4ea131d0810da297ad66144b091 .nav-tabs { border-radius: $ui-radius $ui-radius 0 0; }
+body .vd1cfa4ea131d0810da297ad66144b091 .options-btn:focus { border-radius: $ui-radius; }
+// widget-ticket-conversation
+body .v85357f52cb30020000f8d856634c9c24 .translation-container { border-radius: $ui-radius; }
+// Approval Info Record
+body .v3933a2b544607650f8777e088888d613 .approval-body,
+body .v3933a2b544607650f8777e088888d613 .request-item-card,
+body .v3933a2b544607650f8777e088888d613 .tab-content-inner,
+body .v3933a2b544607650f8777e088888d613 .accordion-item,
+body .v3933a2b544607650f8777e088888d613 .info-row.first-row,
+body .v3933a2b544607650f8777e088888d613 .info-row:first-child,
+body .v3933a2b544607650f8777e088888d613 .default-fields .approval-field:nth-child(-n+3) ~ .approval-field,
+body .v3933a2b544607650f8777e088888d613 .approval-field-value .avatar-container .sub-avatar { border-color: $ui-border-subtle; }
+body .v3933a2b544607650f8777e088888d613 .approval-body,
+body .v3933a2b544607650f8777e088888d613 .tab-content-inner,
+body .v3933a2b544607650f8777e088888d613 .info-col { border-radius: $ui-radius; }
+body .v3933a2b544607650f8777e088888d613 .accordion-toggle { border-radius: $ui-radius $ui-radius 0 0; }
+body .v3933a2b544607650f8777e088888d613 .tab-content { border-radius: 0 0 $ui-radius $ui-radius; }
+body .v3933a2b544607650f8777e088888d613 .items-heading .badge { border-radius: $ui-radius-pill; }
+
+// --- C7. Catalog ---------------------------------------------------------------------------
+// widget-sc-cat-item-v2: image gallery dots
+body .v3c29786e87133200e0ef0cf888cb0bdf .image-gallery { color: $ui-border; }
+body .v3c29786e87133200e0ef0cf888cb0bdf .image-gallery .active { color: $ui-text-muted; }
+// sc_scroll_to_top
+@media only screen and (max-width: 992px) {
+  body .v9cfd91940b4103002600425663673a31 .button-to-top-wrapper .button-to-top { background-color: $ui-surface-strong; border-radius: $ui-radius !important; }
+}
+// sc_wishlist_cart, sc-shopping-cart-v2: "item added" flash
+body .v452a0b27db033200575d1150f0b8f503 .list-group-item.ng-enter,
+body .v7589060c87290300e0ef0cf888cb0ba5 .list-group-item.ng-enter { background-color: $ui-primary-subtle; }
+body .v452a0b27db033200575d1150f0b8f503 .sc-remove-btn:hover { color: $ui-text-inverse; }
+// widget-sc-order-guide-v2
+body .v480ca054db03320064301150f0b8f545 .order-guide-mobile .list-group-mobile .accordion-header .og-check-bucket .og-check { background-color: $ui-surface; }
+body .v480ca054db03320064301150f0b8f545 .order-guide-mobile .list-group-mobile .accordion-header .og-check-bucket .og-check:after { border-color: $ui-surface; }
+body .v480ca054db03320064301150f0b8f545 .order-guide-mobile .list-group-mobile .guide-item-details-wrapper-mobile { background-color: $ui-surface !important; }
+body .v480ca054db03320064301150f0b8f545 .order-guide-mobile .list-group-mobile .summary .guide-item-quantity { background-color: $ui-surface-strong; border-radius: $ui-radius; }
+body .v480ca054db03320064301150f0b8f545 .disabled-mask { background-color: $ui-surface-subtle; border-radius: $ui-radius; }
+body .v480ca054db03320064301150f0b8f545 .accordion-header.panel-open .panel-heading { border-bottom-color: $ui-border-subtle; }
+body .v480ca054db03320064301150f0b8f545 .mandatory-header { border-left-color: $ui-danger !important; }
+body .v480ca054db03320064301150f0b8f545 .mandatory-icon { color: $ui-danger; }
+body .v480ca054db03320064301150f0b8f545 .summary .summary-excluded { color: $ui-border; }
+body .v480ca054db03320064301150f0b8f545 .summary .not-included-pill { background-color: $ui-warning; border-radius: $ui-radius-pill; }
+body .v480ca054db03320064301150f0b8f545 .timeline-container { border-radius: $ui-radius $ui-radius 0 0; }
+// transaction_configurator (Product catalog)
+body .v8784fe8f775552101653c9889a5a9903 .loader { border-color: $ui-surface-strong; border-top-color: $ui-primary; }
+body .v8784fe8f775552101653c9889a5a9903 macroponent-889db06643c231100325912a1bb8f241 { border-radius: $ui-radius-card; }
+
+// --- C8. Home & taxonomy ---------------------------------------------------------------------
+body .vbceff822777e61107b89a0e89e5a9933 .card-header .case-state { border-radius: $ui-radius-pill; }
+body .vf9238bca4f91a51088b241eeae72e056 #overlay { background-color: $ui-surface; }
+body .vda9c8b18c38579506e399a07050131d9 .select:hover::after { color: $ui-text; }
+body .v76914a3cc3fb25504584f827050131b1 .input-group { background: $ui-surface; }
+
+// navigation-tree (taxonomy / FAQ trees) and ec_favorites pagination use spacing variables as radii
+body .v7f6e396743af211062ee0848c4b8f278 ul.item-tree .item-header { border-radius: $ui-radius-lg; }
+body .v3a25abd853310110fedfddeeff7b12dd .page-first-index { border-top-left-radius: $ui-radius; border-bottom-left-radius: $ui-radius; }
+body .v3a25abd853310110fedfddeeff7b12dd .page-last-index { border-top-right-radius: $ui-radius; border-bottom-right-radius: $ui-radius; }
+
+// --- C9. Profile, login & security -----------------------------------------------------------
+body .v6e6ac664d710120023c84f80de610318 .mia,
+body .vb3261ba253710110880bddeeff7b121d .mia { color: $ui-text-muted; }
+body .v62d700b79f210200f0a91471367fcfe8 .row.info-row:hover { background-color: $ui-surface-subtle; }
+body .v62d700b79f210200f0a91471367fcfe8 a.widget-button { color: $ui-on-primary; border-radius: $ui-radius-button; }
+// widget-login
+body .v6506d341cb33020000f8d856634c9cdc .sp-login-widget .list-group { border-radius: $ui-radius-md; }
+body .v6506d341cb33020000f8d856634c9cdc .sp-login-widget.advanced .form-signin .btn { border-radius: $ui-radius-button; }
+body .v6506d341cb33020000f8d856634c9cdc .sp-login-widget .mask_btn.active:after,
+body .v6506d341cb33020000f8d856634c9cdc .sp-login-widget.advanced .form-signin .mask_btn.active:after { background-color: $ui-text; }
+body .v6506d341cb33020000f8d856634c9cdc .sp-login-widget .bar span:before,
+body .v6506d341cb33020000f8d856634c9cdc .sp-login-widget .bar span:after { background-color: $ui-border; }
+body .v6506d341cb33020000f8d856634c9cdc .sp-login-widget button.cert,
+body .v6506d341cb33020000f8d856634c9cdc .sp-login-widget a.idp { background-color: $ui-surface !important; border-color: $ui-border !important; }
+body .v6506d341cb33020000f8d856634c9cdc .sp-login-widget button.cert:hover,
+body .v6506d341cb33020000f8d856634c9cdc .sp-login-widget a.idp:hover { background-color: $ui-surface-subtle !important; border-color: $ui-border-strong !important; }
+// multi-factor-authentication
+body .vd1f76d8aa11a2010f877436a29bc631f .authenticator { background: $ui-surface; border-color: $ui-border-subtle; }
+body .vd1f76d8aa11a2010f877436a29bc631f .alert,
+body .vd1f76d8aa11a2010f877436a29bc631f .notification { border-radius: $ui-radius; }
+body .vd1f76d8aa11a2010f877436a29bc631f .alert-success,
+body .vd1f76d8aa11a2010f877436a29bc631f .notification-success { background-color: $ui-success-bg; border-color: $ui-success; color: $ui-status-text; }
+body .vd1f76d8aa11a2010f877436a29bc631f .alert-success hr,
+body .vd1f76d8aa11a2010f877436a29bc631f .notification-success hr { border-top-color: $ui-success; }
+body .vd1f76d8aa11a2010f877436a29bc631f .alert-success .alert-link,
+body .vd1f76d8aa11a2010f877436a29bc631f .notification-success .alert-link { color: $ui-status-text; }
+// enroll-soft-pin
+body .v04d1c530084c7210f8773628e470cad6 .input-advanced { border-radius: $ui-radius-input !important; }
+body .v04d1c530084c7210f8773628e470cad6 .mask_btn { background-color: $ui-surface-subtle; border-color: $ui-border-strong; }
+body .v04d1c530084c7210f8773628e470cad6 .active:after { background-color: $ui-text; }
+
+// --- C10. Lists, forms, surveys --------------------------------------------------------------
+// data-table-from-url, widget-data-table
+body .v8ae61f55cb21020000f8d856634c9c93 .panel-primary .panel-heading button:not(.btn-default):focus { outline-color: $ui-on-primary; border-color: $ui-on-primary; box-shadow: 0 0 5px $ui-on-primary; }
+body .v5001b062d7101200b0b044580e6103eb thead,
+body .v5001b062d7101200b0b044580e6103eb .filter-breadcrumbs ~ .table { border-color: $ui-border-subtle; }
+body .v5001b062d7101200b0b044580e6103eb .table > thead > tr > th { border-right-color: $ui-border-subtle; }
+body .v5001b062d7101200b0b044580e6103eb th .disabled { color: $ui-border; }
+body .v5001b062d7101200b0b044580e6103eb .selected { color: $ui-on-selected; border-color: $ui-on-selected; }
+// widget-form
+body .vfd1f4ec347730200ba13a5554ee490c0 .empty-state-wrapper .empty-state { border-radius: $ui-radius-card; }
+body .vfd1f4ec347730200ba13a5554ee490c0 .empty-state-wrapper .empty-state .empty-state-badge { color: $ui-text-inverse; }
+// surveys (My Surveys)
+body .v04b1cc07c3231200e44574e1c1d3ae96 .progress-bar { background: $ui-border; }
+body .v04b1cc07c3231200e44574e1c1d3ae96 .progress-bar,
+body .v04b1cc07c3231200e44574e1c1d3ae96 .progress-bar-inner { border-radius: $ui-radius; }
+// take-survey (embedded in Surveys and Assessments)
+body .vd65e4495c3331200e44574e1c1d3aeb2 .question-label, body .vd65e4495c3331200e44574e1c1d3aeb2 .category-label,
+body .vd65e4495c3331200e44574e1c1d3aeb2 .title-label, body .vd65e4495c3331200e44574e1c1d3aeb2 .description-text,
+body .vd65e4495c3331200e44574e1c1d3aeb2 .sps-checkbox-label, body .vd65e4495c3331200e44574e1c1d3aeb2 .sps-radio-label,
+body .vd65e4495c3331200e44574e1c1d3aeb2 .sps-scale-radio-label, body .vd65e4495c3331200e44574e1c1d3aeb2 .details-text { color: $ui-text; }
+body .vd65e4495c3331200e44574e1c1d3aeb2 .assessable-record { background: $ui-surface-subtle; }
+body .vd65e4495c3331200e44574e1c1d3aeb2 .has-error,
+body .vd65e4495c3331200e44574e1c1d3aeb2 .has-error .select2-container .select2-choice,
+body .vd65e4495c3331200e44574e1c1d3aeb2 .has-error.sp-attachment-add { border-color: $ui-danger; }
+body .vd65e4495c3331200e44574e1c1d3aeb2 .intro-text .outer-circle,
+body .vd65e4495c3331200e44574e1c1d3aeb2 .survey-heading { background: $ui-primary; }
+body .vd65e4495c3331200e44574e1c1d3aeb2 .intro-text .survey-icon,
+body .vd65e4495c3331200e44574e1c1d3aeb2 .survey-heading,
+body .vd65e4495c3331200e44574e1c1d3aeb2 a.survey-heading { color: $ui-on-primary; }
+body .vd65e4495c3331200e44574e1c1d3aeb2 .category-description { color: mix($ui-on-primary, $ui-primary, 90%); }
+body .vd65e4495c3331200e44574e1c1d3aeb2 .sps-ranking-list li.hovered { background-color: $ui-surface-strong; }
+body .vd65e4495c3331200e44574e1c1d3aeb2 .disable_button { color: $ui-text-muted; }
+
+// --- C11. Static platform CSS (css_includes_$sp.css - never compiled with the theme)
+// select2 dropdowns (reference / choice fields)
+body .select2-container .select2-choice,
+body .select2-container-multi .select2-choices,
+body .select2-drop,
+body .select2-drop-active { border-color: $ui-border-strong; }
+body .select2-container .select2-choice { color: $ui-text; }
+body .select2-container .select2-choice .select2-arrow { background-color: $ui-surface-subtle; }
+body .select2-container-active .select2-choice,
+body .select2-container-active .select2-choices,
+body .select2-container-multi.select2-container-active .select2-choices,
+body .select2-drop.select2-drop-above.select2-drop-active,
+body .select2-dropdown-open.select2-drop-above .select2-choice { border-color: $ui-focus; }
+body .select2-drop { color: $ui-text; }
+body .select2-results .select2-no-results,
+body .select2-results .select2-search,
+body .select2-results .select2-disabled,
+body .select2-results .select2-disabled.select2-highlighted { background-color: $ui-surface-subtle; color: $ui-text-muted; }
+body .select2-results li em { background-color: $ui-highlight-bg; }
+body .select2-container-multi .select2-choices .select2-search-choice { color: $ui-text; border-color: $ui-border-subtle; }
+body .select2-container-multi .select2-choices .select2-search-choice-focus { background-color: $ui-surface-strong; }
+body .select2-container-multi.select2-container-disabled .select2-choices { border-color: $ui-border-subtle; }
+body .select2-container.select2-container-disabled .select2-choice,
+body .select2-container.select2-container-disabled .select2-choice .select2-arrow { background-color: $ui-surface-strong; }
+body .select2-default { color: $ui-text-muted !important; }
+// date / time picker
+body .bootstrap-datetimepicker-widget td.active, body .bootstrap-datetimepicker-widget td.active:hover,
+body .bootstrap-datetimepicker-widget td span.active { background-color: $ui-selected; color: $ui-on-selected; text-shadow: none; }
+body .bootstrap-datetimepicker-widget td.today::before { border-bottom-color: $ui-selected; }
+body .bootstrap-datetimepicker-widget td.active.today::before { border-bottom-color: $ui-on-selected; }
+body .bootstrap-datetimepicker-widget td.day:hover, body .bootstrap-datetimepicker-widget td.hour:hover,
+body .bootstrap-datetimepicker-widget td.minute:hover, body .bootstrap-datetimepicker-widget td.second:hover,
+body .bootstrap-datetimepicker-widget td span:hover,
+body .bootstrap-datetimepicker-widget thead tr:first-child th:hover { background-color: $ui-surface-subtle; }
+body .bootstrap-datetimepicker-widget td.old, body .bootstrap-datetimepicker-widget td.new,
+body .bootstrap-datetimepicker-widget td.cw, body .bootstrap-datetimepicker-widget td.disabled { color: $ui-text-muted; }
+body button.calendarbutton-pressed { background-color: $ui-surface-strong; border-color: $ui-border-strong; color: $ui-text; }
+// slider (survey scales)
+body .slider-handle { background-color: $ui-primary; background-image: none; }
+body .slider-selection, body .slider-selection.tick-slider-selection, body .slider-tick.in-selection { background-image: none; background-color: $ui-primary-subtle; }
+body .slider-track, body .slider-tick { background-image: none; background-color: $ui-surface-strong; }
+body .slider.slider-horizontal .slider-tick.triangle, body .slider.slider-horizontal .slider-handle.triangle { border-bottom-color: $ui-primary; }
+// async-load placeholders (inline style="background: #e2e5e7")
+body sp-async-load-widget .placeholder[style] { background: $ui-surface-strong !important; border-radius: $ui-radius-card !important; }
+// skeleton loaders (home page quick links, case cards)
+body .skeleton-container { background-color: $ui-surface-subtle; }
+body .skeleton-box { background-color: $ui-surface-strong; }
+body .skeleton-box::before { background-image: linear-gradient(90deg, $ui-surface-strong 0%, $ui-surface-subtle 50%, $ui-surface-strong 100%); }
+// misc
+body .avatar-container .avatar.soloAvatar .sub-avatar:focus { border-color: $ui-focus; }
+body .sp-loading-indicator.la-dark { color: $ui-text; }
+body .delete-dialog .btn-cancel, body .delete-dialog .btn-cancel:hover { border-color: $ui-border-strong; }
+body .sp-attachment-manager .attached-file .not_available,
+body .file-attachment span.not_available { color: $ui-text-muted; }
+
+// --- C12. Knowledge widgets embedded in nested rows ---------------------------
+// kb-result
+body .vff26f2b1db12220099f93691f0b8f5ce .kb-summary-block { background-color: $ui-surface; border-color: $ui-border-subtle; border-radius: 0 0 $ui-radius $ui-radius; }
+body .vff26f2b1db12220099f93691f0b8f5ce .knowledge-articles { border-radius: 0 0 $ui-radius $ui-radius; }
+body .vff26f2b1db12220099f93691f0b8f5ce .pinned-articles { background-color: $ui-surface-subtle; border-color: $ui-surface; }
+body .vff26f2b1db12220099f93691f0b8f5ce .kb-icon { color: $ui-text; }
+// kb-search
+body .v6df47e71db12220099f93691f0b8f560 .fa-search { color: $ui-text; }
+// kb-result-sort, kb-selected-filter, kb-keyword-suggestion
+body .ve6c77ab1db12220099f93691f0b8f535 .panel,
+body .v54387ab1db12220099f93691f0b8f561 .panel,
+body .v8493d20c0b01320026eba6c125673a4c .panel { border-color: $ui-border-subtle; }
+body .ve6c77ab1db12220099f93691f0b8f535 .panel { border-top-left-radius: $ui-radius; border-top-right-radius: $ui-radius; }
+body .ve6c77ab1db12220099f93691f0b8f535 .overlay-sort { background-color: $ui-surface; }
+body .ve6c77ab1db12220099f93691f0b8f535 .res-li-class,
+body .ve6c77ab1db12220099f93691f0b8f535 .overlay-header-bottom { border-bottom-color: $ui-border-subtle; }
+body .v54387ab1db12220099f93691f0b8f561 .fa-times,
+body .v8493d20c0b01320026eba6c125673a4c .fa-times { -webkit-text-stroke-color: $ui-surface-subtle; }
+body .v8493d20c0b01320026eba6c125673a4c .suggestion-item { color: $ui-link; }
+body .v8493d20c0b01320026eba6c125673a4c .kb-breadcrumb-item a { color: $ui-text; }
+// knowledge-comments (colours come from $kb-comment-* knobs in the theme)
+body .v077810090be432004ce28ffe15673adb .dropdown-menu li > div { color: $ui-text; }
+body .v077810090be432004ce28ffe15673adb .attachment-box:focus-within { box-shadow: 0 0 0 .15rem $ui-focus; }
+body .v077810090be432004ce28ffe15673adb .kb-mobile .create-comment-mobile-not-mesp { border-color: $ui-border-subtle; }
+body .v077810090be432004ce28ffe15673adb .parent,
+body .v077810090be432004ce28ffe15673adb .attachment-box,
+body .v077810090be432004ce28ffe15673adb .kb-desktop .create-comment,
+body .v077810090be432004ce28ffe15673adb .kb-mobile .create-comment-mobile-not-mesp { border-radius: $ui-radius; }
+// kb-article-content
+body .va47ea1cb0b9432004ce28ffe15673a5b .collapsible-title:focus { border-color: $ui-focus; -webkit-box-shadow: 0 0 5px $ui-focus; box-shadow: 0 0 5px $ui-focus; }
+body .va47ea1cb0b9432004ce28ffe15673a5b .kb-mobile .kb-header-line { border-color: $ui-border-subtle; }
+// Knowledge home banner (container background image) follows the hero tokens.
+// Text only follows $ui-hero-text when the background does too, so a theme that
+// keeps the stock (light) banner image keeps readable text.
+@if $ui-hero-bg != null {
+  body .banner-container { background: $ui-hero-bg !important; }
+  @if $ui-hero-text != null {
+    body .banner-container .kb-search-heading,
+    body .banner-container .summary { color: $ui-hero-text !important; }
+  }
+}
+
+// --- C13. TinyMCE rich-text editor chrome (comments, HTML variables) ---------
+// TinyMCE's skin.min.css loads after this file with selectors such as
+// ".sn-sp-page .tox ..." and ".tox:not(.tox-tinymce-inline) ...", so these rules
+// mirror them behind "html.sn-sp-page body". The editable area is an iframe and
+// keeps TinyMCE's own (white) content CSS - see docs, edge cases.
+html.sn-sp-page body .tox.tox-tinymce { border-color: $ui-border-strong; border-radius: $ui-radius-input; }
+html.sn-sp-page body .tox:not(.tox-tinymce-inline) .tox-editor-header,
+html.sn-sp-page body .tox .tox-toolbar,
+html.sn-sp-page body .tox .tox-toolbar__overflow,
+html.sn-sp-page body .tox .tox-toolbar__primary,
+html.sn-sp-page body .tox .tox-toolbar-overlord,
+html.sn-sp-page body .tox .tox-statusbar,
+html.sn-sp-page body .tox .tox-edit-area__iframe { background-color: $ui-surface; background-image: none; }
+html.sn-sp-page body .tox:not(.tox-tinymce-inline) .tox-editor-header { border-bottom-color: $ui-border-subtle; }
+html.sn-sp-page body .tox .tox-statusbar { border-top-color: $ui-border-subtle; }
+html.sn-sp-page body .tox:not([dir="rtl"]) .tox-toolbar__group:not(:last-of-type) { border-right-color: $ui-border-subtle; }
+html.sn-sp-page body .tox .tox-tbtn,
+html.sn-sp-page body .tox .tox-tbtn__select-label,
+html.sn-sp-page body .tox .tox-statusbar,
+html.sn-sp-page body .tox .tox-statusbar a,
+html.sn-sp-page body .tox .tox-statusbar__path-item,
+html.sn-sp-page body .tox .tox-statusbar__wordcount { color: $ui-text-muted; }
+html.sn-sp-page body .tox .tox-tbtn svg { fill: $ui-text-muted; }
+html.sn-sp-page body .tox .tox-tbtn--disabled svg,
+html.sn-sp-page body .tox .tox-tbtn--disabled:hover svg,
+html.sn-sp-page body .tox .tox-tbtn:disabled svg,
+html.sn-sp-page body .tox .tox-tbtn:disabled:hover svg { fill: rgba($ui-text-muted, .5); }
+html.sn-sp-page body .tox .tox-tbtn:hover,
+html.sn-sp-page body .tox .tox-tbtn:focus { background-color: $ui-surface-subtle; }
+html.sn-sp-page body .tox .tox-tbtn--enabled,
+html.sn-sp-page body .tox .tox-tbtn--enabled:hover { background-color: $ui-primary-subtle; }
+html.sn-sp-page body .tox .tox-edit-area::before { border-color: $ui-focus; }
+
+// --- C14. Tickets (ticket-configuration widgets) & native fields --------------
+body .timeline > li > .timeline-panel:before { border-left-color: $ui-border-subtle; border-right-color: $ui-border-subtle; }
+body .v7ea4faa2532610105b51ddeeff7b1294 .timeline-badge span { color: $ui-text-inverse; }
+body .v7ea4faa2532610105b51ddeeff7b1294 .translation-container { border-radius: $ui-radius; }
+body .v7ea4faa2532610105b51ddeeff7b1294 .default-comment,
+body .v7ea4faa2532610105b51ddeeff7b1294 .note-comment { border-radius: 0 $ui-radius-lg $ui-radius-lg !important; }
+body .va38cbab2535f0110481fddeeff7b1283 div.sp-form-container { border-top-color: $ui-border-subtle; }
+body .v93afd51293e302106c8d0157448918f0 thead,
+body .v93afd51293e302106c8d0157448918f0 .filter-breadcrumbs ~ .table { border-color: $ui-border-subtle; }
+body .v93afd51293e302106c8d0157448918f0 .table > thead > tr > th { border-color: $ui-border-subtle !important; }
+body .v93afd51293e302106c8d0157448918f0 th i { color: $ui-text-muted; }
+body .v93afd51293e302106c8d0157448918f0 th .disabled { color: $ui-border; }
+body .v93afd51293e302106c8d0157448918f0 .selected { color: $ui-on-selected; border-color: $ui-on-selected; }
+body .v93afd51293e302106c8d0157448918f0 .th-title { color: $ui-text; }
+// Plain inputs without .form-control fall back to the browser's white.
+// :where() keeps specificity at zero so every widget style still wins.
+:where(input[type="text"], input[type="search"], input[type="email"], input[type="tel"], input[type="number"], input[type="password"], input[type="url"], input:not([type]), textarea, select) { background-color: $ui-surface; color: $ui-text; }
