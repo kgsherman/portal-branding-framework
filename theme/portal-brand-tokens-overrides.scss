@@ -269,6 +269,12 @@ body .v5cf9e3234305ce107b228dc226b8f2a2 .scrub-footer hr { border-color: $ui-foo
   body .v45306dec93131210aa3886075489187d .navbar-inverse .sub-navbar .v756957db43f5ed1011a4ebdffab8f243 .navbar-nav .open > a:focus { color: $text !important; }
   body .v45306dec93131210aa3886075489187d .navbar-inverse .sub-navbar .v756957db43f5ed1011a4ebdffab8f243 .navbar-nav .header-menu-item .toggle-icon { color: mix($text, $bg, 80%); }
   body .v45306dec93131210aa3886075489187d .navbar-inverse .sub-navbar .v756957db43f5ed1011a4ebdffab8f243 .navbar-nav .header-menu-item:hover { background: $hover; }
+  // the item's link would otherwise paint Bootstrap's header hover/active fill over it
+  body .v45306dec93131210aa3886075489187d .navbar-inverse .sub-navbar .v756957db43f5ed1011a4ebdffab8f243 .navbar-nav .header-menu-item > a:hover,
+  body .v45306dec93131210aa3886075489187d .navbar-inverse .sub-navbar .v756957db43f5ed1011a4ebdffab8f243 .navbar-nav .header-menu-item > a:focus,
+  body .v45306dec93131210aa3886075489187d .navbar-inverse .sub-navbar .v756957db43f5ed1011a4ebdffab8f243 .navbar-nav .open > a,
+  body .v45306dec93131210aa3886075489187d .navbar-inverse .sub-navbar .v756957db43f5ed1011a4ebdffab8f243 .navbar-nav .open > a:hover,
+  body .v45306dec93131210aa3886075489187d .navbar-inverse .sub-navbar .v756957db43f5ed1011a4ebdffab8f243 .navbar-nav .open > a:focus { background-color: transparent; }
   body .v45306dec93131210aa3886075489187d .navbar-inverse .sub-navbar .v756957db43f5ed1011a4ebdffab8f243 .navbar-nav .header-menu-item.selected > a { border-bottom-color: $text; }
   body .v45306dec93131210aa3886075489187d .navbar-inverse .sub-navbar .v756957db43f5ed1011a4ebdffab8f243 .navbar-nav .header-menu-item:focus-visible,
   body .v45306dec93131210aa3886075489187d .navbar-inverse .sub-navbar .v756957db43f5ed1011a4ebdffab8f243 .navbar-nav .header-menu-item a:focus-visible,
