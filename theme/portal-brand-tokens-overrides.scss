@@ -1,5 +1,5 @@
 // =============================================================================
-//  PORTAL BRAND TOKENS - OVERRIDES  .  framework v1.0
+//  PORTAL BRAND TOKENS - OVERRIDES  .  framework v1.1
 // =============================================================================
 //  ONE shared stylesheet for every client theme. Never edit per client -
 //  change the tokens in the theme's css_variables instead.
@@ -12,7 +12,8 @@
 //      properties used by Next Experience components (search, Now Assist,
 //      macroponents). Without this they keep the colours of the separate
 //      UX theme record. Uses html:root so it beats that block.
-//   B. FOOTER & HERO - lets footer and home banner differ from the header.
+//   B. FOOTER, HERO, MENU BAR & HEADINGS - lets footer, home banner and menu
+//      bar differ from the header; optional heading case.
 //   C. HARDCODED FIXES - OOTB stylesheets and widgets that ignore the theme.
 //      Only colours, radii and fonts are touched, never layout.
 //      Widget CSS is injected after this file, so selectors start with
@@ -199,7 +200,7 @@ html:root {
 
 
 // =============================================================================
-//  B. FOOTER & HERO
+//  B. FOOTER, HERO, MENU BAR & HEADINGS
 // =============================================================================
 // Footer (portal-next-experience-footer) - OOTB reuses the header colours.
 body .v5cf9e3234305ce107b228dc226b8f2a2 .scrub-footer { background: $ui-footer-bg; }
@@ -226,6 +227,40 @@ body .v5cf9e3234305ce107b228dc226b8f2a2 .scrub-footer hr { border-color: $ui-foo
 @if $ui-hero-text != null {
   body .v72caf7f8adb12910f8772457eb7e59d3 .heading,
   body .v72caf7f8adb12910f8772457eb7e59d3 .description { color: $ui-hero-text !important; }
+}
+
+// Menu bar (header row 2). The header widget paints it and its dropdowns with
+// $ui-subnav-bg but keeps the header text colour; $ui-subnav-text splits them.
+@if $ui-subnav-text != null {
+  body .v45306dec93131210aa3886075489187d .navbar-inverse .sub-navbar .v5ef595c1cb12020000f8d856634c9c6e.navbar-nav > li > a,
+  body .v45306dec93131210aa3886075489187d .navbar-inverse .sub-navbar .v5ef595c1cb12020000f8d856634c9c6e.navbar-nav > li > a:hover,
+  body .v45306dec93131210aa3886075489187d .navbar-inverse .sub-navbar .v5ef595c1cb12020000f8d856634c9c6e.navbar-nav > li > a:focus,
+  body .v45306dec93131210aa3886075489187d .navbar-inverse .sub-navbar .v5ef595c1cb12020000f8d856634c9c6e .open > a,
+  body .v45306dec93131210aa3886075489187d .navbar-inverse .sub-navbar .v5ef595c1cb12020000f8d856634c9c6e .open > a:hover,
+  body .v45306dec93131210aa3886075489187d .navbar-inverse .sub-navbar .v5ef595c1cb12020000f8d856634c9c6e .open > a:focus,
+  body .v45306dec93131210aa3886075489187d .navbar-inverse .sub-navbar .dropdown-menu > li > a,
+  body .v45306dec93131210aa3886075489187d .navbar-inverse .sub-navbar .dropdown-menu > li > a:hover,
+  body .v45306dec93131210aa3886075489187d .navbar-inverse .sub-navbar .dropdown-menu > li > a:focus,
+  body .v45306dec93131210aa3886075489187d .navbar-inverse .sub-navbar .sp-loading-indicator,
+  body .v45306dec93131210aa3886075489187d .navbar-inverse .mobile-mega-menu-entry li > a { color: $ui-subnav-text !important; }
+  body .v45306dec93131210aa3886075489187d .navbar-inverse .sub-navbar .v5ef595c1cb12020000f8d856634c9c6e.navbar-nav > li > a:hover,
+  body .v45306dec93131210aa3886075489187d .navbar-inverse .sub-navbar .v5ef595c1cb12020000f8d856634c9c6e .open > a,
+  body .v45306dec93131210aa3886075489187d .navbar-inverse .sub-navbar .v5ef595c1cb12020000f8d856634c9c6e .open > a:hover,
+  body .v45306dec93131210aa3886075489187d .navbar-inverse .sub-navbar .v5ef595c1cb12020000f8d856634c9c6e .open > a:focus,
+  body .v45306dec93131210aa3886075489187d .navbar-inverse .sub-navbar .dropdown-menu > li > a:hover,
+  body .v45306dec93131210aa3886075489187d .navbar-inverse .sub-navbar .dropdown-menu > li > a:focus { background-color: $ui-subnav-hover-bg; }
+  body .v45306dec93131210aa3886075489187d .navbar-inverse .sub-navbar .v5ef595c1cb12020000f8d856634c9c6e.navbar-nav > li > a:focus { outline-color: $ui-subnav-text !important; }
+}
+
+// Heading case for page and widget titles (h1/h2). The hero sub-heading is an
+// h2 as well but stays as written.
+@if $ui-heading-transform != null {
+  body h1, body h2, body .h1, body .h2 { text-transform: $ui-heading-transform; }
+  body .v72caf7f8adb12910f8772457eb7e59d3 .description { text-transform: none; }
+}
+@if $ui-heading-letter-spacing != null {
+  body h1, body h2, body .h1, body .h2 { letter-spacing: $ui-heading-letter-spacing; }
+  body .v72caf7f8adb12910f8772457eb7e59d3 .description { letter-spacing: normal; }
 }
 
 

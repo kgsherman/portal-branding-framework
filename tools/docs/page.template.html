@@ -78,7 +78,7 @@ h3 { font-size: 20px; font-weight: 500; }
 
 /* compare */
 .compare { display: grid; gap: 12px; }
-.compare-head, .compare-row { display: grid; grid-template-columns: 70px minmax(0, 1fr) minmax(0, 1fr); gap: 12px; align-items: start; }
+.compare-head, .compare-row { display: grid; grid-template-columns: 70px repeat(3, minmax(0, 1fr)); gap: 12px; align-items: start; }
 .compare-head span { font-size: 13px; color: var(--muted); font-weight: 600; letter-spacing: .04em; text-transform: uppercase; }
 .compare-row > b { font-weight: 600; font-size: 15px; padding-top: 6px; }
 .shot { display: block; padding: 0; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); overflow: hidden; cursor: zoom-in; width: 100%; }
@@ -172,7 +172,7 @@ footer { color: var(--muted); font-size: 14px; border-top: 1px solid var(--line)
 }
 @media (max-width: 560px) {
   body { font-size: 16px; }
-  .compare-head, .compare-row { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .compare-head, .compare-row { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
   .compare-head span:first-child { display: none; }
   .compare-row > b { grid-column: 1 / -1; padding-top: 0; }
 }
@@ -182,7 +182,7 @@ footer { color: var(--muted); font-size: 14px; border-top: 1px solid var(--line)
   <nav class="toc" aria-label="Contents">
     <p>Contents</p>
     <ol>
-      <li><a href="#example">Aareal example</a></li>
+      <li><a href="#example">Examples</a></li>
       <li><a href="#start">New client</a></li>
       <li><a href="#how">How it works</a></li>
       <li><a href="#file">The variables file</a></li>
@@ -201,12 +201,12 @@ footer { color: var(--muted); font-size: 14px; border-top: 1px solid var(--line)
 
   <main>
     <header class="intro">
-      <p class="eyebrow">ServiceNow Business Portal · Coral base · framework v1.0</p>
+      <p class="eyebrow">ServiceNow Business Portal · Coral base · framework v1.1</p>
       <h1>Business Portal Brand Tokens</h1>
       <p class="lede">One place per client for a full rebrand: <strong>Section 1 of the theme's CSS Variables</strong>. Bootstrap, the Coral stylesheets, header and footer, the OOTB widgets and the Next Experience components are all wired to it.</p>
       <dl class="facts">
         <div><dt>Coral variables mapped</dt><dd>375 / 375</dd></div>
-        <div><dt>Brand tokens</dt><dd>139</dd></div>
+        <div><dt>Brand tokens</dt><dd>143</dd></div>
         <div><dt>Hardcoded rules fixed</dt><dd>~240</dd></div>
         <div><dt>Core CSS vs stock Coral</dt><dd>5,514 / 5,514</dd></div>
       </dl>
@@ -214,32 +214,38 @@ footer { color: var(--muted); font-size: 14px; border-top: 1px solid var(--line)
 
     <section aria-labelledby="compare-h">
       <h2 id="compare-h">Same portal, rebranded from one file</h2>
-      <div class="prose"><p>Left: the stock Business Portal. Right: the same portal with the Aareal Bank example theme. Every colour, font, corner and the banner come from Section 1 of the theme's CSS Variables; the logo and footer address are set on the portal record.</p></div>
+      <div class="prose"><p>Left: the stock Business Portal. Then the same portal with the two example themes, Aareal Bank and noris network. Every colour, font, corner and the banner come from Section 1 of the theme's CSS Variables; the logo and footer address are set on the portal record.</p></div>
       <div class="compare">
-        <div class="compare-head"><span></span><span>Stock Coral</span><span>Aareal Bank example</span></div>
+        <div class="compare-head"><span></span><span>Stock Coral</span><span>Aareal Bank</span><span>noris network</span></div>
         <div class="compare-row"><b>Home</b>
           <button class="shot" data-cap="Stock Coral: home"><img src="screenshots/40-coral-home.jpg" alt="Business Portal home page in stock Coral teal" width="800" height="741"></button>
           <button class="shot" data-cap="Aareal: navy header, angled light-shard banner, Arvo slab headings, sky-blue call to action, cream page with flat square cards"><img src="screenshots/30-aareal-home.jpg" alt="Business Portal home page in Aareal Bank branding" width="800" height="741"></button>
+          <button class="shot" data-cap="noris: white logo bar over a noris-blue menu bar, petrol-to-teal banner with angled planes and hexagons, Open Sans titles in capitals, bordeaux pill call to action"><img src="screenshots/50-noris-home.jpg" alt="Business Portal home page in noris network branding" width="800" height="741"></button>
         </div>
         <div class="compare-row"><b>Case</b>
           <button class="shot" data-cap="Stock Coral: case"><img src="screenshots/42-coral-case.jpg" alt="Case page in stock Coral" loading="lazy" width="800" height="741"></button>
           <button class="shot" data-cap="Aareal: case page"><img src="screenshots/32-aareal-case.jpg" alt="Case page in Aareal Bank branding" loading="lazy" width="800" height="741"></button>
+          <button class="shot" data-cap="noris: case page - bordeaux pills for Actions and Send, teal selected tab"><img src="screenshots/52-noris-case.jpg" alt="Case page in noris network branding" loading="lazy" width="800" height="741"></button>
         </div>
         <div class="compare-row"><b>Form</b>
           <button class="shot" data-cap="Stock Coral: catalog form"><img src="screenshots/43-coral-form.jpg" alt="Create case form in stock Coral" loading="lazy" width="800" height="741"></button>
           <button class="shot" data-cap="Aareal: catalog form"><img src="screenshots/33-aareal-form.jpg" alt="Create case form in Aareal Bank branding" loading="lazy" width="800" height="741"></button>
+          <button class="shot" data-cap="noris: catalog form - 8px inputs, bordeaux Submit pill"><img src="screenshots/53-noris-form.jpg" alt="Create case form in noris network branding" loading="lazy" width="800" height="741"></button>
         </div>
         <div class="compare-row"><b>Knowledge</b>
           <button class="shot" data-cap="Stock Coral: knowledge home"><img src="screenshots/44-coral-kb-home.jpg" alt="Knowledge home in stock Coral" loading="lazy" width="800" height="741"></button>
           <button class="shot" data-cap="Aareal: knowledge home - the banner follows the same hero tokens as the home page"><img src="screenshots/34-aareal-kb-home.jpg" alt="Knowledge home in Aareal Bank branding" loading="lazy" width="800" height="741"></button>
+          <button class="shot" data-cap="noris: knowledge home - the hexagon banner comes from the same hero token"><img src="screenshots/54-noris-kb-home.jpg" alt="Knowledge home in noris network branding" loading="lazy" width="800" height="741"></button>
         </div>
       </div>
-      <div class="strip" id="strip" aria-label="Palette roles, Coral and Aareal"></div>
+      <div class="strip" id="strip" aria-label="Palette roles: Coral, Aareal and noris"></div>
     </section>
 
     <section id="example" aria-labelledby="example-h">
-      <p class="eyebrow">Worked example</p>
-      <h2 id="example-h">Aareal Bank in Section 1</h2>
+      <p class="eyebrow">Worked examples</p>
+      <h2 id="example-h">Two brands in Section 1</h2>
+      <div class="prose"><p>Two real brands with very different looks, each built only from Section 1 plus a font include, a logo and the footer settings. Their files are in <code>examples/</code>.</p></div>
+      <h3>Aareal Bank</h3>
       <div class="prose">
         <p>Aareal's brand, taken from aareal-bank.com: a deep navy, a light sky blue for calls to action, warm cream and sand surfaces, four royal blues in the angled "light shards" of their artwork, square cards, and a slab-serif heading face over Helvetica. All of it maps onto existing tokens:</p>
       </div>
@@ -262,6 +268,30 @@ footer { color: var(--muted); font-size: 14px; border-top: 1px solid var(--line)
         <figure><button class="shot"><img src="screenshots/36-aareal-product-catalog.jpg" alt="Aareal product catalog" loading="lazy" width="800" height="741"></button><figcaption>Product catalog (a Next Experience component) in Aareal colours and font after <strong>Sync Next Experience theme</strong>. Its panel keeps rounded corners: the sync covers colours and fonts, not shape.</figcaption></figure>
       </div>
       <div class="prose"><p>Outside Section 1 the example needed three things: the <code>aareal-fonts</code> CSS include (made with <code>tools/embed_font.py</code>), the white logo on the portal record, and the footer logo and address in the portal's footer settings. Building the example also turned up three framework fixes that every dark-header or light-CTA client now gets: header loading dots follow <code>$ui-header-text</code>, the knowledge banner text follows <code>$ui-hero-text</code>, and the onboarding modal's button hover derives from the CTA colour.</p></div>
+      <h3>noris network</h3>
+      <div class="prose">
+        <p>noris network's brand, taken from noris.de's stylesheets, their logo usage guideline and product sheets: "noris blue" petrol for large fields and titles, "noris blue 2" teal as the interactive colour, bordeaux for calls to action, Open Sans with titles in capitals, pill buttons, 12px cards, angled planes and a hexagon motif. A white logo bar over a noris-blue menu bar mirrors their own customer portal and noris.de's menus.</p>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>noris brand</th><th>Section 1 setting</th></tr></thead>
+        <tbody>
+          <tr><td>noris blue <code>#234D5B</code> for brand fills, titles and the menu bar</td><td><code>$palette-primary</code>, <code>$ui-heading-color</code>, <code>$ui-subnav-bg</code></td></tr>
+          <tr><td>noris blue 2 <code>#118291</code>, the interactive colour</td><td><code>$palette-accent</code>, <code>$palette-focus</code>; links use it 15% darker (<code>$palette-secondary</code>) to pass AA on grey</td></tr>
+          <tr><td>Bordeaux call-to-action pills</td><td><code>$ui-button-primary-bg: $noris-bordeaux;</code> <code>$ui-radius-button: 999px;</code></td></tr>
+          <tr><td>Black logo on white, menu bar in noris blue</td><td><code>$ui-header-text: $noris-blue;</code> <code>$ui-subnav-text: #FFFFFF;</code> <code>$ui-subnav-hover-bg: $noris-blue-2;</code> (new in v1.1)</td></tr>
+          <tr><td>Promo gradient, angled print covers, hexagons</td><td><code>$ui-hero-bg</code>: an SVG honeycomb (<code>url("data:…")</code>, drawn by <code>hero-hexagons.py</code>) over two hard-stop planes over <code>linear-gradient(135deg, noris blue, noris blue 2)</code></td></tr>
+          <tr><td>Official tints of noris blue as greys</td><td>Neutral ramp <code>mix($noris-blue, #FFFFFF, 10% … 90%)</code>, body text <code>#333</code> as on noris.de</td></tr>
+          <tr><td>Open Sans, titles in capitals</td><td><code>$ui-font-family: "Open Sans", …</code> (variable font embedded by <code>noris-fonts</code>), <code>$ui-heading-transform: uppercase;</code> <code>$ui-heading-letter-spacing: .04em;</code> (new in v1.1)</td></tr>
+          <tr><td>12px cards, soft blue shadow, 8px inputs</td><td><code>$ui-radius-lg: 12px;</code> <code>$ui-radius: 8px;</code> <code>$ui-shadow-card: 0 4px 15px rgba($noris-blue, .12);</code></td></tr>
+        </tbody>
+      </table></div>
+      <div class="gallery">
+        <figure><button class="shot"><img src="screenshots/57-noris-menu.jpg" alt="noris menu bar with an open dropdown" loading="lazy" width="800" height="741"></button><figcaption>Two-tone header: white logo bar, noris-blue menu bar and dropdowns with white text, teal hover. Set with <code>$ui-subnav-bg</code>, <code>$ui-subnav-text</code> and <code>$ui-subnav-hover-bg</code>.</figcaption></figure>
+        <figure><button class="shot"><img src="screenshots/51-noris-home-footer.jpg" alt="noris footer" loading="lazy" width="800" height="741"></button><figcaption>Footer in deep noris blue with the white logo and the Nürnberg address, set in the portal's footer settings.</figcaption></figure>
+        <figure><button class="shot"><img src="screenshots/55-noris-kb-article.jpg" alt="noris KB article" loading="lazy" width="800" height="741"></button><figcaption>Knowledge article: capitalised title in noris blue, teal links, pill Yes/No buttons.</figcaption></figure>
+        <figure><button class="shot"><img src="screenshots/56-noris-product-catalog.jpg" alt="noris product catalog" loading="lazy" width="800" height="741"></button><figcaption>Product catalog after <strong>Sync Next Experience theme</strong>: Open Sans and noris colours. Its titles stay in sentence case; heading case can't reach inside Next Experience components.</figcaption></figure>
+      </div>
+      <div class="prose"><p>The noris example drove two additions in v1.1, both <code>null</code> by default so other themes don't change. <code>$ui-subnav-text</code> and <code>$ui-subnav-hover-bg</code> give the menu bar its own text and hover colours. Before, the header widget painted the bar with <code>$ui-subnav-bg</code> but kept the header text colour, so a coloured menu bar under a white header was unreadable. <code>$ui-heading-transform</code> and <code>$ui-heading-letter-spacing</code> set page and widget titles in capitals. Outside Section 1 it needed the <code>noris-fonts</code> include, the black logo on the portal record, and the white logo and Nürnberg address in the footer settings.</p></div>
     </section>
 
     <section id="start" aria-labelledby="start-h">
@@ -311,9 +341,9 @@ footer { color: var(--muted); font-size: 14px; border-top: 1px solid var(--line)
       </table></div>
       <div class="flow" aria-label="How a value flows">
         <div class="lead"><b>Section 1</b><span>Palette (<code>$palette-*</code>) and token overrides</span></div>
-        <div><b>Section 2</b><span>139 brand tokens (<code>$ui-*</code>), all <code>!default</code></span></div>
+        <div><b>Section 2</b><span>143 brand tokens (<code>$ui-*</code>), all <code>!default</code></span></div>
         <div><b>Section 3</b><span>378 Bootstrap, Coral and widget variables</span></div>
-        <div><b>Override sheet</b><span>Reads tokens: bridge (A), footer and hero (B), fixes (C1–C14)</span></div>
+        <div><b>Override sheet</b><span>Reads tokens: bridge (A), footer, hero, menu bar and headings (B), fixes (C1–C14)</span></div>
         <div><b>Sync</b><span>Reads tokens and writes the generated Next Experience theme</span></div>
       </div>
       <div class="prose">
@@ -372,7 +402,9 @@ $ui-radius-lg:         0px;                // square cards</code></pre>
         <li><strong>Small brand guide?</strong> One colour can fill several roles. Aareal uses its navy for both primary and links, and borrows royal blues from its artwork for the selected state and focus.</li>
         <li><strong>CTA colour different from the brand colour?</strong> Keep <code>$palette-primary</code> on brand and set <code>$ui-button-primary-bg</code> in 1d, plus <code>$ui-button-primary-text</code> if the CTA is light. Aareal has sky-blue buttons with navy text on a navy brand.</li>
         <li><strong>No neutrals in the guide?</strong> Grade the brand's background colour into its darkest colour. Aareal goes from sand to navy: <code>$palette-neutral-60: mix($aareal-darkblue, $aareal-sand, 58%);</code></li>
-        <li><strong>Exact tints in the guide?</strong> Pin them in 1c. Generated shades are fixed <code>mix()</code> percentages with black or white (see 2a).</li>
+        <li><strong>Exact tints in the guide?</strong> Pin them in 1c. Generated shades are fixed <code>mix()</code> percentages with black or white (see 2a). noris publishes 10% tints of noris blue, which become its whole neutral ramp: <code>$palette-neutral-60: mix($noris-blue, #FFFFFF, 60%);</code></li>
+        <li><strong>Brand colour too light for text?</strong> Use it for fills and focus, and a slightly darker mix for links. noris keeps teal for selection and focus, and links use <code>mix(#000000, $noris-blue-2, 15%)</code>.</li>
+        <li><strong>Light header with a coloured menu bar?</strong> Keep the header light and set <code>$ui-subnav-bg</code>, <code>$ui-subnav-text</code> and optionally <code>$ui-subnav-hover-bg</code> (the noris example).</li>
         <li><strong>Dark header?</strong> Set <code>$ui-header-bg</code> and <code>$ui-header-text</code> in 1d. Hover, active and disabled states are derived from those two, and the footer follows unless you set <code>$ui-footer-*</code>. You'll need a light logo.</li>
       </ul></div>
     </section>
@@ -394,9 +426,11 @@ $ui-radius-lg:         0px;                // square cards</code></pre>
         <h3>Header, footer, banner (2c)</h3>
         <figure><button class="shot"><img src="screenshots/14-token-header-hero.jpg" alt="Dark header and gradient banner" loading="lazy" width="800" height="742"></button><figcaption><code>$ui-header-bg: #2B1F5C; $ui-header-text: #FFFFFF; $ui-hero-bg: linear-gradient(120deg, #2B1F5C 0%, #E6007E 100%); $ui-hero-text: #FFFFFF</code>. The dark logo on a dark header shows why a light logo variant is needed.</figcaption></figure>
         <figure><button class="shot"><img src="screenshots/15-token-footer.jpg" alt="Magenta footer" loading="lazy" width="800" height="742"></button><figcaption><code>$ui-footer-bg: #E6007E; $ui-footer-text: #FFFFFF</code>. The footer is independent of the header (OOTB it always copies the header).</figcaption></figure>
+        <figure><button class="shot"><img src="screenshots/57-noris-menu.jpg" alt="White header with a petrol menu bar" loading="lazy" width="800" height="741"></button><figcaption><code>$ui-subnav-bg: #234D5B; $ui-subnav-text: #FFFFFF; $ui-subnav-hover-bg: #118291</code> under a white header (noris example). The menu bar and its dropdowns get their own colours.</figcaption></figure>
         <h3>Typography (2e) and shape (2f)</h3>
         <figure><button class="shot"><img src="screenshots/16-token-typography-case.jpg" alt="Case in Georgia serif" loading="lazy" width="800" height="742"></button><figcaption><code>$ui-font-family: Georgia, "Times New Roman", serif; $ui-font-weight-heading: 700; $ui-heading-color: #E6007E</code>.</figcaption></figure>
         <figure><button class="shot"><img src="screenshots/17-token-shape-home.jpg" alt="Home with square cards and pill buttons" loading="lazy" width="800" height="742"></button><figcaption>All radii <code>0</code>, <code>$ui-radius-button: 999px</code> (pill buttons), <code>$ui-shadow-card: 0 10px 28px 0 rgba(43, 31, 92, .35)</code>.</figcaption></figure>
+        <figure><button class="shot"><img src="screenshots/55-noris-kb-article.jpg" alt="KB article with capitalised titles" loading="lazy" width="800" height="741"></button><figcaption><code>$ui-heading-transform: uppercase; $ui-heading-letter-spacing: .04em</code> on page and widget titles (noris example).</figcaption></figure>
         <figure><button class="shot"><img src="screenshots/18-token-shape-case.jpg" alt="Case with square cards and pill buttons" loading="lazy" width="800" height="742"></button><figcaption>Same overrides on a case: square cards and editor, pill buttons, deeper shadow.</figcaption></figure>
       </div>
       <div class="prose">
@@ -406,17 +440,17 @@ $ui-radius-lg:         0px;                // square cards</code></pre>
     </section>
 
     <section id="reference" aria-labelledby="reference-h">
-      <p class="eyebrow">All 139 tokens</p>
+      <p class="eyebrow">All 143 tokens</p>
       <h2 id="reference-h">Token reference</h2>
-      <div class="prose"><p>Each token's resolved value in the template (Coral look) and in the Aareal example, what it visibly changes, and where it is wired in. <em>Wired into</em> lists the platform variables mapped to it, the tokens derived from it (→), and the override sheet sections that read it (A bridge, B footer and hero, C1–C14 fixes).</p></div>
+      <div class="prose"><p>Each token's resolved value in the template (Coral look) and in the two examples, what it visibly changes, and where it is wired in. <em>Wired into</em> lists the platform variables mapped to it, the tokens derived from it (→), and the override sheet sections that read it (A bridge, B footer, hero, menu bar and headings, C1–C14 fixes).</p></div>
       <div class="controls">
         <input type="search" id="tok-q" placeholder="Filter tokens, e.g. header, radius, link" aria-label="Filter tokens">
         <div class="pills" id="tok-groups" role="group" aria-label="Token group"></div>
-        <label><input type="checkbox" id="tok-changed"> Only tokens Aareal changes</label>
+        <label><input type="checkbox" id="tok-changed"> Only tokens an example changes</label>
         <span class="count" id="tok-count"></span>
       </div>
       <div class="table-wrap scroll"><table class="ref">
-        <thead><tr><th>Token</th><th>Template (Coral)</th><th>Aareal example</th><th>Wired into</th></tr></thead>
+        <thead><tr><th>Token</th><th>Template (Coral)</th><th>Aareal</th><th>noris</th><th>Wired into</th></tr></thead>
         <tbody id="tok-body"></tbody>
       </table></div>
     </section>
@@ -433,7 +467,7 @@ $ui-radius-lg:         0px;                // square cards</code></pre>
           <li>Set <code>$ui-font-family: "Client Sans", Arial, sans-serif;</code> in 1d and click Sync.</li>
           <li>Remove the Lato include from the client theme if nothing uses Lato any more.</li>
         </ol>
-        <p>The Aareal example uses exactly this: the open-source slab Arvo (SIL OFL) stands in for Aareal's commercial ITC Lubalin Graph, embedded in the <code>aareal-fonts</code> include at order 95, with <code>$ui-font-family-heading: "Arvo", Rockwell, Georgia, serif;</code>. Never embed a commercial font without a web licence, and check the client's privacy and CSP rules before hot-linking a font CDN instead.</p>
+        <p>The Aareal example uses exactly this: the open-source slab Arvo (SIL OFL) stands in for Aareal's commercial ITC Lubalin Graph, embedded in the <code>aareal-fonts</code> include at order 95, with <code>$ui-font-family-heading: "Arvo", Rockwell, Georgia, serif;</code>. The noris example embeds Open Sans, the font noris.de uses, as one variable WOFF2 that covers weights 300–800: <code>python tools/embed_font.py "Open Sans" "300 800=open-sans-latin-var.woff2"</code>. Never embed a commercial font without a web licence, and check the client's privacy and CSP rules before hot-linking a font CDN instead.</p>
       </div>
     </section>
 
@@ -451,12 +485,14 @@ $ui-radius-lg:         0px;                // square cards</code></pre>
           <tr><td><strong>Rich-text typing area</strong></td><td>TinyMCE's editable iframe keeps its own white content CSS</td><td>Toolbar and frame are themed (C13); fine on light themes</td></tr>
           <tr><td><strong>select2 arrows</strong></td><td>A grey sprite image in the static bundle</td><td>Acceptable on light themes</td></tr>
           <tr><td><strong>File-type icons, presence dots, Now Assist onboarding, guided tours</strong></td><td>Platform components with fixed palettes</td><td>Leave as is</td></tr>
-          <tr><td><strong>Footer logo, address, copyright, links</strong></td><td>Come from the portal record's footer settings (field <code>quick_start_config</code>, JSON <code>footer</code>: <code>logo_img_name</code>, <code>org_info</code>, <code>copyright</code>), not from the header logo or the theme</td><td>Set per portal. An uploaded logo works as <code>/&lt;attachment sys_id&gt;.iix</code>.</td></tr>
+          <tr><td><strong>Footer logo, address, copyright, links</strong></td><td>Come from the portal record's footer settings (field <code>quick_start_config</code>, JSON <code>footer</code>: <code>logo_img_name</code>, <code>org_info</code>, <code>copyright</code>), not from the header logo or the theme</td><td>Set per portal. An uploaded logo works as <code>/&lt;attachment sys_id&gt;.iix</code>, but only as an image attachment (table <code>ZZ_YYsp_portal</code>, like the portal logo). A plain record attachment returns 403 to customers. The footer slot is at most 100px wide, so trim the built-in margins of a padded logo (viewBox) or it shrinks below the brand's minimum size.</td></tr>
           <tr><td><strong>Footer social icons</strong></td><td>Colour from the footer configuration (<code>social_icons_color</code>)</td><td>Set per client in the footer config</td></tr>
           <tr><td><strong>Dark mode</strong></td><td>Not supported: Coral's dark variant is empty and the portal has no switch</td><td>–</td></tr>
           <tr><td><strong>Dead OOTB rules</strong></td><td>Rules using undefined variables (<code>$panel-border-color</code>, <code>$brand-primary-dark</code>, <code>$tropical-rain</code>, <code>$gull-grey</code>, <code>$mesp-*</code>, <code>$selection-primary*</code>, <code>$navbar-invese-bg</code> typo…) never apply</td><td>Left dead on purpose. Defining them would change the stock look.</td></tr>
           <tr><td><strong>OOTB SCSS bugs</strong></td><td><code>portal-banner</code>: <code>$sp-space--xxs: 2px; !default;</code> forces 2px. Coral declares <code>$navbar-inverse-*</code> twice (second block dead). Coral's <code>$now-sp-nass-*</code> lines run together (fixed in the template).</td><td>Harmless with the framework; noted so nobody chases them</td></tr>
           <tr><td><strong>Next Experience components</strong></td><td>Keep old colours until synced</td><td>Click Sync after every palette or font change</td></tr>
+          <tr><td><strong>Heading case</strong></td><td><code>$ui-heading-transform</code> reaches portal h1/h2 titles. Next Experience components (Product Catalog) keep their own case, and the hero sub-heading stays as written.</td><td>Accept; titles inside components are short</td></tr>
+          <tr><td><strong>Menu bar on phones</strong></td><td>Below 768px the menu bar folds into the header's slide-out panel, which uses the header colours, not <code>$ui-subnav-*</code></td><td>Nothing to do; the panel stays readable</td></tr>
           <tr><td><strong>Next Experience shapes</strong></td><td>Sync generates colours and fonts only. Radii and shadows inside components such as the Product Catalog follow the base Coral UX theme (e.g. rounded panels on a square theme).</td><td>Accept, or extend <code>PortalBrandTokensUx</code> to generate the "Shape and Form" style too</td></tr>
         </tbody>
       </table></div>
@@ -491,6 +527,7 @@ $ui-radius-lg:         0px;                // square cards</code></pre>
           <li><strong>Loud-palette sweep.</strong> Put an obviously fake palette in the lab theme's Section 1 (sepia-tinted neutrals, magenta, purple and green brand colours), Sync, walk the verification pages. Anything still Coral teal, blue or grey is hardcoded. Find its source and add a fix.</li>
         </ul>
         <p><strong>Adding a fix</strong>: put it in the matching C-section, start the selector with <code>body</code>, use tokens only, never change layout, and name the widget or stylesheet in a comment.</p>
+        <p><strong>Changelog.</strong> v1.1 adds <code>$ui-subnav-text</code>, <code>$ui-subnav-hover-bg</code>, <code>$ui-heading-transform</code> and <code>$ui-heading-letter-spacing</code> (all off by default) and their rules in section B of the override sheet. The script include and UI actions are unchanged from v1.0. To upgrade a v1.0 theme, replace Sections 2–4 and the override sheet; nothing changes until a theme sets the new tokens.</p>
         <p><strong>Adding a token</strong>: declare it in Section 2 with <code>!default</code> and a comment, map platform variables to it in Section 3, add it to the reference, and to <code>PortalBrandTokensUx.buildBaseColours()</code> if Next Experience components should follow it.</p>
       </div>
     </section>
@@ -502,6 +539,7 @@ $ui-radius-lg:         0px;                // square cards</code></pre>
         <p><strong>Framework</strong>, once per instance (update set <em>Portal Brand Tokens - Framework</em>): the <code>portal-brand-tokens-overrides</code> stylesheet and include, the <code>PortalBrandTokensUx</code> script include, the two UI actions on <code>sp_theme</code>, and the <em>Business Portal Brand Template</em> theme with its 15 include records.</p>
         <p><strong>Per client</strong>: the client theme and its include records (made by the clone), the portal's theme and logo, the <code>base_font</code> property if it's a new portal record, and the generated UX theme. Either move the generated <code>sys_ux_theme</code>, <code>sys_ux_style</code> and <code>m2m_theme_style</code> records, or click Sync once in the target instance after committing.</p>
         <p><strong>Aareal example</strong>: update set <em>Portal Brand Tokens - Aareal Bank example</em> (theme, its includes, <code>aareal-fonts</code>, generated UX theme). It depends on the Framework set. The lab portal's logo and footer settings stay in the scratch set.</p>
+        <p><strong>noris example</strong>: update set <em>Portal Brand Tokens - noris network example</em> (theme, its 16 include records, <code>noris-fonts</code>, generated UX theme; 30 entries). It needs the Framework set at v1.1.</p>
         <p>Use the UI actions in your own session so changes land in your current update set. Scripts that run as <code>system</code> (scheduled jobs, triggers) write to <em>Default</em>; move those records afterwards.</p>
       </div>
     </section>
@@ -515,14 +553,15 @@ $ui-radius-lg:         0px;                // square cards</code></pre>
           <tr><td><code>theme/css_variables.template.scss</code></td><td>sp_theme <em>Business Portal Brand Template</em> <code>6f3055f42b77cf10a5feffb86e91bf67</code></td></tr>
           <tr><td><code>examples/aareal/css_variables.aareal.scss</code></td><td>sp_theme <em>Aareal Bank Theme (example)</em> <code>a32169b42b7bcf10a5feffb86e91bf12</code></td></tr>
           <tr><td><code>examples/aareal/aareal-fonts.scss</code></td><td>sp_css <code>1b5161302b374350ff68f76a6e91bf01</code>, include <code>5f5161302b374350ff68f76a6e91bf02</code> (order 95 on the Aareal theme)</td></tr>
-          <tr><td><code>examples/noris/css_variables.noris.scss</code></td><td>sp_theme <em>noris Theme</em> <code>d71405382beacf54a5feffb86e91bf75</code> (test theme)</td></tr>
+          <tr><td><code>examples/noris/css_variables.noris.scss</code></td><td>sp_theme <em>noris network Theme (example)</em> <code>d71405382beacf54a5feffb86e91bf75</code></td></tr>
+          <tr><td><code>examples/noris/noris-fonts.scss</code></td><td>sp_css <code>057339742b7fcf10a5feffb86e91bfb1</code>, include <code>0d7339742b7fcf10a5feffb86e91bfb2</code> (order 95 on the noris theme)</td></tr>
           <tr><td><code>theme/portal-brand-tokens-overrides.scss</code></td><td>sp_css <code>39fcc9782b37cf10a5feffb86e91bf83</code>, include <code>010dc9782b37cf10a5feffb86e91bfa4</code></td></tr>
           <tr><td><code>theme/PortalBrandTokensUx.js</code></td><td>sys_script_include <code>b61595742b734350ff68f76a6e91bf7a</code></td></tr>
           <tr><td><code>theme/ui-actions.js</code></td><td>Sync <code>462559742b734350ff68f76a6e91bf60</code>, Clone <code>f23ad9f82bf7cf10a5feffb86e91bfb4</code></td></tr>
           <tr><td><code>docs/</code></td><td>This guide as Markdown, token reference, variable inventory, screenshots</td></tr>
         </tbody>
       </table></div>
-      <div class="prose"><p>Reference: Business Portal <code>f264dbaccbfd52108d3f6a6fc041e4b5</code> · stock Coral theme <code>60bed96c93131210aa38860754891827</code> · base Coral UX theme <code>fad87d2ca304121029a4d1aed31e610f</code> · Aareal generated UX theme <code>c761e1302b374350ff68f76a6e91bfe4</code> · lab portal <code>/theme_lab</code> (currently showing the Aareal example).</p></div>
+      <div class="prose"><p>Reference: Business Portal <code>f264dbaccbfd52108d3f6a6fc041e4b5</code> · stock Coral theme <code>60bed96c93131210aa38860754891827</code> · base Coral UX theme <code>fad87d2ca304121029a4d1aed31e610f</code> · Aareal generated UX theme <code>c761e1302b374350ff68f76a6e91bfe4</code> · noris generated UX theme <code>1dd33db42b7fcf10a5feffb86e91bf09</code> · lab portal <code>/theme_lab</code> (currently showing the noris example).</p></div>
     </section>
 
     <section id="inventory" aria-labelledby="inventory-h">
@@ -540,7 +579,7 @@ $ui-radius-lg:         0px;                // square cards</code></pre>
       </table></div>
     </section>
 
-    <footer>Portal Brand Tokens framework v1.0 · built and verified on the kev instance, October 2026 · source in <code>portal-branding-framework/</code></footer>
+    <footer>Portal Brand Tokens framework v1.1 · built and verified on the kev instance, October 2026 · source in <code>portal-branding-framework/</code></footer>
   </main>
 </div>
 
@@ -554,17 +593,17 @@ $ui-radius-lg:         0px;                // square cards</code></pre>
 const DATA = __PAGEDATA__;
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 
-/* palette strip: Coral vs Aareal roles */
+/* palette strip: Coral and the example themes */
 (function () {
   const names = ['primary', 'secondary', 'accent', 'focus', 'neutral-5', 'neutral-20', 'neutral-40', 'neutral-60', 'neutral-85', 'neutral-100', 'success', 'warning', 'danger', 'info'];
   const map = {}; DATA.tokens.forEach(t => map[t.n] = t);
   const strip = document.getElementById('strip');
   strip.style.setProperty('--n', names.length);
-  const row = (label, key) => '<div class="strip-row"><span>' + label + '</span>' + names.map(n => {
-    const v = map['$palette-' + n][key];
+  const row = (label, i) => '<div class="strip-row"><span>' + label + '</span>' + names.map(n => {
+    const v = map['$palette-' + n].v[i];
     return '<span class="chip" style="background:' + esc(v.v) + '" title="$palette-' + n + ' ' + esc(v.v) + '"></span>';
   }).join('') + '</div>';
-  strip.innerHTML = row('Coral', 'c') + row('Aareal', 'o') +
+  strip.innerHTML = row('Coral', 0) + DATA.examples.map((e, i) => row(e, i + 1)).join('') +
     '<div class="strip-row strip-labels"><span></span>' + names.map(n => '<span>' + n.replace('neutral-', 'n') + '</span>').join('') + '</div>';
 })();
 
@@ -608,17 +647,17 @@ function renderTokens() {
   let html = '', shown = 0, last = null;
   DATA.tokens.forEach(t => {
     if (tokGroup !== 'all' && t.g !== tokGroup) return;
-    const changed = t.c.v !== t.o.v;
-    if (onlyChanged && !changed) return;
+    const changed = t.v.slice(1).map(v => v.v !== t.v[0].v);
+    if (onlyChanged && !changed.some(Boolean)) return;
     if (q && !(t.n + ' ' + t.x + ' ' + t.p.join(' ')).toLowerCase().includes(q)) return;
-    if (t.g !== last) { html += '<tr class="grp"><td colspan="4">' + esc(groupLabel(t.g)) + '</td></tr>'; last = t.g; }
+    if (t.g !== last) { html += '<tr class="grp"><td colspan="' + (3 + DATA.examples.length) + '">' + esc(groupLabel(t.g)) + '</td></tr>'; last = t.g; }
     shown++;
     html += '<tr><td><span class="tname">' + esc(t.n) + '</span><span class="tdesc">' + esc(t.x).replace(/`([^`]+)`/g, '<code>$1</code>') + '</span></td>' +
-      '<td><div class="val">' + preview(t, t.c) + '</div></td>' +
-      '<td><div class="val' + (changed ? '' : ' same') + '">' + (changed ? preview(t, t.o) : '<span class="dash">same</span>') + '</div></td>' +
+      '<td><div class="val">' + preview(t, t.v[0]) + '</div></td>' +
+      changed.map((c, i) => '<td><div class="val' + (c ? '' : ' same') + '">' + (c ? preview(t, t.v[i + 1]) : '<span class="dash">same</span>') + '</div></td>').join('') +
       '<td><div class="wired">' + wired(t) + '</div></td></tr>';
   });
-  document.getElementById('tok-body').innerHTML = html || '<tr><td colspan="4">No tokens match. Clear the filter to see all 139.</td></tr>';
+  document.getElementById('tok-body').innerHTML = html || '<tr><td colspan="' + (3 + DATA.examples.length) + '">No tokens match. Clear the filter to see all ' + DATA.tokens.length + '.</td></tr>';
   document.getElementById('tok-count').textContent = shown + ' of ' + DATA.tokens.length;
 }
 document.getElementById('tok-q').addEventListener('input', renderTokens);

@@ -2,14 +2,14 @@
 
 A theming framework for the ServiceNow **Business Portal** (Customer Experience Coral base). A client's full rebrand lives in one place: **Section 1 of the theme's CSS Variables**. Everything else (Bootstrap, the Coral stylesheets, the header and footer, OOTB widgets, Next Experience components) is wired to those values.
 
-| | Stock Coral | Same portal, Aareal Bank example theme |
-|---|---|---|
-| Home | ![](screenshots/40-coral-home.jpg) | ![](screenshots/30-aareal-home.jpg) |
-| Case | ![](screenshots/42-coral-case.jpg) | ![](screenshots/32-aareal-case.jpg) |
-| Form | ![](screenshots/43-coral-form.jpg) | ![](screenshots/33-aareal-form.jpg) |
-| Knowledge | ![](screenshots/44-coral-kb-home.jpg) | ![](screenshots/34-aareal-kb-home.jpg) |
+| | Stock Coral | Aareal Bank example | noris network example |
+|---|---|---|---|
+| Home | ![](screenshots/40-coral-home.jpg) | ![](screenshots/30-aareal-home.jpg) | ![](screenshots/50-noris-home.jpg) |
+| Case | ![](screenshots/42-coral-case.jpg) | ![](screenshots/32-aareal-case.jpg) | ![](screenshots/52-noris-case.jpg) |
+| Form | ![](screenshots/43-coral-form.jpg) | ![](screenshots/33-aareal-form.jpg) | ![](screenshots/53-noris-form.jpg) |
+| Knowledge | ![](screenshots/44-coral-kb-home.jpg) | ![](screenshots/34-aareal-kb-home.jpg) | ![](screenshots/54-noris-kb-home.jpg) |
 
-Every colour, font, corner and the banner on the right come from Section 1 of the theme's CSS Variables; the logo and footer address are set on the portal record. See [the Aareal example](../examples/aareal/README.md).
+Every colour, font, corner and the banner in the two example columns come from Section 1 of the theme's CSS Variables; the logo and footer address are set on the portal record. See the [Aareal](../examples/aareal/README.md) and [noris](../examples/noris/README.md) examples.
 
 Contents
 
@@ -40,6 +40,7 @@ Appendix: [variable-inventory.md](variable-inventory.md) - all 375 Coral variabl
 | **UI actions on Portal Theme** | **Sync Next Experience theme** (button) and **Clone theme with includes** (related link). |
 | **Business Portal Brand Template** (sp_theme) | Starting point for every client: template variables + the 15 Coral includes + the override include. Looks identical to stock Coral. |
 | **Aareal Bank Theme (example)** (sp_theme) | Worked example of a strong client brand: dark header, light CTA, custom banner, embedded slab font, square flat cards. See [examples/aareal](../examples/aareal/README.md). |
+| **noris network Theme (example)** (sp_theme) | Second worked example: white logo bar over a coloured menu bar, bordeaux pill CTAs, a hexagon banner drawn as SVG, Open Sans titles in capitals, rounded cards. See [examples/noris](../examples/noris/README.md). |
 
 How it was built: every stylesheet that reaches a Business Portal page was audited - Bootstrap core, the 15 Coral includes, the header and footer, every widget on ~55 pages (including nested rows and ticket-configuration widgets), and the static platform bundle. Each was compiled with a "canary" theme (every variable set to a unique sentinel value) to learn which variables are actually read, then checked in the browser with a deliberately loud palette to catch colours that don't come from the theme. With the template's Coral palette, the compiled core CSS matches stock Coral declaration for declaration (5,514 of 5,514). The only differences are intentional fixes and 1-step RGB rounding.
 
@@ -144,15 +145,18 @@ Practical tips:
 - **Small brand guide (2-3 colours)?** One colour can fill several roles. Aareal uses its navy for both primary and links, and borrows royal blues from its artwork for the selected state and focus.
 - **CTA colour different from the brand colour?** Keep `$palette-primary` as the brand colour and set `$ui-button-primary-bg` in 1d, plus `$ui-button-primary-text` if the CTA is light. Aareal has sky-blue buttons with navy text on a navy brand.
 - **No neutrals in the guide?** Grade the brand's background colour into its darkest colour so greys feel on-brand. Aareal goes from sand to navy: `$palette-neutral-60: mix($aareal-darkblue, $aareal-sand, 58%);`
-- **Exact tints in the guide?** Pin them in 1c. Generated shades are `mix()` with black or white at fixed percentages (see 2a), which is good enough for most brands.
+- **Exact tints in the guide?** Pin them in 1c. Generated shades are `mix()` with black or white at fixed percentages (see 2a), which is good enough for most brands. noris publishes 10% tints of noris blue, which become its whole neutral ramp: `$palette-neutral-60: mix($noris-blue, #FFFFFF, 60%);`
+- **Brand colour too light for text?** Use it for fills, selection and focus, and a slightly darker mix for links. noris keeps its teal for selection and focus; links use `mix(#000000, $noris-blue-2, 15%)` to pass AA on grey.
 - **Coloured headings?** `$ui-heading-color: $palette-primary;` in 1d.
 - **Dark header?** Set `$ui-header-bg` and `$ui-header-text` in 1d. Hover, active and disabled shades are derived from those two and work on dark too. The footer follows the header unless you set `$ui-footer-*`. You'll need a light logo.
+- **Light header with a coloured menu bar?** Keep the header light and set `$ui-subnav-bg`, `$ui-subnav-text` and optionally `$ui-subnav-hover-bg` (the noris example).
+- **Titles in capitals?** `$ui-heading-transform: uppercase;` plus a little `$ui-heading-letter-spacing` (noris uses `.04em`).
 
 ---
 
 ## 6. What each token changes
 
-The screenshots below are the lab portal with one group of tokens set to loud colours, so it's obvious what each token reaches. The exact override is in each caption. The full table of all 139 tokens (default, what it changes, what it's wired into) is in **[token-reference.md](token-reference.md)**.
+The screenshots below are the lab portal with one group of tokens set to loud colours, so it's obvious what each token reaches. The exact override is in each caption. The full table of all 143 tokens (default, what it changes, what it's wired into) is in **[token-reference.md](token-reference.md)**.
 
 ### Brand colours (1b)
 
@@ -187,12 +191,18 @@ The screenshots below are the lab portal with one group of tokens set to loud co
 ![Footer](screenshots/15-token-footer.jpg)
 *`$ui-footer-bg: #E6007E; $ui-footer-text: #FFFFFF` - footer independent of the header (OOTB the footer always copies the header).*
 
+![Menu bar](screenshots/57-noris-menu.jpg)
+*`$ui-subnav-bg: #234D5B; $ui-subnav-text: #FFFFFF; $ui-subnav-hover-bg: #118291` under a white header (noris example). The menu bar and its dropdowns get their own colours (new in v1.1).*
+
 `$ui-hero-bg` accepts any CSS background (colour, gradient, `url(...)`). The default is a soft gradient from the palette. Set `$ui-hero-bg: null;` and `$ui-hero-text: null;` to hand control back to the Portal Banner widget's own Background Image and colour options.
 
 ### Typography (2e)
 
 ![Typography](screenshots/16-token-typography-case.jpg)
 *`$ui-font-family: Georgia, "Times New Roman", serif; $ui-font-weight-heading: 700; $ui-heading-color: #E6007E`.*
+
+![Heading case](screenshots/55-noris-kb-article.jpg)
+*`$ui-heading-transform: uppercase; $ui-heading-letter-spacing: .04em` on page and widget titles (noris example, new in v1.1). The hero sub-heading and Next Experience components keep their own case.*
 
 ### Shape and elevation (2f)
 
@@ -219,7 +229,7 @@ The font also has to be **loaded**. Stock Coral embeds Lato as base64 WOFF2 in t
 3. Set `$ui-font-family: "Client Sans", Arial, sans-serif;` in 1d and click **Sync Next Experience theme**.
 4. Remove the Lato include from the client theme if nothing uses Lato any more.
 
-The Aareal example does exactly this: the open-source slab Arvo (SIL OFL) stands in for Aareal's commercial ITC Lubalin Graph, embedded in the `aareal-fonts` include at order 95, with `$ui-font-family-heading: "Arvo", Rockwell, Georgia, serif;`. Never embed a commercial font without a web licence, and check the client's privacy and CSP requirements before hot-linking a font CDN instead.
+The Aareal example does exactly this: the open-source slab Arvo (SIL OFL) stands in for Aareal's commercial ITC Lubalin Graph, embedded in the `aareal-fonts` include at order 95, with `$ui-font-family-heading: "Arvo", Rockwell, Georgia, serif;`. The noris example embeds Open Sans, the font noris.de uses, as one variable WOFF2 covering weights 300-800: `python tools/embed_font.py "Open Sans" "300 800=open-sans-latin-var.woff2"`. Never embed a commercial font without a web licence, and check the client's privacy and CSP requirements before hot-linking a font CDN instead.
 
 ---
 
@@ -237,12 +247,14 @@ Things the theme cannot (cleanly) control, and what to do about them:
 | **select2 arrows** | Arrow comes from `select2.png` | Sprite image in the static bundle | Neutral grey, acceptable on light themes |
 | **File-type icons, presence dots, Otto / Now Assist onboarding, guided tours** | Fixed colours | Platform components with hardcoded palettes | Leave as is |
 | **Dark mode** | Not supported | Coral's dark variant is empty and the portal has no dark-mode switch | - |
-| **Footer logo, address, copyright, links** | Not the header logo and not the theme | Portal record field `quick_start_config` (JSON `footer`: `logo_img_name`, `org_info`, `copyright`, menu ids) | Set per portal. An uploaded logo works as `/<attachment sys_id>.iix` |
+| **Footer logo, address, copyright, links** | Not the header logo and not the theme | Portal record field `quick_start_config` (JSON `footer`: `logo_img_name`, `org_info`, `copyright`, menu ids) | Set per portal. An uploaded logo works as `/<attachment sys_id>.iix`, but only as an image attachment (table `ZZ_YYsp_portal`, like the portal logo); a plain record attachment returns 403 to customers. The footer slot is at most 100px wide, so trim a padded logo's built-in margins (viewBox) or it shrinks below the brand's minimum size. |
 | **Footer social icons** | Colour set in the footer configuration (`social_icons_color`) | Widget option | Set per client in the footer config |
 | **Form panel heading** (instance `9dbfcec3…`) | `.panel-heading { background: $primary; color: #ffffff }` | Instance CSS | Follows primary. White text assumes a dark primary. |
 | **Dead OOTB rules** | Rules using undefined variables (`$panel-border-color`, `$brand-primary-dark`, `$tropical-rain`, `$gull-grey`, `$mesp-*`, `$selection-primary*`, `$default`, `$border-width-xs`, `$navbar-invese-bg` typo) never apply | OOTB bugs | Left dead on purpose. Defining them would *change* the stock look. |
 | **OOTB SCSS bugs** | `portal-banner` widget: `$sp-space--xxs: 2px; !default;` (semicolon before `!default` forces 2px). Coral's `$navbar-inverse-*` declared twice (the second block is dead). Some `--now-*` props get a literal variable name. | Platform bugs | Harmless with the framework. Noted so nobody chases them. |
 | **Next Experience components** | Use the old colours until synced | They read the UX theme, not SCSS | Click **Sync Next Experience theme** after every palette/font change |
+| **Heading case** | `$ui-heading-transform` reaches portal h1/h2 titles; titles inside Next Experience components (Product Catalog) and the hero sub-heading keep their own case | Component titles live in the shadow DOM | Accept; those titles are short |
+| **Menu bar on phones** | Below 768px the menu bar folds into the header's slide-out panel, which uses the header colours, not `$ui-subnav-*` | Header widget layout | Nothing to do; the panel stays readable |
 | **Next Experience shapes** | Radii and shadows inside components such as the Product Catalog stay Coral (rounded panels on a square theme) | Sync generates colours and fonts only; "Shape and Form" is shared with the base UX theme | Accept, or extend `PortalBrandTokensUx` to generate the shape style too |
 
 ---
@@ -276,6 +288,8 @@ Things the theme cannot (cleanly) control, and what to do about them:
 
 **Adding a fix** to `portal-brand-tokens-overrides`: put it in the matching C-section, start the selector with `body` (widget CSS loads later), use tokens only, never change layout, and add a comment naming the widget/stylesheet it fixes.
 
+**Changelog.** v1.1 (October 2026) adds `$ui-subnav-text`, `$ui-subnav-hover-bg`, `$ui-heading-transform` and `$ui-heading-letter-spacing`, all `null` or derived by default, with their rules in section B of the override sheet. Script include and UI actions are unchanged from v1.0. Upgrading a v1.0 theme = replace Sections 2-4 and the override sheet; nothing looks different until a theme sets the new tokens.
+
 **Adding a token**: declare it in Section 2 with `!default` and a comment, map platform variables to it in Section 3, add its description to `tools/docs/token-content.json`, and add it to `PortalBrandTokensUx.buildBaseColours()` if Next Experience components should follow it.
 
 **Regenerating the docs** after any change to the theme files: `python tools/docs/build_docs.py` rewrites `token-reference.md`, `variable-inventory.md` and `brand-tokens.html` (it warns about tokens without a description). Then republish `brand-tokens.html` to the team page.
@@ -298,7 +312,7 @@ Per client:
 - `glide.service_portal.resize_text.<suffix>.base_font` if it's a new portal record
 - the generated UX theme: either move the generated `sys_ux_theme` / `sys_ux_style` / `m2m_theme_style` records, or (simpler) click **Sync Next Experience theme** once in the target instance after the update set is committed
 
-The Aareal example has its own update set, *Portal Brand Tokens - Aareal Bank example* (theme, its includes, `aareal-fonts`, generated UX theme). It depends on the Framework set. The lab portal's logo and footer settings stay in the scratch set.
+The Aareal example has its own update set, *Portal Brand Tokens - Aareal Bank example* (theme, its includes, `aareal-fonts`, generated UX theme). It depends on the Framework set. So does *Portal Brand Tokens - noris network example* (theme, its 16 include records, `noris-fonts`, generated UX theme; 30 entries), which needs the Framework set at v1.1. The lab portal's logo and footer settings stay in the scratch set.
 
 The generated UX records are tracked by update sets (type *UX Theme*, *UX Style*, *UX Theme Style*). Use the UI actions in your own session so changes land in your current update set. Scripts that run as `system` (scheduled jobs, triggers) write to *Default*; move those `sys_update_xml` records afterwards.
 
@@ -313,7 +327,8 @@ Local source of truth (`portal-branding-framework/`):
 | `theme/css_variables.template.scss` | sp_theme *Business Portal Brand Template* `6f3055f42b77cf10a5feffb86e91bf67` (css_variables) |
 | `examples/aareal/css_variables.aareal.scss` | sp_theme *Aareal Bank Theme (example)* `a32169b42b7bcf10a5feffb86e91bf12` |
 | `examples/aareal/aareal-fonts.scss` | sp_css `1b5161302b374350ff68f76a6e91bf01`, include `5f5161302b374350ff68f76a6e91bf02` (order 95 on the Aareal theme) |
-| `examples/noris/css_variables.noris.scss` | sp_theme *noris Theme* `d71405382beacf54a5feffb86e91bf75` (test theme) |
+| `examples/noris/css_variables.noris.scss` | sp_theme *noris network Theme (example)* `d71405382beacf54a5feffb86e91bf75` |
+| `examples/noris/noris-fonts.scss` | sp_css `057339742b7fcf10a5feffb86e91bfb1`, include `0d7339742b7fcf10a5feffb86e91bfb2` (order 95 on the noris theme) |
 | `tools/embed_font.py` | builds `@font-face` stylesheets with embedded WOFF2 |
 | `theme/portal-brand-tokens-overrides.scss` | sp_css `39fcc9782b37cf10a5feffb86e91bf83`, include `010dc9782b37cf10a5feffb86e91bfa4` |
 | `theme/PortalBrandTokensUx.js` | sys_script_include `b61595742b734350ff68f76a6e91bf7a` |
@@ -322,4 +337,4 @@ Local source of truth (`portal-branding-framework/`):
 | `tools/docs/` | `build_docs.py` regenerates the token reference, inventory and `brand-tokens.html` from the theme files; `token-content.json` holds the hand-written token descriptions and screenshot captions |
 | `audit/` | audit notes, scanner/crawler scripts, per-variable usage table |
 
-Reference IDs: Business Portal `f264dbaccbfd52108d3f6a6fc041e4b5`; stock Coral theme `60bed96c93131210aa38860754891827`; base Coral UX theme `fad87d2ca304121029a4d1aed31e610f`; Aareal generated UX theme `c761e1302b374350ff68f76a6e91bfe4`; lab portal `/theme_lab` `5db5c93c2b7f0350ff68f76a6e91bff6` (currently showing the Aareal example).
+Reference IDs: Business Portal `f264dbaccbfd52108d3f6a6fc041e4b5`; stock Coral theme `60bed96c93131210aa38860754891827`; base Coral UX theme `fad87d2ca304121029a4d1aed31e610f`; Aareal generated UX theme `c761e1302b374350ff68f76a6e91bfe4`; noris generated UX theme `1dd33db42b7fcf10a5feffb86e91bf09`; lab portal `/theme_lab` `5db5c93c2b7f0350ff68f76a6e91bff6` (currently showing the noris example).

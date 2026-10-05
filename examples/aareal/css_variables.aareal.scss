@@ -1,5 +1,5 @@
 // =============================================================================
-//  PORTAL BRAND TOKENS  .  framework v1.0  .  client: Aareal Bank (example)
+//  PORTAL BRAND TOKENS  .  framework v1.1  .  client: Aareal Bank (example)
 // =============================================================================
 //  This file has four sections. Only section 1 is edited per client.
 //
@@ -193,7 +193,9 @@ $ui-header-hover-bg:       mix($ui-header-text, $ui-header-bg, 5%) !default;   /
 $ui-header-active-bg:      mix($ui-header-text, $ui-header-bg, 10%) !default;
 $ui-header-disabled-text:  mix($ui-header-text, $ui-header-bg, 20%) !default;
 $ui-header-border:         $ui-header-bg !default;             // line under the header (same as bg = no line)
-$ui-subnav-bg:             $ui-header-bg !default;             // second header row (menu bar)
+$ui-subnav-bg:             $ui-header-bg !default;             // second header row (menu bar) and its dropdowns
+$ui-subnav-text:           null !default;                      // menu bar text for a two-tone header; null = $ui-header-text
+$ui-subnav-hover-bg:       darken($ui-subnav-bg, 8%) !default; // menu bar hover/open item (only used with $ui-subnav-text)
 $ui-header-height:         60px !default;
 $ui-logo-max-height:       40px !default;
 $ui-logo-margin-x:         6px !default;
@@ -220,6 +222,8 @@ $ui-font-family:           "Lato", sans-serif !default;        // must also be l
 $ui-font-family-heading:   $ui-font-family !default;
 $ui-font-size-base:        16px !default;                      // every text size scales from this
 $ui-font-weight-heading:   600 !default;
+$ui-heading-transform:     null !default;                      // e.g. uppercase for page and widget titles (h1/h2); null = as written
+$ui-heading-letter-spacing: null !default;                     // e.g. .04em, usually with uppercase; null = normal
 $ui-font-weight-strong:    600 !default;                       // buttons, emphasised labels
 $ui-font-weight-medium:    500 !default;
 $ui-line-height:           1.4 !default;

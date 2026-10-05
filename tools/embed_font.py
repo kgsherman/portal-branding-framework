@@ -2,6 +2,10 @@
 
     python tools/embed_font.py "Arvo" 400=examples/aareal/fonts/arvo-400.woff2 700=examples/aareal/fonts/arvo-700.woff2 > aareal-fonts.scss
 
+A variable font covers a weight range with one file - give the range instead:
+
+    python tools/embed_font.py "Open Sans" "300 800=examples/noris/fonts/open-sans-latin-var.woff2"
+
 Paste the output into a new sp_css record, add it to the client theme as a CSS
 include with a low order (e.g. 95), then set $ui-font-family or
 $ui-font-family-heading in Section 1d and click "Sync Next Experience theme".
@@ -23,7 +27,7 @@ def main(argv):
         style = "italic" if weight.endswith("i") else "normal"
         out.append("@font-face {\n  font-family: '%s';\n  font-style: %s;\n  font-weight: %s;\n  font-display: swap;\n"
                    "  src: url(data:font/woff2;base64,%s) format('woff2');\n}" % (family, style, weight.rstrip("i"), data))
-    sys.stdout.write("\n".join(out) + "\n")
+    sys.stdout.buffer.write(("\n".join(out) + "\n").encode())   # LF on every OS, like the instance copy
 
 
 if __name__ == "__main__":

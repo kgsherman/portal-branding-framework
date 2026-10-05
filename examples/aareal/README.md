@@ -43,7 +43,10 @@ Contrast checked: input borders 4.4:1 on white, muted text 8.7:1 on cream, navy 
 | sp_css / include *aareal-fonts* | `1b5161302b374350ff68f76a6e91bf01` / `5f5161302b374350ff68f76a6e91bf02` |
 | Generated UX theme | `c761e1302b374350ff68f76a6e91bfe4` |
 | Update set *Portal Brand Tokens - Aareal Bank example* | `6ff06d7c2bf34350ff68f76a6e91bf6d` |
-| Live on | lab portal `/theme_lab` (`5db5c93c2b7f0350ff68f76a6e91bff6`) |
+| Logo attachment (white) | `167169f42b7bcf10a5feffb86e91bf25` |
+| Shown on | lab portal `/theme_lab` (`5db5c93c2b7f0350ff68f76a6e91bff6`) until the noris example replaced it |
+
+To show Aareal on the lab portal again: set its theme to `a32169b42b7bcf10a5feffb86e91bf12`, its logo to `167169f42b7bcf10a5feffb86e91bf25`, and its footer to `logo_img_name: "/167169f42b7bcf10a5feffb86e91bf25.iix"`, `logo_alt_text: "Aareal Bank"`, `org_info: ["Aareal Bank AG", "Paulinenstraße 15", "65189 Wiesbaden"]`, `copyright: "© 2026 Aareal Bank AG (theme demo)"`.
 
 To put the lab portal back on the plain template: set its theme to *zz Theme Lab* (`c1b5c93c2b7f0350ff68f76a6e91bf70`), its logo to `7818298cffd82210aa38fffffffffff7`, and its footer to `logo_img_name: "business_portal_coral_servicenow_footer_logo.png"`, `org_info: ["2225 Lawson Lane,", "Santa Clara, CA 95054"]`, `copyright: " © ServiceNow. All rights reserved."`.
 

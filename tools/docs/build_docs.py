@@ -2,7 +2,7 @@
 
     python tools/docs/build_docs.py
 
-Reads   theme/css_variables.template.scss, examples/aareal/css_variables.aareal.scss,
+Reads   theme/css_variables.template.scss, examples/*/css_variables.*.scss (Aareal, noris),
         theme/portal-brand-tokens-overrides.scss, audit/variable-usage-canary.psv,
         tools/docs/token-content.json (hand-written descriptions + screenshot captions),
         tools/docs/page.template.html
@@ -11,6 +11,7 @@ Writes  docs/variable-inventory.md, docs/token-reference.md, docs/brand-tokens.h
 docs/README.md is hand-written and not touched. After a rebuild, republish
 docs/brand-tokens.html to the team artifact (screenshots go with it as files).
 """
+import colorsys
 import json
 import re
 from pathlib import Path
@@ -18,7 +19,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 HERE = Path(__file__).resolve().parent
 TEMPLATE = ROOT / "theme" / "css_variables.template.scss"
-CLIENT_EXAMPLE = ROOT / "examples" / "aareal" / "css_variables.aareal.scss"
+EXAMPLES = [("Aareal", ROOT / "examples" / "aareal" / "css_variables.aareal.scss"),
+            ("noris", ROOT / "examples" / "noris" / "css_variables.noris.scss")]
 OVERRIDES = ROOT / "theme" / "portal-brand-tokens-overrides.scss"
 USAGE = ROOT / "audit" / "variable-usage-canary.psv"
 
@@ -154,7 +156,7 @@ def write_token_reference(tvars, tokens, wired_map, content):
     out = ["# Token reference", "",
            "Every token in Sections 1 and 2 of `css_variables`, what it visibly changes, and where it is wired in.", "",
            "* **Default** - the framework default (Coral look). Section 1 values are the template's Coral palette.",
-           "* **Wired into** - platform variables mapped to it in Section 3/4, other tokens derived from it, and the sections of `portal-brand-tokens-overrides` that use it (A = Next Experience bridge, B = footer & hero, C1-C14 = hardcoded fixes, see the guide).",
+           "* **Wired into** - platform variables mapped to it in Section 3/4, other tokens derived from it, and the sections of `portal-brand-tokens-overrides` that use it (A = Next Experience bridge, B = footer, hero, menu bar & headings, C1-C14 = hardcoded fixes, see the guide).",
            "* Override any Section 2 token in Section 1d. Derived tokens recalculate automatically.", ""]
     cur, missing = None, []
     for n in tokens:
@@ -208,6 +210,14 @@ def _colour(expr, vars):
         c1, c2 = _colour(a[0], vars), _colour(a[1], vars)
         w = float(a[2].rstrip("%")) / 100 if len(a) > 2 else 0.5
         return _mix(c1, c2, w) if c1 and c2 else None
+    m = re.fullmatch(r"(darken|lighten)\((.*)\)", expr, re.I)
+    if m:   # Sass: move HSL lightness by the given percentage points
+        a = _args(m.group(2))
+        c = _colour(a[0], vars)
+        if not c: return None
+        h, l, s = colorsys.rgb_to_hls(*(x / 255 for x in c))
+        d = float(a[1].rstrip("%")) / 100 * (-1 if m.group(1).lower() == "darken" else 1)
+        return tuple(round(x * 255) for x in colorsys.hls_to_rgb(h, min(1, max(0, l + d)), s))
     return None
 
 
@@ -233,22 +243,28 @@ def show(v, vars):
     if v is None: return {"t": "null", "v": "null"}
     if isinstance(v, tuple): return {"t": "c", "v": "#%02X%02X%02X" % v}
     v = re.sub(r"\s+", " ", v)
-    if "gradient(" in v:
-        def rgba(m):
-            c = _colour(m.group(1), vars)
-            return "rgba(%d, %d, %d, %s)" % (c + (m.group(2).strip(),)) if c else m.group(0)
-        v = re.sub(r"rgba\((\$[\w-]+),\s*([^)]+)\)", rgba, v)
-        v = re.sub(r"\$[\w-]+", lambda m: ("#%02X%02X%02X" % vars[m.group(0)]) if isinstance(vars.get(m.group(0)), tuple) else m.group(0), v)
+
+    def rgba(m):
+        c = _colour(m.group(1), vars)
+        return "rgba(%d, %d, %d, %s)" % (c + (m.group(2).strip(),)) if c else m.group(0)
+
+    def var(m):
+        x = vars.get(m.group(0))
+        return "#%02X%02X%02X" % x if isinstance(x, tuple) else x if isinstance(x, str) else m.group(0)
+    v = re.sub(r"rgba\((\$[\w-]+),\s*([^)]+)\)", rgba, v)
+    v = re.sub(r"\$[\w-]+", var, v)
+    if "gradient(" in v or "url(" in v:
         return {"t": "g", "v": v}
     return {"t": "s", "v": v}
 
 
 def write_page(tvars, tokens, wired_map, rows, content):
-    coral, client = evaluate(TEMPLATE), evaluate(CLIENT_EXAMPLE)
+    themes = [evaluate(TEMPLATE)] + [evaluate(path) for _, path in EXAMPLES]
     data = {
+        "examples": [name for name, _ in EXAMPLES],
         "tokens": [{
             "n": n, "g": tvars[n]["sub"], "d": tvars[n]["rhs"], "x": content["descriptions"].get(n, tvars[n]["comment"]),
-            "c": show(coral.get(n), coral), "o": show(client.get(n), client),
+            "v": [show(t.get(n), t) for t in themes],
             "p": wired_map[n]["platform"], "f": wired_map[n]["derived"], "s": wired_map[n]["overrides"],
         } for n in tokens],
         "inventory": [{"n": r["name"], "g": r["group"], "o": r["origin"], "s": r["status"], "m": r["maps"], "u": r["usage"]} for r in rows],
@@ -256,7 +272,7 @@ def write_page(tvars, tokens, wired_map, rows, content):
     payload = json.dumps(data, separators=(",", ":")).replace("</", "<\\/")
     page = (HERE / "page.template.html").read_text(encoding="utf-8").replace("__PAGEDATA__", payload)
     write(ROOT / "docs" / "brand-tokens.html", page)
-    return sum(1 for t in data["tokens"] if t["c"]["v"] != t["o"]["v"])
+    return {name: sum(1 for t in data["tokens"] if t["v"][0]["v"] != t["v"][i + 1]["v"]) for i, (name, _) in enumerate(EXAMPLES)}
 
 
 def main():
@@ -269,7 +285,8 @@ def main():
     write_inventory(rows)
     missing_desc = write_token_reference(tvars, tokens, wired_map, content)
     changed = write_page(tvars, tokens, wired_map, rows, content)
-    print("tokens %d, inventory rows %d, client example differs on %d tokens" % (len(tokens), len(rows), changed))
+    print("tokens %d, inventory rows %d, examples differ from the template on: %s" % (
+        len(tokens), len(rows), ", ".join("%s %d tokens" % kv for kv in changed.items())))
     if missing_coral: print("WARNING Coral variables missing from the template:", missing_coral)
     if missing_desc: print("WARNING tokens without a description in token-content.json:", missing_desc)
 

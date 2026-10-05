@@ -88,7 +88,9 @@
   "$ui-header-active-bg": "Header menu item active/open background (10% text over bg).",
   "$ui-header-disabled-text": "Disabled header items (20% text over bg).",
   "$ui-header-border": "Line under the header (same as bg = no line).",
-  "$ui-subnav-bg": "Second header row (menu bar).",
+  "$ui-subnav-bg": "Second header row (the menu bar) and its dropdown menus. Same as the header by default; set it with `$ui-subnav-text` for a light logo bar over a coloured menu bar.",
+  "$ui-subnav-text": "Menu bar text, carets and dropdown items when the menu bar has its own colour. `null` = header text (one-colour header).",
+  "$ui-subnav-hover-bg": "Hovered and open menu bar items and hovered dropdown items. Derived from `$ui-subnav-bg`; only used when `$ui-subnav-text` is set.",
   "$ui-header-height": "Header (navbar) height.",
   "$ui-logo-max-height": "Maximum logo height in the header.",
   "$ui-logo-margin-x": "Horizontal logo margin.",
@@ -111,6 +113,8 @@
   "$ui-font-family-heading": "Font for h1-h6.",
   "$ui-font-size-base": "Base text size; every Bootstrap font size (h1-h6, small, large) is computed from it.",
   "$ui-font-weight-heading": "Heading weight.",
+  "$ui-heading-transform": "Letter case of page and widget titles (h1/h2), e.g. `uppercase`. `null` = as written. The hero sub-heading and Next Experience components keep their own case.",
+  "$ui-heading-letter-spacing": "Tracking for the same titles, e.g. `.04em` with uppercase. `null` = normal.",
   "$ui-font-weight-strong": "Button and emphasised-label weight.",
   "$ui-font-weight-medium": "Medium weight (small/meta text).",
   "$ui-line-height": "Body line height.",
@@ -182,6 +186,10 @@
    [
     "15-token-footer.jpg",
     "`$ui-footer-bg: #E6007E; $ui-footer-text: #FFFFFF` - footer independent of the header"
+   ],
+   [
+    "57-noris-menu.jpg",
+    "`$ui-subnav-bg: $noris-blue; $ui-subnav-text: #FFFFFF; $ui-subnav-hover-bg: $noris-blue-2` on a white header (noris example)"
    ]
   ],
   "2e": [

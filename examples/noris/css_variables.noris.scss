@@ -1,6 +1,5 @@
 // =============================================================================
-//  PORTAL BRAND TOKENS  .  framework v1.0  .  base: Customer Experience Coral
-//  CLIENT: noris network AG
+//  PORTAL BRAND TOKENS  .  framework v1.1  .  client: noris network AG (example)
 // =============================================================================
 //  This file has four sections. Only section 1 is edited per client.
 //
@@ -26,58 +25,52 @@
 // =============================================================================
 
 // --- 1a. Brand guideline colours (optional) ----------------------------------
-// noris network AG - brand colours from the noris.de style guide
-$noris-blue:          #234d5b;  // primary brand blue (100%)
-$noris-blue-90:       #3a606c;
-$noris-blue-80:       #50717d;
-$noris-blue-70:       #66848d;
-$noris-blue-60:       #7c959d;
-$noris-blue-50:       #91a6ad;
-$noris-blue-40:       #a7b8be;
-$noris-blue-30:       #becacf;
-$noris-blue-20:       #d3dcde;
-$noris-blue-10:       #eaeeef;
-$noris-petrol:        #118291;  // "noris blue 2" - interactive colour
-$noris-bordeaux:      #9e1946;  // highlight / call to action - max 10% of a page
-$noris-light-blue:    #bcd5dc;  // accent
-$noris-light-green:   #d7fcd4;  // success fill
-$noris-pigeon-blue:   #c1e8e0;  // info / selection fill
-$noris-grey-blue:     #3f8199;  // info
+// noris network AG - from noris.de (site stylesheet, October 2026), the logo
+// usage guideline (Logo-Nutzungsrichtlinie) and the product sheets
+$noris-blue:           #234D5B;  // "noris blue": logo fields, menu bar, headings, hero
+$noris-blue-2:         #118291;  // "noris blue 2": the interactive colour - selection, focus, links
+$noris-bordeaux:       #9E1946;  // highlight: call-to-action pills and badges, sparingly
+$noris-light-blue:     #BCD5DC;  // light fields, hexagon icons
+$noris-grey-blue:      #3F8199;  // information
+$noris-light-green:    #D7FCD4;  // positive fill
+$noris-light:          #F4F7F8;  // section background
+$noris-teal-wash:      #E0EFF1;  // teal-tinted hover / selected fill
+$noris-teal-mist:      #F0F7F8;  // palest teal surface
 
 
 // --- 1b. Palette roles (required) --------------------------------------------
 // Brand colours
-$palette-primary:      $noris-petrol;     // main brand colour: primary buttons, brand accents
-$palette-secondary:    $noris-petrol;     // links and text actions
-$palette-accent:       $noris-petrol;     // selected / active states: tabs, chosen list items
-$palette-focus:        $noris-petrol;     // keyboard focus ring - must contrast with white
+$palette-primary:      $noris-blue;                       // main brand colour: brand fills, pagination, active tab line
+$palette-secondary:    mix(#000000, $noris-blue-2, 15%);  // links: noris blue 2, darkened to pass AA on grey (5.5:1)
+$palette-accent:       $noris-blue-2;                     // selected / active states (white text 4.5:1)
+$palette-focus:        $noris-blue-2;                     // keyboard focus ring (4.5:1 on white)
 
-// Neutrals, light to dark (text, borders, backgrounds) - noris uses blue-tinted greys
+// Neutrals, light to dark - noris's official tints of noris blue (10% steps)
 $palette-white:        #FFFFFF;
-$palette-neutral-5:    $noris-blue-10;    // page background, subtle fills
-$palette-neutral-10:   $noris-blue-20;    // stronger fills
-$palette-neutral-20:   $noris-blue-20;    // dividers, panel borders
-$palette-neutral-30:   $noris-blue-30;
-$palette-neutral-40:   $noris-blue-40;    // secondary borders
-$palette-neutral-50:   $noris-blue-50;    // disabled
-$palette-neutral-60:   $noris-blue-60;    // input borders
-$palette-neutral-70:   $noris-blue-70;
-$palette-neutral-80:   $noris-blue-80;
-$palette-neutral-85:   $noris-blue-90;    // muted text
-$palette-neutral-90:   $noris-blue-90;    // secondary text
-$palette-neutral-95:   $noris-blue;
-$palette-neutral-100:  #000000;           // body text (noris: black on light)
+$palette-neutral-5:    $noris-light;                      // page background, subtle fills
+$palette-neutral-10:   mix($noris-blue, #FFFFFF, 10%);    // stronger fills
+$palette-neutral-20:   mix($noris-blue, #FFFFFF, 20%);    // dividers, panel borders
+$palette-neutral-30:   mix($noris-blue, #FFFFFF, 30%);
+$palette-neutral-40:   mix($noris-blue, #FFFFFF, 40%);    // secondary borders
+$palette-neutral-50:   mix($noris-blue, #FFFFFF, 50%);    // disabled
+$palette-neutral-60:   mix($noris-blue, #FFFFFF, 60%);    // input borders (3.2:1 on white)
+$palette-neutral-70:   mix($noris-blue, #FFFFFF, 70%);
+$palette-neutral-80:   mix($noris-blue, #FFFFFF, 80%);
+$palette-neutral-85:   mix($noris-blue, #FFFFFF, 90%);    // muted text (6.5:1 on the page background)
+$palette-neutral-90:   $noris-blue;                       // secondary text
+$palette-neutral-95:   mix(#000000, $noris-blue, 30%);
+$palette-neutral-100:  #333333;                           // body text, as on noris.de
 $palette-black:        #000000;
 
 // Status
-$palette-success:        #3E8600;
+$palette-success:        #2E7D32;
 $palette-success-light:  $noris-light-green;
-$palette-warning:        #B29800;
-$palette-warning-light:  #ECE5BF;
-$palette-danger:         $noris-bordeaux;
-$palette-danger-light:   #F9C8CE;
+$palette-warning:        #A35C00;
+$palette-warning-light:  #FEE9B3;
+$palette-danger:         #C4122F;  // brighter than bordeaux, so errors never look like a call to action
+$palette-danger-light:   #F8D0D6;
 $palette-info:           $noris-grey-blue;
-$palette-info-light:     $noris-pigeon-blue;
+$palette-info-light:     mix(#FFFFFF, $noris-grey-blue, 78%);
 
 // Special purpose
 $palette-rating:         #D1A940;  // rating / favourite stars
@@ -85,33 +78,53 @@ $palette-rating-dark:    #C28C00;  // star outline
 
 
 // --- 1c. Optional: pin exact shades ------------------------------------------
-// noris specifies its own tints, so they are pinned instead of generated.
-$palette-primary-dark:      $noris-blue;
-$palette-primary-darkest:   $noris-blue;
-$palette-primary-light:     $noris-grey-blue;
+// Light fills come from noris's light blue and teal washes, not from generated tints.
 $palette-primary-lightest:  $noris-light-blue;
-$palette-primary-pale:      $noris-pigeon-blue;
-$palette-secondary-dark:    $noris-blue;
-$palette-accent-dark:       $noris-blue;
-$palette-accent-lightest:   $noris-pigeon-blue;
+$palette-primary-pale:      $noris-teal-mist;
+$palette-accent-lightest:   $noris-teal-wash;
 $palette-info-mid:          $noris-light-blue;
 
 
 // --- 1d. Token overrides (optional) ------------------------------------------
-$ui-button-primary-bg:      $noris-bordeaux;   // noris.de: bordeaux call-to-action buttons
-$ui-heading-color:          $noris-blue;       // noris.de: headings in noris blue ...
-$ui-hero-text:              $noris-blue;
-$ui-font-weight-heading:    700;               // ... and bold
-$ui-font-weight-strong:     700;               // bold buttons
-$ui-radius-lg:              16px;              // noris.de cards ~16px
-$ui-radius-button:          16px;              // rounded buttons
-$ui-radius-button-lg:       20px;
-$ui-radius-button-sm:       12px;
-$ui-header-hover-bg:        $noris-blue-10;
-$ui-header-active-bg:       $noris-blue-20;
-$ui-header-disabled-text:   $noris-blue-40;
-$ui-button-secondary-hover-border:  $noris-blue-70;
-$ui-button-secondary-active-border: $noris-blue-90;
+// Typography: Open Sans throughout (loaded by the "noris-fonts" CSS include);
+// titles bold, in noris blue and in capitals, as on noris.de
+$ui-font-family:            "Open Sans", Arial, Helvetica, sans-serif;
+$ui-font-weight-heading:    700;
+$ui-heading-color:          $noris-blue;
+$ui-heading-transform:      uppercase;
+$ui-heading-letter-spacing: .04em;
+
+// Call to action: bordeaux pills
+$ui-button-primary-bg:      $noris-bordeaux;
+$ui-radius-button:          999px;
+
+// Two-tone header: official black logo on white, menu bar in noris blue with
+// teal hover - the layout of noris's own customer portal and noris.de's menus
+$ui-header-text:            $noris-blue;
+$ui-header-height:          64px;
+$ui-logo-max-height:        30px;
+$ui-subnav-bg:              $noris-blue;
+$ui-subnav-text:            #FFFFFF;
+$ui-subnav-hover-bg:        $noris-blue-2;
+
+// Footer: deep noris blue with the white logo
+$ui-footer-bg:              mix(#000000, $noris-blue, 30%);
+$ui-footer-text:            #FFFFFF;
+$ui-footer-link-hover:      $noris-light-blue;
+
+// Home banner: noris blue into noris blue 2 (the noris.de promo gradient), the
+// angled planes of noris print covers and the hexagon motif. $noris-hexagons
+// is generated by examples/noris/hero-hexagons.py.
+$noris-hexagons:            url("data:image/svg+xml,%3Csvg xmlns='http:%2F%2Fwww.w3.org%2F2000%2Fsvg' width='560' height='400'%3E%3Cdefs%3E%3Cpolygon id='o' points='0,-38.5 33.3,-19.2 33.3,19.2 0,38.5 -33.3,19.2 -33.3,-19.3' fill='none' stroke='white' stroke-opacity='.16' stroke-width='1.5'%2F%3E%3Cpolygon id='f' points='0,-33 28.6,-16.5 28.6,16.5 0,33 -28.6,16.5 -28.6,-16.5' fill='white' fill-opacity='.06'%2F%3E%3Cpolygon id='t' points='0,-33 28.6,-16.5 28.6,16.5 0,33 -28.6,16.5 -28.6,-16.5' fill='rgb(17,130,145)' fill-opacity='.55'%2F%3E%3C%2Fdefs%3E%3Cuse href='%23o' x='346' y='0'%2F%3E%3Cuse href='%23o' x='416' y='0'%2F%3E%3Cuse href='%23o' x='485' y='0'%2F%3E%3Cuse href='%23o' x='554' y='0'%2F%3E%3Cuse href='%23t' x='554' y='0'%2F%3E%3Cuse href='%23o' x='312' y='60'%2F%3E%3Cuse href='%23o' x='450' y='60'%2F%3E%3Cuse href='%23o' x='520' y='60'%2F%3E%3Cuse href='%23o' x='589' y='60'%2F%3E%3Cuse href='%23t' x='589' y='60'%2F%3E%3Cuse href='%23o' x='416' y='120'%2F%3E%3Cuse href='%23o' x='485' y='120'%2F%3E%3Cuse href='%23o' x='554' y='120'%2F%3E%3Cuse href='%23o' x='450' y='180'%2F%3E%3Cuse href='%23o' x='520' y='180'%2F%3E%3Cuse href='%23o' x='589' y='180'%2F%3E%3Cuse href='%23f' x='589' y='180'%2F%3E%3Cuse href='%23o' x='416' y='240'%2F%3E%3Cuse href='%23o' x='485' y='240'%2F%3E%3Cuse href='%23o' x='554' y='240'%2F%3E%3Cuse href='%23o' x='450' y='300'%2F%3E%3Cuse href='%23o' x='520' y='300'%2F%3E%3Cuse href='%23o' x='589' y='300'%2F%3E%3Cuse href='%23f' x='589' y='300'%2F%3E%3Cuse href='%23o' x='277' y='360'%2F%3E%3Cuse href='%23o' x='346' y='360'%2F%3E%3Cuse href='%23o' x='416' y='360'%2F%3E%3Cuse href='%23o' x='485' y='360'%2F%3E%3Cuse href='%23o' x='554' y='360'%2F%3E%3Cuse href='%23o' x='520' y='420'%2F%3E%3Cuse href='%23o' x='589' y='420'%2F%3E%3C%2Fsvg%3E");
+$ui-hero-bg:                $noris-hexagons no-repeat right top, linear-gradient(155deg, rgba(255, 255, 255, 0) 64%, rgba(255, 255, 255, .07) 64%), linear-gradient(20deg, rgba(0, 0, 0, .16) 0%, rgba(0, 0, 0, .16) 24%, rgba(0, 0, 0, 0) 24%), linear-gradient(135deg, $noris-blue 0%, $noris-blue 35%, $noris-blue-2 100%);
+$ui-hero-text:              #FFFFFF;
+
+// Shape: 8px controls, 12px cards with a soft blue-tinted shadow
+$ui-radius:                 8px;
+$ui-radius-md:              8px;
+$ui-radius-lg:              12px;
+$ui-radius-search:          8px;
+$ui-shadow-card:            0 4px 15px rgba($noris-blue, .12);
 
 
 
@@ -193,7 +206,9 @@ $ui-header-hover-bg:       mix($ui-header-text, $ui-header-bg, 5%) !default;   /
 $ui-header-active-bg:      mix($ui-header-text, $ui-header-bg, 10%) !default;
 $ui-header-disabled-text:  mix($ui-header-text, $ui-header-bg, 20%) !default;
 $ui-header-border:         $ui-header-bg !default;             // line under the header (same as bg = no line)
-$ui-subnav-bg:             $ui-header-bg !default;             // second header row (menu bar)
+$ui-subnav-bg:             $ui-header-bg !default;             // second header row (menu bar) and its dropdowns
+$ui-subnav-text:           null !default;                      // menu bar text for a two-tone header; null = $ui-header-text
+$ui-subnav-hover-bg:       darken($ui-subnav-bg, 8%) !default; // menu bar hover/open item (only used with $ui-subnav-text)
 $ui-header-height:         60px !default;
 $ui-logo-max-height:       40px !default;
 $ui-logo-margin-x:         6px !default;
@@ -220,6 +235,8 @@ $ui-font-family:           "Lato", sans-serif !default;        // must also be l
 $ui-font-family-heading:   $ui-font-family !default;
 $ui-font-size-base:        16px !default;                      // every text size scales from this
 $ui-font-weight-heading:   600 !default;
+$ui-heading-transform:     null !default;                      // e.g. uppercase for page and widget titles (h1/h2); null = as written
+$ui-heading-letter-spacing: null !default;                     // e.g. .04em, usually with uppercase; null = normal
 $ui-font-weight-strong:    600 !default;                       // buttons, emphasised labels
 $ui-font-weight-medium:    500 !default;
 $ui-line-height:           1.4 !default;
