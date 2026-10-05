@@ -194,6 +194,12 @@ The screenshots below are the lab portal with one group of tokens set to loud co
 ![Menu bar](screenshots/57-noris-menu.jpg)
 *`$ui-subnav-bg: #234D5B; $ui-subnav-text: #FFFFFF; $ui-subnav-hover-bg: #118291` under a white header (noris example). The menu bar and its dropdowns get their own colours (new in v1.1).*
 
+![Mega menu, two-tone](screenshots/58-noris-mega-menu.jpg)
+*The same tokens with the menu instance set to **Portal Mega Menu**: the full-width panel follows the menu bar (v1.2).*
+
+![Mega menu, dark header](screenshots/59-aareal-mega-menu.jpg)
+*Portal Mega Menu under a dark one-colour header (Aareal). No tokens needed: a dark menu bar switches the panel to light text automatically.*
+
 `$ui-hero-bg` accepts any CSS background (colour, gradient, `url(...)`). The default is a soft gradient from the palette. Set `$ui-hero-bg: null;` and `$ui-hero-text: null;` to hand control back to the Portal Banner widget's own Background Image and colour options.
 
 ### Typography (2e)
@@ -253,6 +259,8 @@ Things the theme cannot (cleanly) control, and what to do about them:
 | **Dead OOTB rules** | Rules using undefined variables (`$panel-border-color`, `$brand-primary-dark`, `$tropical-rain`, `$gull-grey`, `$mesp-*`, `$selection-primary*`, `$default`, `$border-width-xs`, `$navbar-invese-bg` typo) never apply | OOTB bugs | Left dead on purpose. Defining them would *change* the stock look. |
 | **OOTB SCSS bugs** | `portal-banner` widget: `$sp-space--xxs: 2px; !default;` (semicolon before `!default` forces 2px). Coral's `$navbar-inverse-*` declared twice (the second block is dead). Some `--now-*` props get a literal variable name. | Platform bugs | Harmless with the framework. Noted so nobody chases them. |
 | **Next Experience components** | Use the old colours until synced | They read the UX theme, not SCSS | Click **Sync Next Experience theme** after every palette/font change |
+| **Portal Mega Menu** | The portal's menu instance can use the *Portal Mega Menu* widget instead of *Header Menu*. It takes the header colours for text and fills but body colours for chevrons, link columns and the first panel column, so on a two-tone or dark header it was unreadable | Widget CSS mixes header and body variables | Handled since v1.2: the override sheet recolours its bar, dropdowns, full-width panel and phone list from the menu bar colours. Nothing to set; light one-colour headers stay stock |
+| **Advanced Portal Navigation (APN)** | APN records do nothing on a Coral-based portal | Only the Employee Center Header reads APN; the Coral header, Header Menu and Portal Mega Menu all read the portal's menu instance (`$sp.getMenuItems`) | Build navigation with the portal's menu items. A portal switched to the Employee Center Header is outside the framework |
 | **Heading case** | `$ui-heading-transform` reaches portal h1/h2 titles; titles inside Next Experience components (Product Catalog) and the hero sub-heading keep their own case | Component titles live in the shadow DOM | Accept; those titles are short |
 | **Menu bar on phones** | Below 768px the menu bar folds into the header's slide-out panel, which uses the header colours, not `$ui-subnav-*` | Header widget layout | Nothing to do; the panel stays readable |
 | **Next Experience shapes** | Radii and shadows inside components such as the Product Catalog stay Coral (rounded panels on a square theme) | Sync generates colours and fonts only; "Shape and Form" is shared with the base UX theme | Accept, or extend `PortalBrandTokensUx` to generate the shape style too |
@@ -288,7 +296,7 @@ Things the theme cannot (cleanly) control, and what to do about them:
 
 **Adding a fix** to `portal-brand-tokens-overrides`: put it in the matching C-section, start the selector with `body` (widget CSS loads later), use tokens only, never change layout, and add a comment naming the widget/stylesheet it fixes.
 
-**Changelog.** v1.1 (October 2026) adds `$ui-subnav-text`, `$ui-subnav-hover-bg`, `$ui-heading-transform` and `$ui-heading-letter-spacing`, all `null` or derived by default, with their rules in section B of the override sheet. Script include and UI actions are unchanged from v1.0. Upgrading a v1.0 theme = replace Sections 2-4 and the override sheet; nothing looks different until a theme sets the new tokens.
+**Changelog.** v1.2 (October 2026) adds Portal Mega Menu support to the override sheet (section B): when the menu bar has its own text colour, or the header is dark, the mega menu's bar, dropdowns, full-width panel and phone list follow the menu bar. Sections 2-4 are unchanged from v1.1, so upgrading means replacing the override sheet only. v1.1 adds `$ui-subnav-text`, `$ui-subnav-hover-bg`, `$ui-heading-transform` and `$ui-heading-letter-spacing`, all `null` or derived by default, with their rules in section B of the override sheet. Script include and UI actions are unchanged from v1.0. Upgrading a v1.0 theme = replace Sections 2-4 and the override sheet; nothing looks different until a theme sets the new tokens.
 
 **Adding a token**: declare it in Section 2 with `!default` and a comment, map platform variables to it in Section 3, add its description to `tools/docs/token-content.json`, and add it to `PortalBrandTokensUx.buildBaseColours()` if Next Experience components should follow it.
 

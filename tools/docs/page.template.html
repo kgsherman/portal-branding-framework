@@ -201,7 +201,7 @@ footer { color: var(--muted); font-size: 14px; border-top: 1px solid var(--line)
 
   <main>
     <header class="intro">
-      <p class="eyebrow">ServiceNow Business Portal · Coral base · framework v1.1</p>
+      <p class="eyebrow">ServiceNow Business Portal · Coral base · framework v1.2</p>
       <h1>Business Portal Brand Tokens</h1>
       <p class="lede">One place per client for a full rebrand: <strong>Section 1 of the theme's CSS Variables</strong>. Bootstrap, the Coral stylesheets, header and footer, the OOTB widgets and the Next Experience components are all wired to it.</p>
       <dl class="facts">
@@ -427,6 +427,8 @@ $ui-radius-lg:         0px;                // square cards</code></pre>
         <figure><button class="shot"><img src="screenshots/14-token-header-hero.jpg" alt="Dark header and gradient banner" loading="lazy" width="800" height="742"></button><figcaption><code>$ui-header-bg: #2B1F5C; $ui-header-text: #FFFFFF; $ui-hero-bg: linear-gradient(120deg, #2B1F5C 0%, #E6007E 100%); $ui-hero-text: #FFFFFF</code>. The dark logo on a dark header shows why a light logo variant is needed.</figcaption></figure>
         <figure><button class="shot"><img src="screenshots/15-token-footer.jpg" alt="Magenta footer" loading="lazy" width="800" height="742"></button><figcaption><code>$ui-footer-bg: #E6007E; $ui-footer-text: #FFFFFF</code>. The footer is independent of the header (OOTB it always copies the header).</figcaption></figure>
         <figure><button class="shot"><img src="screenshots/57-noris-menu.jpg" alt="White header with a petrol menu bar" loading="lazy" width="800" height="741"></button><figcaption><code>$ui-subnav-bg: #234D5B; $ui-subnav-text: #FFFFFF; $ui-subnav-hover-bg: #118291</code> under a white header (noris example). The menu bar and its dropdowns get their own colours.</figcaption></figure>
+        <figure><button class="shot"><img src="screenshots/58-noris-mega-menu.jpg" alt="Portal Mega Menu panel in noris colours" loading="lazy" width="800" height="741"></button><figcaption>The same tokens with the menu instance set to <em>Portal Mega Menu</em>: the full-width panel follows the menu bar (first column a shade lighter, teal hover).</figcaption></figure>
+        <figure><button class="shot"><img src="screenshots/59-aareal-mega-menu.jpg" alt="Portal Mega Menu panel in Aareal colours" loading="lazy" width="800" height="741"></button><figcaption>Portal Mega Menu under a dark one-colour header (Aareal). No tokens needed: a dark menu bar switches the panel to light text automatically.</figcaption></figure>
         <h3>Typography (2e) and shape (2f)</h3>
         <figure><button class="shot"><img src="screenshots/16-token-typography-case.jpg" alt="Case in Georgia serif" loading="lazy" width="800" height="742"></button><figcaption><code>$ui-font-family: Georgia, "Times New Roman", serif; $ui-font-weight-heading: 700; $ui-heading-color: #E6007E</code>.</figcaption></figure>
         <figure><button class="shot"><img src="screenshots/17-token-shape-home.jpg" alt="Home with square cards and pill buttons" loading="lazy" width="800" height="742"></button><figcaption>All radii <code>0</code>, <code>$ui-radius-button: 999px</code> (pill buttons), <code>$ui-shadow-card: 0 10px 28px 0 rgba(43, 31, 92, .35)</code>.</figcaption></figure>
@@ -491,6 +493,8 @@ $ui-radius-lg:         0px;                // square cards</code></pre>
           <tr><td><strong>Dead OOTB rules</strong></td><td>Rules using undefined variables (<code>$panel-border-color</code>, <code>$brand-primary-dark</code>, <code>$tropical-rain</code>, <code>$gull-grey</code>, <code>$mesp-*</code>, <code>$selection-primary*</code>, <code>$navbar-invese-bg</code> typo…) never apply</td><td>Left dead on purpose. Defining them would change the stock look.</td></tr>
           <tr><td><strong>OOTB SCSS bugs</strong></td><td><code>portal-banner</code>: <code>$sp-space--xxs: 2px; !default;</code> forces 2px. Coral declares <code>$navbar-inverse-*</code> twice (second block dead). Coral's <code>$now-sp-nass-*</code> lines run together (fixed in the template).</td><td>Harmless with the framework; noted so nobody chases them</td></tr>
           <tr><td><strong>Next Experience components</strong></td><td>Keep old colours until synced</td><td>Click Sync after every palette or font change</td></tr>
+          <tr><td><strong>Portal Mega Menu</strong></td><td>The portal's menu instance can use the <em>Portal Mega Menu</em> widget instead of <em>Header Menu</em>. It takes the header colours for text and fills but body colours for chevrons, link columns and the first panel column, so on a two-tone or dark header it was unreadable</td><td>Handled since v1.2: the override sheet recolours its bar, dropdowns, full-width panel and phone list from the menu bar colours. Nothing to set; light one-colour headers stay stock</td></tr>
+          <tr><td><strong>Advanced Portal Navigation (APN)</strong></td><td>Employee Center's navigation designer. Only the Employee Center Header reads APN records; the Coral header, Header Menu and Portal Mega Menu all read the portal's menu instance (<code>$sp.getMenuItems</code>), so an APN record for a Coral-based portal changes nothing</td><td>Build navigation with the portal's menu items. A portal switched to the Employee Center Header is outside the framework</td></tr>
           <tr><td><strong>Heading case</strong></td><td><code>$ui-heading-transform</code> reaches portal h1/h2 titles. Next Experience components (Product Catalog) keep their own case, and the hero sub-heading stays as written.</td><td>Accept; titles inside components are short</td></tr>
           <tr><td><strong>Menu bar on phones</strong></td><td>Below 768px the menu bar folds into the header's slide-out panel, which uses the header colours, not <code>$ui-subnav-*</code></td><td>Nothing to do; the panel stays readable</td></tr>
           <tr><td><strong>Next Experience shapes</strong></td><td>Sync generates colours and fonts only. Radii and shadows inside components such as the Product Catalog follow the base Coral UX theme (e.g. rounded panels on a square theme).</td><td>Accept, or extend <code>PortalBrandTokensUx</code> to generate the "Shape and Form" style too</td></tr>
@@ -527,7 +531,7 @@ $ui-radius-lg:         0px;                // square cards</code></pre>
           <li><strong>Loud-palette sweep.</strong> Put an obviously fake palette in the lab theme's Section 1 (sepia-tinted neutrals, magenta, purple and green brand colours), Sync, walk the verification pages. Anything still Coral teal, blue or grey is hardcoded. Find its source and add a fix.</li>
         </ul>
         <p><strong>Adding a fix</strong>: put it in the matching C-section, start the selector with <code>body</code>, use tokens only, never change layout, and name the widget or stylesheet in a comment.</p>
-        <p><strong>Changelog.</strong> v1.1 adds <code>$ui-subnav-text</code>, <code>$ui-subnav-hover-bg</code>, <code>$ui-heading-transform</code> and <code>$ui-heading-letter-spacing</code> (all off by default) and their rules in section B of the override sheet. The script include and UI actions are unchanged from v1.0. To upgrade a v1.0 theme, replace Sections 2–4 and the override sheet; nothing changes until a theme sets the new tokens.</p>
+        <p><strong>Changelog.</strong> v1.2 adds Portal Mega Menu support to the override sheet (section B): when the menu bar has its own text colour, or the header is dark, the mega menu's bar, dropdowns, full-width panel and phone list follow the menu bar. Sections 2–4 are unchanged from v1.1, so upgrading means replacing the override sheet only. v1.1 adds <code>$ui-subnav-text</code>, <code>$ui-subnav-hover-bg</code>, <code>$ui-heading-transform</code> and <code>$ui-heading-letter-spacing</code> (all off by default) and their rules in section B of the override sheet. The script include and UI actions are unchanged from v1.0. To upgrade a v1.0 theme, replace Sections 2–4 and the override sheet; nothing changes until a theme sets the new tokens.</p>
         <p><strong>Adding a token</strong>: declare it in Section 2 with <code>!default</code> and a comment, map platform variables to it in Section 3, add it to the reference, and to <code>PortalBrandTokensUx.buildBaseColours()</code> if Next Experience components should follow it.</p>
       </div>
     </section>
@@ -579,7 +583,7 @@ $ui-radius-lg:         0px;                // square cards</code></pre>
       </table></div>
     </section>
 
-    <footer>Portal Brand Tokens framework v1.1 · built and verified on the kev instance, October 2026 · source in <code>portal-branding-framework/</code></footer>
+    <footer>Portal Brand Tokens framework v1.2 · built and verified on the kev instance, October 2026 · source in <code>portal-branding-framework/</code></footer>
   </main>
 </div>
 

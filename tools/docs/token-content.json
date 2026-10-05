@@ -88,9 +88,9 @@
   "$ui-header-active-bg": "Header menu item active/open background (10% text over bg).",
   "$ui-header-disabled-text": "Disabled header items (20% text over bg).",
   "$ui-header-border": "Line under the header (same as bg = no line).",
-  "$ui-subnav-bg": "Second header row (the menu bar) and its dropdown menus. Same as the header by default; set it with `$ui-subnav-text` for a light logo bar over a coloured menu bar.",
-  "$ui-subnav-text": "Menu bar text, carets and dropdown items when the menu bar has its own colour. `null` = header text (one-colour header).",
-  "$ui-subnav-hover-bg": "Hovered and open menu bar items and hovered dropdown items. Derived from `$ui-subnav-bg`; only used when `$ui-subnav-text` is set.",
+  "$ui-subnav-bg": "Second header row (the menu bar) and its dropdown menus, with either menu widget (Header Menu or Portal Mega Menu, whose full-width panel follows it too). Same as the header by default; set it with `$ui-subnav-text` for a light logo bar over a coloured menu bar.",
+  "$ui-subnav-text": "Menu bar text, carets and dropdown items (and the Portal Mega Menu panel) when the menu bar has its own colour. `null` = header text (one-colour header).",
+  "$ui-subnav-hover-bg": "Hovered and open menu bar items, hovered dropdown items and mega menu panel rows. Derived from `$ui-subnav-bg`; used with `$ui-subnav-text`, or by the Portal Mega Menu under a dark header.",
   "$ui-header-height": "Header (navbar) height.",
   "$ui-logo-max-height": "Maximum logo height in the header.",
   "$ui-logo-margin-x": "Horizontal logo margin.",
@@ -190,6 +190,14 @@
    [
     "57-noris-menu.jpg",
     "`$ui-subnav-bg: $noris-blue; $ui-subnav-text: #FFFFFF; $ui-subnav-hover-bg: $noris-blue-2` on a white header (noris example)"
+   ],
+   [
+    "58-noris-mega-menu.jpg",
+    "Same tokens with the menu instance set to Portal Mega Menu: the full-width panel follows the menu bar (v1.2)"
+   ],
+   [
+    "59-aareal-mega-menu.jpg",
+    "Portal Mega Menu under a dark one-colour header (Aareal): light text switches on automatically"
    ]
   ],
   "2e": [

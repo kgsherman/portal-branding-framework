@@ -1,5 +1,5 @@
 // =============================================================================
-//  PORTAL BRAND TOKENS - OVERRIDES  .  framework v1.1
+//  PORTAL BRAND TOKENS - OVERRIDES  .  framework v1.2
 // =============================================================================
 //  ONE shared stylesheet for every client theme. Never edit per client -
 //  change the tokens in the theme's css_variables instead.
@@ -13,7 +13,8 @@
 //      macroponents). Without this they keep the colours of the separate
 //      UX theme record. Uses html:root so it beats that block.
 //   B. FOOTER, HERO, MENU BAR & HEADINGS - lets footer, home banner and menu
-//      bar differ from the header; optional heading case.
+//      bar (Header Menu or Portal Mega Menu) differ from the header; optional
+//      heading case.
 //   C. HARDCODED FIXES - OOTB stylesheets and widgets that ignore the theme.
 //      Only colours, radii and fonts are touched, never layout.
 //      Widget CSS is injected after this file, so selectors start with
@@ -250,6 +251,65 @@ body .v5cf9e3234305ce107b228dc226b8f2a2 .scrub-footer hr { border-color: $ui-foo
   body .v45306dec93131210aa3886075489187d .navbar-inverse .sub-navbar .dropdown-menu > li > a:hover,
   body .v45306dec93131210aa3886075489187d .navbar-inverse .sub-navbar .dropdown-menu > li > a:focus { background-color: $ui-subnav-hover-bg; }
   body .v45306dec93131210aa3886075489187d .navbar-inverse .sub-navbar .v5ef595c1cb12020000f8d856634c9c6e.navbar-nav > li > a:focus { outline-color: $ui-subnav-text !important; }
+}
+
+// Portal Mega Menu (the alternative widget for the portal's menu instance). Its
+// menu bar, dropdowns and full-width panel take the header colours but borrow body
+// colours for chevrons, link columns and the first panel column, which only works
+// on a light one-colour header. On a two-tone or dark header the whole menu follows
+// the menu bar instead: the desktop bar and panels, and the phone menu block.
+@mixin ui-mega-menu($bg, $text, $hover) {
+  // menu bar
+  body .v45306dec93131210aa3886075489187d .navbar-inverse .sub-navbar .v756957db43f5ed1011a4ebdffab8f243 .navbar-nav { border-top-color: mix($text, $bg, 20%); }
+  body .v45306dec93131210aa3886075489187d .navbar-inverse .sub-navbar .v756957db43f5ed1011a4ebdffab8f243 .navbar-nav .header-menu-item > a,
+  body .v45306dec93131210aa3886075489187d .navbar-inverse .sub-navbar .v756957db43f5ed1011a4ebdffab8f243 .navbar-nav .header-menu-item > a:hover,
+  body .v45306dec93131210aa3886075489187d .navbar-inverse .sub-navbar .v756957db43f5ed1011a4ebdffab8f243 .navbar-nav .header-menu-item > a:focus,
+  body .v45306dec93131210aa3886075489187d .navbar-inverse .sub-navbar .v756957db43f5ed1011a4ebdffab8f243 .navbar-nav .open > a,
+  body .v45306dec93131210aa3886075489187d .navbar-inverse .sub-navbar .v756957db43f5ed1011a4ebdffab8f243 .navbar-nav .open > a:hover,
+  body .v45306dec93131210aa3886075489187d .navbar-inverse .sub-navbar .v756957db43f5ed1011a4ebdffab8f243 .navbar-nav .open > a:focus { color: $text !important; }
+  body .v45306dec93131210aa3886075489187d .navbar-inverse .sub-navbar .v756957db43f5ed1011a4ebdffab8f243 .navbar-nav .header-menu-item .toggle-icon { color: mix($text, $bg, 80%); }
+  body .v45306dec93131210aa3886075489187d .navbar-inverse .sub-navbar .v756957db43f5ed1011a4ebdffab8f243 .navbar-nav .header-menu-item:hover { background: $hover; }
+  body .v45306dec93131210aa3886075489187d .navbar-inverse .sub-navbar .v756957db43f5ed1011a4ebdffab8f243 .navbar-nav .header-menu-item.selected > a { border-bottom-color: $text; }
+  body .v45306dec93131210aa3886075489187d .navbar-inverse .sub-navbar .v756957db43f5ed1011a4ebdffab8f243 .navbar-nav .header-menu-item:focus-visible,
+  body .v45306dec93131210aa3886075489187d .navbar-inverse .sub-navbar .v756957db43f5ed1011a4ebdffab8f243 .navbar-nav .header-menu-item a:focus-visible,
+  body .v45306dec93131210aa3886075489187d .navbar-inverse .sub-navbar .v756957db43f5ed1011a4ebdffab8f243 .navbar-nav .open > .dropdown-menu li a:focus-visible,
+  body .v45306dec93131210aa3886075489187d .navbar-inverse .sub-navbar .v756957db43f5ed1011a4ebdffab8f243 .backdrop .grid li a:focus-visible { outline-color: $text !important; }
+  // simple dropdown (a menu with up to six links)
+  body .v45306dec93131210aa3886075489187d .navbar-inverse .sub-navbar .v756957db43f5ed1011a4ebdffab8f243 .navbar-nav .open > .dropdown-menu { background-color: $bg; }
+  body .v45306dec93131210aa3886075489187d .navbar-inverse .sub-navbar .v756957db43f5ed1011a4ebdffab8f243 .navbar-nav .open > .dropdown-menu li a { color: $text !important; }
+  body .v45306dec93131210aa3886075489187d .navbar-inverse .sub-navbar .v756957db43f5ed1011a4ebdffab8f243 .navbar-nav .open > .dropdown-menu li:hover,
+  body .v45306dec93131210aa3886075489187d .navbar-inverse .sub-navbar .v756957db43f5ed1011a4ebdffab8f243 .navbar-nav .open > .dropdown-menu li a:hover { background: $hover !important; }
+  // full-width panel (menus with sub-levels or many links)
+  body .v45306dec93131210aa3886075489187d .navbar-inverse .sub-navbar .v756957db43f5ed1011a4ebdffab8f243 .backdrop { background-color: $bg; }
+  body .v45306dec93131210aa3886075489187d .navbar-inverse .sub-navbar .v756957db43f5ed1011a4ebdffab8f243 .backdrop .grid > ul:nth-child(1) { background: mix($text, $bg, 6%); }
+  body .v45306dec93131210aa3886075489187d .navbar-inverse .sub-navbar .v756957db43f5ed1011a4ebdffab8f243 .backdrop .grid .flex-col { border-right-color: mix($text, $bg, 20%); }
+  body .v45306dec93131210aa3886075489187d .navbar-inverse .sub-navbar .v756957db43f5ed1011a4ebdffab8f243 .backdrop .grid li a { color: $text; }
+  body .v45306dec93131210aa3886075489187d .navbar-inverse .sub-navbar .v756957db43f5ed1011a4ebdffab8f243 .backdrop .grid li a .col2,
+  body .v45306dec93131210aa3886075489187d .navbar-inverse .sub-navbar .v756957db43f5ed1011a4ebdffab8f243 .backdrop .grid .menu-links .flex-row > li > a { color: mix($text, $bg, 80%) !important; }
+  body .v45306dec93131210aa3886075489187d .navbar-inverse .sub-navbar .v756957db43f5ed1011a4ebdffab8f243 .backdrop .grid li:hover { background: $hover !important; }
+  body .v45306dec93131210aa3886075489187d .navbar-inverse .sub-navbar .v756957db43f5ed1011a4ebdffab8f243 .backdrop .grid li.selected,
+  body .v45306dec93131210aa3886075489187d .navbar-inverse .sub-navbar .v756957db43f5ed1011a4ebdffab8f243 .backdrop .grid li.open { background: mix($text, $bg, 14%) !important; }
+  // phone layout: in the header's menu panel, or in the bar when the screen is narrow
+  body .v45306dec93131210aa3886075489187d .navbar-inverse .sub-navbar .v756957db43f5ed1011a4ebdffab8f243 .megamenu-mobile-view,
+  body .v45306dec93131210aa3886075489187d .navbar-inverse .sub-navbar .v756957db43f5ed1011a4ebdffab8f243 .megamenu-mobile-view a,
+  body .v45306dec93131210aa3886075489187d .navbar-inverse .sub-navbar .v756957db43f5ed1011a4ebdffab8f243 .megamenu-mobile-view .chevron-icon,
+  body .v45306dec93131210aa3886075489187d .navbar-inverse .sub-navbar .v756957db43f5ed1011a4ebdffab8f243 .megamenu-mobile-view .nav-tree-cat .item-header,
+  body .v45306dec93131210aa3886075489187d .navbar-inverse .sub-navbar .v756957db43f5ed1011a4ebdffab8f243 .megamenu-mobile-view .nav-tree-cat button.fa-chevron-right,
+  body .v45306dec93131210aa3886075489187d .navbar-inverse .mobile-mega-menu-entry .v756957db43f5ed1011a4ebdffab8f243 .megamenu-mobile-view,
+  body .v45306dec93131210aa3886075489187d .navbar-inverse .mobile-mega-menu-entry .v756957db43f5ed1011a4ebdffab8f243 .megamenu-mobile-view a,
+  body .v45306dec93131210aa3886075489187d .navbar-inverse .mobile-mega-menu-entry .v756957db43f5ed1011a4ebdffab8f243 .megamenu-mobile-view .chevron-icon,
+  body .v45306dec93131210aa3886075489187d .navbar-inverse .mobile-mega-menu-entry .v756957db43f5ed1011a4ebdffab8f243 .megamenu-mobile-view .nav-tree-cat .item-header,
+  body .v45306dec93131210aa3886075489187d .navbar-inverse .mobile-mega-menu-entry .v756957db43f5ed1011a4ebdffab8f243 .megamenu-mobile-view .nav-tree-cat button.fa-chevron-right { color: $text !important; }
+  body .v45306dec93131210aa3886075489187d .navbar-inverse .sub-navbar .v756957db43f5ed1011a4ebdffab8f243 .megamenu-mobile-view hr,
+  body .v45306dec93131210aa3886075489187d .navbar-inverse .mobile-mega-menu-entry .v756957db43f5ed1011a4ebdffab8f243 .megamenu-mobile-view hr { border-top-color: mix($text, $bg, 20%); }
+}
+@if $ui-subnav-text != null {
+  @include ui-mega-menu($ui-subnav-bg, $ui-subnav-text, $ui-subnav-hover-bg);
+}
+@if $ui-subnav-text == null {
+  @if lightness($ui-subnav-bg) < 50% {
+    @include ui-mega-menu($ui-subnav-bg, $ui-header-text, $ui-subnav-hover-bg);
+  }
 }
 
 // Heading case for page and widget titles (h1/h2). The hero sub-heading is an

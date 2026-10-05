@@ -134,18 +134,24 @@ Every token in Sections 1 and 2 of `css_variables`, what it visibly changes, and
 ![$ui-subnav-bg: $noris-blue; $ui-subnav-text: #FFFFFF; $ui-subnav-hover-bg: $noris-blue-2 on a white header (noris example)](screenshots/57-noris-menu.jpg)
 *`$ui-subnav-bg: $noris-blue; $ui-subnav-text: #FFFFFF; $ui-subnav-hover-bg: $noris-blue-2` on a white header (noris example)*
 
+![Same tokens with the menu instance set to Portal Mega Menu: the full-width panel follows the menu bar (v1.2)](screenshots/58-noris-mega-menu.jpg)
+*Same tokens with the menu instance set to Portal Mega Menu: the full-width panel follows the menu bar (v1.2)*
+
+![Portal Mega Menu under a dark one-colour header (Aareal): light text switches on automatically](screenshots/59-aareal-mega-menu.jpg)
+*Portal Mega Menu under a dark one-colour header (Aareal): light text switches on automatically*
+
 | Token | Default | What it changes | Wired into |
 |---|---|---|---|
 | `$ui-header-bg` | `$palette-white` | Header (navbar) background. Footer and second menu row follow it unless set separately. | `$navbar-inverse-bg`, `$sp-navbar-inverse-bg`; feeds `$ui-header-hover-bg`, `$ui-header-active-bg`, `$ui-header-disabled-text`, `$ui-header-border` +2 |
-| `$ui-header-text` | `$ui-text` | Header links, menu labels, user name, search icon. Hover/active/disabled shades are derived from it. | `$sp-tagline-color`, `$navbar-inverse-link-color`, `$navbar-inverse-link-hover-color`, `$navbar-inverse-link-active-color`, `$navbar-inverse-brand-color` +1 more; feeds `$ui-header-hover-bg`, `$ui-header-active-bg`, `$ui-header-disabled-text`, `$ui-footer-text`; overrides C1b, C3 |
+| `$ui-header-text` | `$ui-text` | Header links, menu labels, user name, search icon. Hover/active/disabled shades are derived from it. | `$sp-tagline-color`, `$navbar-inverse-link-color`, `$navbar-inverse-link-hover-color`, `$navbar-inverse-link-active-color`, `$navbar-inverse-brand-color` +1 more; feeds `$ui-header-hover-bg`, `$ui-header-active-bg`, `$ui-header-disabled-text`, `$ui-footer-text`; overrides B, C1b, C3 |
 | `$ui-header-text-muted` | `$ui-text-muted` | Secondary header text. | `$navbar-inverse-color` |
 | `$ui-header-hover-bg` | `mix($ui-header-text, $ui-header-bg, 5%)` | Header menu item hover background (derived: 5% text over bg, works on dark headers). | `$navbar-default-link-hover-color`, `$navbar-inverse-link-hover-bg`; overrides C1b |
 | `$ui-header-active-bg` | `mix($ui-header-text, $ui-header-bg, 10%)` | Header menu item active/open background (10% text over bg). | `$navbar-inverse-link-active-bg` |
 | `$ui-header-disabled-text` | `mix($ui-header-text, $ui-header-bg, 20%)` | Disabled header items (20% text over bg). | `$navbar-inverse-link-disabled-color` |
 | `$ui-header-border` | `$ui-header-bg` | Line under the header (same as bg = no line). | `$navbar-inverse-border` |
-| `$ui-subnav-bg` | `$ui-header-bg` | Second header row (the menu bar) and its dropdown menus. Same as the header by default; set it with `$ui-subnav-text` for a light logo bar over a coloured menu bar. | `$sp-navbar-divider-color`, `$sp-nav-subnav`; feeds `$ui-subnav-hover-bg` |
-| `$ui-subnav-text` | `null` | Menu bar text, carets and dropdown items when the menu bar has its own colour. `null` = header text (one-colour header). | overrides B |
-| `$ui-subnav-hover-bg` | `darken($ui-subnav-bg, 8%)` | Hovered and open menu bar items and hovered dropdown items. Derived from `$ui-subnav-bg`; only used when `$ui-subnav-text` is set. | overrides B |
+| `$ui-subnav-bg` | `$ui-header-bg` | Second header row (the menu bar) and its dropdown menus, with either menu widget (Header Menu or Portal Mega Menu, whose full-width panel follows it too). Same as the header by default; set it with `$ui-subnav-text` for a light logo bar over a coloured menu bar. | `$sp-navbar-divider-color`, `$sp-nav-subnav`; feeds `$ui-subnav-hover-bg`; overrides B |
+| `$ui-subnav-text` | `null` | Menu bar text, carets and dropdown items (and the Portal Mega Menu panel) when the menu bar has its own colour. `null` = header text (one-colour header). | overrides B |
+| `$ui-subnav-hover-bg` | `darken($ui-subnav-bg, 8%)` | Hovered and open menu bar items, hovered dropdown items and mega menu panel rows. Derived from `$ui-subnav-bg`; used with `$ui-subnav-text`, or by the Portal Mega Menu under a dark header. | overrides B |
 | `$ui-header-height` | `60px` | Header (navbar) height. | `$sp-navbar-height`, `$navbar-height` |
 | `$ui-logo-max-height` | `40px` | Maximum logo height in the header. | `$sp-logo-max-height` |
 | `$ui-logo-margin-x` | `6px` | Horizontal logo margin. | `$sp-logo-margin-x` |

@@ -65,4 +65,8 @@ Both additions are `null` by default, so other themes don't change.
 1. **Two-tone header.** The header widget paints the menu bar with `$ui-subnav-bg` but kept the header text colour, so a coloured menu bar under a white header was unreadable. `$ui-subnav-text` and `$ui-subnav-hover-bg` now colour the menu bar's items, carets, dropdowns, hover state, focus outline and loading dots.
 2. **Heading case.** `$ui-heading-transform` and `$ui-heading-letter-spacing` set page and widget titles (h1/h2) in capitals; the hero sub-heading stays as written.
 
+The two-tone header also works with the *Portal Mega Menu* widget on the menu instance (framework v1.2): its full-width panel follows the menu bar.
+
+![noris mega menu](../../docs/screenshots/58-noris-mega-menu.jpg)
+
 Along the way `tools/embed_font.py` learned weight ranges for variable fonts and now always writes LF line endings.
